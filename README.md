@@ -1,5 +1,7 @@
 # SIMCESIM
 
+**Live demo: [simcesim.vercel.app](https://simcesim.vercel.app/)**
+
 A re-build of the **Cesim Service** hotel-business simulation's interface, created as an
 MBA capstone artifact. It keeps the original's structure (so it's recognizable as "the
 thing we used") and layers the teaching affordances the original withholds: a guided
