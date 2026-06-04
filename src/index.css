@@ -19,7 +19,7 @@
     @apply bg-surface-card border border-gray-200 rounded-sm;
   }
   .section-title {
-    @apply text-cesim-rule font-bold text-[15px] pb-1 mb-3 border-b-2 border-cesim-rule;
+    @apply text-cesim-rule font-bold tracking-tight text-[15px] pb-1 mb-3 border-b-2 border-cesim-rule;
   }
   /* Ghosted = present but inactive (international, competitors, Sarah Wall, etc.) */
   .ghosted {

@@ -2,28 +2,49 @@ import { useDecisions } from '../../state/decisions'
 import { useUI } from '../../state/ui'
 import { FIELDS, DECISION_ORDER } from '../../data/fields'
 import { Tooltip } from '../shared/Tooltip'
+import { otherSeason } from '../../lib/season'
 import { cn } from '../../lib/cn'
 
 // THE DECISION-LOOP STRIP (spec §6) — the "sequence" overlay. Sits below the native top
 // bar and steps through the decisions in dependency order: Sales → Operations → Finance.
-// Each step shows its number, which flips to a green check once that step's decisions are
-// all filled. A progress counter + bar tracks the whole set; it loops.
+// Each step's number flips to a green check once that step's decisions are all made. A
+// progress counter + bar tracks the whole set; it loops.
 
 const PHASES = [
-  { id: 'sales', label: 'Sales', hint: 'demand · price · marketing' },
-  { id: 'operations', label: 'Operations', hint: 'staff & maintenance to that demand' },
-  { id: 'finance', label: 'Finance', hint: 'loans · dividends · credit term' },
+  { id: 'sales', label: 'Sales' },
+  { id: 'operations', label: 'Operations' },
+  { id: 'finance', label: 'Finance' },
 ]
 
-export function DecisionLoopStrip({ page, onNavigate }) {
-  const { touched, progress } = useDecisions()
-  const { setProjectionsOpen } = useUI()
+// Concise names for the per-step tooltip checklist (the full field labels are too long).
+const SHORT = {
+  walkInRate: 'Walk-in room rate',
+  estNightsSold: 'Estimated nights sold',
+  advanceNextSeason: 'Advance — next season',
+  advanceTwoSeasons: 'Advance — two seasons ahead',
+  marketing: 'Marketing',
+  maintenance: 'Maintenance & renovation',
+  directCostSaving: 'Direct cost saving',
+  adminCostSaving: 'Admin cost saving',
+  turnover: 'Personnel turnover',
+  headcount: 'Personnel this period',
+  wage: 'Wage / month',
+  training: 'Training budget',
+  ltLoanChange: 'Long-term loans',
+  dividends: 'Dividends paid',
+  creditTerm: 'Credit term',
+}
 
-  // Per-step completion, computed from decisions the user has actually made (touched).
+export function DecisionLoopStrip({ page, onNavigate }) {
+  const { made: madeSet, progress, season } = useDecisions()
+  const { setProjectionsOpen } = useUI()
+  const nextSeason = otherSeason(season)
+
+  // Per-step completion, computed from decisions the user has actually made.
   const steps = PHASES.map((ph, i) => {
     const ids = DECISION_ORDER.filter((id) => FIELDS[id].page === ph.id && !FIELDS[id].ghosted)
-    const made = ids.filter((id) => touched.has(id)).length
-    return { ...ph, n: i + 1, made, total: ids.length, done: ids.length > 0 && made === ids.length }
+    const made = ids.filter((id) => madeSet.has(id)).length
+    return { ...ph, n: i + 1, ids, made, total: ids.length, done: ids.length > 0 && made === ids.length }
   })
 
   const idx = PHASES.findIndex((p) => p.id === page)
@@ -36,25 +57,46 @@ export function DecisionLoopStrip({ page, onNavigate }) {
     setProjectionsOpen(true) // end of Finance → review budgets
   }
 
+  // A clean, formatted tooltip: heading + count, then a checklist of this step's decisions.
+  const phaseTip = (ph) => (
+    <div className="text-left">
+      <div className="font-bold text-white">Decisions in {ph.label}</div>
+      <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300">
+        {ph.made} of {ph.total} made
+      </div>
+      <ul className="space-y-0.5">
+        {ph.ids.map((id) => {
+          const done = madeSet.has(id)
+          return (
+            <li key={id} className="flex items-center gap-1.5">
+              <span className={done ? 'text-emerald-400' : 'text-white/40'}>{done ? '✓' : '○'}</span>
+              <span className={done ? 'text-white' : 'text-white/70'}>{SHORT[id] ?? FIELDS[id].label}</span>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+
   return (
     <div className="border-b border-header-active/30 bg-header-active text-white">
-      <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-x-5 gap-y-2 px-4 py-2">
+      <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2">
         <span className="text-[11px] font-semibold uppercase tracking-wide text-white/60">
           Your decisions
         </span>
 
         {/* The decision stepper: Sales → Operations → Finance */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center">
           {steps.map((ph, i) => {
             const active = ph.id === page
             return (
               <div key={ph.id} className="flex items-center">
-                <Tooltip content={`${ph.hint} — ${ph.made}/${ph.total} made`} width={220}>
+                <Tooltip content={phaseTip(ph)} width={210} placement="bottom">
                   <button
                     type="button"
                     onClick={() => onNavigate(ph.id)}
                     className={cn(
-                      'flex items-center gap-1.5 rounded px-2.5 py-1 text-[12px] transition-colors',
+                      'flex items-center gap-1.5 rounded px-2 py-1 text-[12px] transition-colors',
                       active ? 'bg-white font-bold text-header-active' : 'text-white/85 hover:bg-white/10',
                     )}
                   >
@@ -73,26 +115,26 @@ export function DecisionLoopStrip({ page, onNavigate }) {
                     {ph.label}
                   </button>
                 </Tooltip>
-                {i < steps.length - 1 && <span className="px-0.5 text-white/40">→</span>}
+                {i < steps.length - 1 && <span className="text-white/40">→</span>}
               </div>
             )
           })}
         </div>
 
         {/* Prev / Next — free navigation, not a locked wizard */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center">
           <button
             type="button"
             onClick={goPrev}
             disabled={idx <= 0}
-            className="rounded px-2 py-1 text-[12px] text-white/85 hover:bg-white/10 disabled:opacity-30"
+            className="rounded px-1.5 py-1 text-[12px] text-white/85 hover:bg-white/10 disabled:opacity-30"
           >
             ‹ Prev
           </button>
           <button
             type="button"
             onClick={goNext}
-            className="rounded bg-white/15 px-2.5 py-1 text-[12px] font-semibold hover:bg-white/25"
+            className="rounded bg-white/15 px-2 py-1 text-[12px] font-semibold hover:bg-white/25"
           >
             {idx === PHASES.length - 1 ? 'Review budgets ⤢' : 'Next ›'}
           </button>
@@ -100,30 +142,31 @@ export function DecisionLoopStrip({ page, onNavigate }) {
 
         {/* Progress counter + bar */}
         <div className="flex items-center gap-2">
-          <span className="text-[12px] tabular-nums text-white/90">
-            {progress.made} of {progress.total} decisions made
+          <span className="whitespace-nowrap text-[12px] tabular-nums text-white/90">
+            {progress.made} of {progress.total} made
           </span>
-          <div className="h-1.5 w-24 overflow-hidden rounded bg-white/20">
+          <div className="h-1.5 w-20 overflow-hidden rounded bg-white/20">
             <div className="h-full bg-emerald-400 transition-all" style={{ width: `${pct}%` }} />
           </div>
         </div>
 
         {/* Loop + inactive inter-round gesture */}
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-1.5">
           <button
             type="button"
             onClick={() => onNavigate('sales')}
-            className="rounded px-2 py-1 text-[12px] text-white/85 hover:bg-white/10"
-            title="Repeat the season — restart the decision loop"
+            className="whitespace-nowrap rounded px-1.5 py-1 text-[12px] text-white/85 hover:bg-white/10"
+            title={`Start this ${season}'s decisions over from the top`}
           >
-            ↻ Repeat season
+            ↻ Start over
           </button>
           <Tooltip
             width={230}
-            content="Inter-round progression is out of scope in v1 — every round is mechanically identical; only the season label changes."
+            placement="bottom"
+            content="Inter-round progression is out of scope in v1 — every round is mechanically identical; only the season changes."
           >
-            <span className="cursor-not-allowed rounded border border-white/20 px-2 py-1 text-[12px] text-white/40">
-              Advance to next season →
+            <span className="cursor-not-allowed whitespace-nowrap rounded border border-white/20 px-2 py-1 text-[12px] text-white/40">
+              Advance to {nextSeason} →
             </span>
           </Tooltip>
         </div>

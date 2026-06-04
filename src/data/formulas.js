@@ -1,6 +1,6 @@
 // DETERMINISTIC MATH (spec §10). All figures USD.
 //
-// SIMCESIM computes only the formula-defined accounting. For demand it uses Approach A:
+// SIMCesim computes only the formula-defined accounting. For demand it uses Approach A:
 // the user's `estNightsSold` estimate drives the budgeted income statement — it does NOT
 // reproduce Cesim's hidden, competitor-dependent demand model. Where a relationship is
 // genuinely hidden (advance pricing, cost-saving curves), this file uses a TRANSPARENT,

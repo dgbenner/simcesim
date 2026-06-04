@@ -7,13 +7,17 @@ import { computeProjection } from '../data/formulas'
 // Seeds every field from its catalog default; recomputes the projection on change.
 //
 // "Made" vs "has a value": defaults are pre-filled, so a value alone doesn't mean the
-// user decided anything. We track a `touched` set — a decision counts as MADE once the
-// user has engaged the field (focused it or changed it). A refresh starts clean.
+// user decided anything. A decision counts as MADE once the user has SET A NON-EMPTY
+// VALUE in it (changing it via input or modal) — NOT merely focusing it, and NOT the
+// pre-filled default. `changed` records which fields the user has edited; `made` is the
+// subset of those that currently hold a value. A refresh starts clean.
 
 const SEASON = 'summer' // Round 2 is summer (active round)
 
 // Editable (non-ghosted) decisions, in dependency order — the set we count + sequence.
 export const EDITABLE_IDS = DECISION_ORDER.filter((id) => !FIELDS[id].ghosted)
+
+const isFilled = (v) => v !== '' && v !== null && v !== undefined
 
 function initialValues() {
   const v = {}
@@ -25,39 +29,37 @@ const DecisionsContext = createContext(null)
 
 export function DecisionsProvider({ children }) {
   const [values, setValues] = useState(initialValues)
-  const [touched, setTouched] = useState(() => new Set())
+  const [changed, setChanged] = useState(() => new Set())
 
-  const markTouched = useCallback((id) => {
-    setTouched((prev) => (prev.has(id) ? prev : new Set(prev).add(id)))
+  const setValue = useCallback((id, value) => {
+    setValues((prev) => ({ ...prev, [id]: value }))
+    setChanged((prev) => (prev.has(id) ? prev : new Set(prev).add(id)))
   }, [])
-
-  const setValue = useCallback(
-    (id, value) => {
-      setValues((prev) => ({ ...prev, [id]: value }))
-      markTouched(id) // changing a value is engaging the decision
-    },
-    [markTouched],
-  )
 
   const reset = useCallback(() => {
     setValues(initialValues())
-    setTouched(new Set())
+    setChanged(new Set())
   }, [])
 
   const projection = useMemo(() => computeProjection(values, SEASON), [values])
 
-  // Overall progress for the strip: editable decisions the user has actually made.
+  // A decision is "made" once the user has edited it AND it holds a value.
+  const made = useMemo(() => {
+    const s = new Set()
+    for (const id of EDITABLE_IDS) {
+      if (changed.has(id) && isFilled(values[id])) s.add(id)
+    }
+    return s
+  }, [changed, values])
+
   const progress = useMemo(
-    () => ({
-      made: EDITABLE_IDS.filter((id) => touched.has(id)).length,
-      total: EDITABLE_IDS.length,
-    }),
-    [touched],
+    () => ({ made: made.size, total: EDITABLE_IDS.length }),
+    [made],
   )
 
   const value = useMemo(
-    () => ({ values, setValue, markTouched, touched, reset, projection, progress, season: SEASON }),
-    [values, setValue, markTouched, touched, reset, projection, progress],
+    () => ({ values, setValue, made, reset, projection, progress, season: SEASON }),
+    [values, setValue, made, reset, projection, progress],
   )
 
   return <DecisionsContext.Provider value={value}>{children}</DecisionsContext.Provider>

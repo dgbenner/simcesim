@@ -28,7 +28,7 @@ export const FIELDS = {
     id: 'walkInRate',
     page: 'sales',
     section: 'Walk-in sales',
-    label: 'Walk-in room rate (this season)',
+    label: 'Walk-in room rate',
     kind: 'decision',
     unit: '$',
     min: 0,
@@ -42,23 +42,23 @@ export const FIELDS = {
       { dir: '+', text: 'Revenue per filled night rises.' },
       { dir: '-', text: 'In the live system, nights sold likely falls — price competes against rivals.' },
       { dir: '~', text: 'Business travelers (winter) are less price-sensitive than leisure (summer).' },
-      { dir: '~', text: 'In SIMCESIM, actual nights come from your estimate below — actual demand resolves only in the live system.' },
+      { dir: '~', text: 'In SIMCesim, actual nights come from your estimate below — actual demand resolves only in the live system.' },
     ],
   },
   estNightsSold: {
     id: 'estNightsSold',
     page: 'sales',
     section: 'Walk-in sales',
-    label: 'Estimated nights sold this season',
+    label: 'Estimated walk-in nights sold',
     kind: 'estimation',
     unit: 'nights',
     min: 0,
     max: 7130, // capacity ceiling confirmed live
     step: 1,
     default: '',
-    help: 'Your forecast of room-nights sold. Budget-only: it feeds the projected income statement but does NOT set your actual sales.',
+    help: "Your forecast of this season's walk-in room-nights. In this tool it drives everything downstream — revenue, occupancy, and profit all compute from it (open Projections). The real Cesim resolves actual demand live against competitors; this version stands in with your estimate.",
     boundsWhy:
-      '0 to 7,130 nights — a capacity-bounded ceiling. This is an ESTIMATION cell: it drives the budgeted income statement only. In the live system the real number resolves at the deadline against competitors; here, everything downstream computes from this estimate (Approach A).',
+      '0 to 7,130 nights — a capacity-bounded ceiling. This counts WALK-IN nights this season only (advance/agency sales below are for future seasons). It is an ESTIMATION cell: it drives the budgeted income statement only. In the live system the real number resolves at the deadline against competitors; here, everything downstream computes from this estimate (Approach A).',
     effects: [
       { dir: '+', text: 'Projected sales revenue rises (rate × nights).' },
       { dir: '+', text: 'Projected direct cost rises (per-night cost × nights).' },
@@ -140,7 +140,7 @@ export const FIELDS = {
     ghosted: true,
     help: 'Buying (or selling) rooms in sets of 5. Out of scope for this cohort — there is no demand growth to build for, so this is disabled.',
     boundsWhy:
-      'Capacity expands in sets of 5 rooms. Ghosted in SIMCESIM: building capacity only pays off if there is demand to fill it, and demand growth is out of scope for the course.',
+      'Capacity expands in sets of 5 rooms. Ghosted in SIMCesim: building capacity only pays off if there is demand to fill it, and demand growth is out of scope for the course.',
     effects: [
       { dir: '+', text: 'Total room-night capacity rises (5 rooms × 180 nights per set).' },
       { dir: '-', text: 'Capital expenditure and depreciation rise.' },

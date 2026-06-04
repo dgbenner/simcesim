@@ -43,7 +43,7 @@ export function MarketOutlookPage() {
     <div>
       <PageHeader
         title="Market Outlook"
-        subtitle="Read the season's parameters and demand picture before you decide. These are the fixed inputs the rest of the model runs on."
+        subtitle={`Read this ${season}'s parameters and demand picture before you decide. These are the fixed inputs the rest of the model runs on.`}
       />
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
@@ -62,7 +62,7 @@ export function MarketOutlookPage() {
             </Axiom>
             <div className="mt-3 rounded bg-cesim-link/5 p-3 text-[12px] leading-relaxed text-cesim-ink">
               <span className="font-semibold">Estimated demand is yours to enter.</span> Because the
-              true demand model is competitor-dependent and hidden, SIMCESIM uses your{' '}
+              true demand model is competitor-dependent and hidden, SIMCesim uses your{' '}
               <Gloss term="estimation cell">estimate</Gloss> on the Sales page to drive the budgeted
               statements. Actual demand resolves only in the live system.
             </div>

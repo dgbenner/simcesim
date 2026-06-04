@@ -3,6 +3,7 @@ import { personnelStress, qualityLevel, personnelChange, PARAMS } from '../../da
 import { Section } from '../shared/Section'
 import { PageHeader } from '../shared/PageHeader'
 import { PageProgressDots } from '../shared/PageProgressDots'
+import { TimeframeLabel } from '../shared/TimeframeLabel'
 import { DecisionField } from '../shared/DecisionField'
 import { Readout } from '../shared/Readout'
 import { Gauge } from '../shared/Gauge'
@@ -37,7 +38,7 @@ function QualityBar({ value }) {
 }
 
 export function OperationsPage() {
-  const { values, projection } = useDecisions()
+  const { values, projection, season } = useDecisions()
   const { income } = projection
 
   const stress = personnelStress(values)
@@ -87,6 +88,7 @@ export function OperationsPage() {
         </Section>
       </div>
 
+      <TimeframeLabel className="mb-2">This {season}</TimeframeLabel>
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         {/* Left: facilities, investments, cost saving */}
         <div className="space-y-4">

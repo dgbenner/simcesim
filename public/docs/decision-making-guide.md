@@ -1,6 +1,6 @@
 # Decision-making guide
 
-*Bundled source document for SIMCESIM. This is the platform's step-by-step decision
+*Bundled source document for SIMCesim. This is the platform's step-by-step decision
 guide — it carries the field language, the decision sequence, and the ratio formulas.
 It also feeds the in-app explain layer and (v2) the corpus-grounded chatbot.*
 
@@ -20,7 +20,7 @@ seven steps are the macro-sequence each round:
 6. **Review budgets** — open the Projections to check your forecast statements.
 7. **Copy as the team's decisions** when you're satisfied.
 
-Step 5 is the part the original never walks you through. SIMCESIM's top strip makes it
+Step 5 is the part the original never walks you through. SIMCesim's top strip makes it
 concrete by stepping you through the decisions in dependency order and looping.
 
 ---
@@ -121,6 +121,6 @@ change + dividends + reinvested returns, annualized.
 
 The real demand model — how many room-nights you actually sell given price, marketing,
 quality, and **competitors' actions** — is hidden and partly competitor-dependent.
-SIMCESIM does not fake it. It reproduces the deterministic accounting (income statement,
+SIMCesim does not fake it. It reproduces the deterministic accounting (income statement,
 balance sheet, occupancy, ratios) and, for demand, uses your estimate. Actual demand
 resolves only in the live system. Naming this boundary is part of the lesson.

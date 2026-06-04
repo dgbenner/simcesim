@@ -1,6 +1,6 @@
 # Case description — Hotel le Bonheur
 
-*Bundled source document for SIMCESIM. The narrative behind the levers — why winter is
+*Bundled source document for SIMCesim. The narrative behind the levers — why winter is
 soft, why dividends matter, and who is judging performance. Feeds the explain layer and
 (v2) the chatbot corpus.*
 
@@ -48,5 +48,5 @@ judged on the company's results — ultimately on **Cumulative Total Shareholder
 - **Quality and reputation compound.** Maintenance and personnel quality feed the Quality
   Level that supports both demand and the rate you can charge.
 - **Competition is live.** The exact demand you'll realize against rivals is not knowable
-  in advance — which is the honest boundary SIMCESIM respects. Use the levers and their
+  in advance — which is the honest boundary SIMCesim respects. Use the levers and their
   directions; confirm with the Projections; learn the model by playing it.

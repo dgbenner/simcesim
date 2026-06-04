@@ -6,7 +6,7 @@ export function Section({ title, children, className, right }) {
     <section className={cn('card p-4', className)}>
       {title && (
         <div className="mb-3 flex items-center justify-between border-b-2 border-cesim-rule pb-1">
-          <h2 className="text-[15px] font-bold text-cesim-rule">{title}</h2>
+          <h2 className="text-[15px] font-bold tracking-tight text-cesim-rule">{title}</h2>
           {right}
         </div>
       )}

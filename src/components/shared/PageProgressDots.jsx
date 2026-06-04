@@ -7,10 +7,10 @@ import { cn } from '../../lib/cn'
 // engaged that field. Quieter in weight + type than the top strip — it's the on-page
 // companion to the strip's accumulated total.
 export function PageProgressDots({ page }) {
-  const { touched } = useDecisions()
+  const { made: madeSet } = useDecisions()
   const ids = DECISION_ORDER.filter((id) => FIELDS[id].page === page && !FIELDS[id].ghosted)
   if (ids.length === 0) return null
-  const made = ids.filter((id) => touched.has(id)).length
+  const made = ids.filter((id) => madeSet.has(id)).length
 
   return (
     <div className="hidden select-none flex-col items-end gap-1 sm:flex">
@@ -21,10 +21,10 @@ export function PageProgressDots({ page }) {
         {ids.map((id) => (
           <span
             key={id}
-            title={`${FIELDS[id].label}${touched.has(id) ? ' — entered' : ' — not yet'}`}
+            title={`${FIELDS[id].label}${madeSet.has(id) ? ' — entered' : ' — not yet'}`}
             className={cn(
               'h-2 w-2 rounded-full transition-colors',
-              touched.has(id) ? 'bg-emerald-400' : 'border border-gray-300',
+              madeSet.has(id) ? 'bg-emerald-400' : 'border border-gray-300',
             )}
           />
         ))}

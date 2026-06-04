@@ -1,5 +1,5 @@
 // fieldTips.js
-// SIMCESIM in-context micro-tips (GREEN "Principles" accent, INLINE variant).
+// SIMCesim in-context micro-tips (GREEN "Principles" accent, INLINE variant).
 //
 // These are SHORT snippets meant to sit INSIDE a decision area, next to the field the
 // user is actually touching — not in the side panel. They rotate dynamically: each field

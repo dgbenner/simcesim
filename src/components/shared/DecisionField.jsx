@@ -23,30 +23,66 @@ function advanceOnEnter(e) {
   else e.currentTarget.blur()
 }
 
-function UnitInput({ field, value, onChange, disabled, onFocus, onBlur }) {
+// Thousands separators. Values display with commas (e.g. 18,750); the stored value stays
+// a plain number. We use a text input (number inputs can't show commas) with a local
+// display string so partial entries like "4." survive while typing.
+const groupInt = (intStr) => intStr.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+function formatTyping(raw) {
+  if (raw === '' || raw === '-') return raw
+  const neg = raw.startsWith('-')
+  const s = neg ? raw.slice(1) : raw
+  const dot = s.indexOf('.')
+  const intPart = dot >= 0 ? s.slice(0, dot) : s
+  const frac = dot >= 0 ? s.slice(dot + 1) : ''
+  return (neg ? '-' : '') + groupInt(intPart) + (dot >= 0 ? '.' + frac : '')
+}
+
+function toDisplay(value) {
+  if (value === '' || value === null || value === undefined) return ''
+  const n = Number(value)
+  return Number.isFinite(n) ? n.toLocaleString('en-US', { maximumFractionDigits: 6 }) : ''
+}
+
+function UnitInput({ field, value, onType, onCommit, disabled, onFocusTip, onBlurTip }) {
   const prefix = field.unit === '$' ? '$' : null
   const suffix = field.unit && field.unit !== '$' ? field.unit : null
+  const [focused, setFocused] = useState(false)
+  const [text, setText] = useState('')
+
+  const handleChange = (e) => {
+    const raw = e.target.value.replace(/,/g, '')
+    if (raw !== '' && !/^-?\d*\.?\d*$/.test(raw)) return // ignore non-numeric input
+    setText(formatTyping(raw))
+    onType(raw)
+  }
+
   return (
     <div
       className={cn(
-        'flex w-36 shrink-0 items-center gap-1 rounded border bg-surface-input px-1.5 py-0.5',
+        'flex w-28 shrink-0 items-center gap-1 rounded border bg-surface-input px-1.5 py-0.5',
         disabled ? 'border-gray-200' : 'border-cesim-link/40 focus-within:ring-1 focus-within:ring-cesim-link',
       )}
     >
       {prefix && <span className="text-[12px] text-cesim-muted">{prefix}</span>}
       <input
-        type="number"
+        type="text"
         inputMode="decimal"
         data-decision-input=""
         disabled={disabled}
-        value={value ?? ''}
-        min={field.min}
-        max={field.max}
-        step={field.step}
+        value={focused ? text : toDisplay(value)}
         placeholder={field.default === '' ? '—' : undefined}
-        onChange={(e) => onChange(e.target.value)}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onChange={handleChange}
+        onFocus={() => {
+          setText(toDisplay(value))
+          setFocused(true)
+          onFocusTip?.()
+        }}
+        onBlur={() => {
+          setFocused(false)
+          onCommit?.()
+          onBlurTip?.()
+        }}
         onKeyDown={advanceOnEnter}
         className="min-w-0 flex-1 bg-transparent text-right text-[13px] tabular-nums outline-none disabled:cursor-not-allowed"
       />
@@ -57,24 +93,29 @@ function UnitInput({ field, value, onChange, disabled, onFocus, onBlur }) {
 
 export function DecisionField({ fieldId, highlight }) {
   const field = FIELDS[fieldId]
-  const { values, setValue, markTouched, touched } = useDecisions()
+  const { values, setValue, made: madeSet } = useDecisions()
   const { openField, explain } = useUI()
   const value = values[fieldId]
-  const made = touched.has(fieldId)
+  const made = madeSet.has(fieldId)
 
   const tips = fieldTips[fieldId]
   const [focused, setFocused] = useState(false)
   // Random starting tip so different fields/visits don't all open on tip #1.
   const [tipIdx, setTipIdx] = useState(() => Math.floor(Math.random() * 100))
 
-  const commit = (raw) => {
+  // While typing, store the value as-is (don't fight the user). Clamp to bounds on blur.
+  const commitType = (raw) => {
     if (raw === '') return setValue(fieldId, '')
-    let n = parseFloat(raw)
-    if (!Number.isFinite(n)) return
-    // Clamp to declared bounds (the "why" lives in the modal; this just enforces it).
+    const n = parseFloat(raw)
+    if (Number.isFinite(n)) setValue(fieldId, n)
+  }
+  const commitClamp = () => {
+    if (value === '' || value === null || value === undefined) return
+    let n = Number(value)
+    if (!Number.isFinite(n)) return setValue(fieldId, '')
     if (typeof field.min === 'number') n = Math.max(field.min, n)
     if (typeof field.max === 'number') n = Math.min(field.max, n)
-    setValue(fieldId, n)
+    if (n !== Number(value)) setValue(fieldId, n)
   }
 
   const showTip = focused && !field.ghosted && tips?.length > 0
@@ -100,33 +141,40 @@ export function DecisionField({ fieldId, highlight }) {
               ✓
             </span>
           )}
-          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-y-0.5 text-[13px]">
-            <button
-              type="button"
+          {/* Inline text flow: the ⓘ tacks to the end of the label text like a period
+              (wrapping with it), and any tag comes after the icon. */}
+          <div className="min-w-0 flex-1 text-[13px] leading-snug">
+            <span
+              role="button"
+              tabIndex={0}
               onClick={() => openField(fieldId)}
-              className="text-left leading-snug text-cesim-ink hover:text-cesim-link hover:underline"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  openField(fieldId)
+                }
+              }}
+              className="cursor-pointer text-cesim-ink hover:text-cesim-link hover:underline"
               title="Open the decision detail"
             >
               {field.label}
-            </button>
+            </span>
+            <InfoIcon help={field.help} label={field.label} onOpen={() => explain(fieldId)} />
             {field.kind === 'estimation' && (
-              <span className="ml-1.5" title="Forecast — feeds the budget only, does not change your actual results">
+              <span className="ml-1.5 inline-block -translate-y-[2px] align-middle" title="Forecast — feeds the budget only, does not change your actual results">
                 <Tag variant="estimation">forecast</Tag>
               </span>
             )}
-            <InfoIcon help={field.help} label={field.label} onOpen={() => explain(fieldId)} />
           </div>
         </div>
         <UnitInput
           field={field}
           value={value}
-          onChange={commit}
+          onType={commitType}
+          onCommit={commitClamp}
           disabled={field.ghosted}
-          onFocus={() => {
-            setFocused(true)
-            markTouched(fieldId)
-          }}
-          onBlur={() => setFocused(false)}
+          onFocusTip={() => setFocused(true)}
+          onBlurTip={() => setFocused(false)}
         />
       </div>
 

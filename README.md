@@ -1,4 +1,4 @@
-# SIMCESIM
+# SIMCesim
 
 **Live demo: [simcesim.vercel.app](https://simcesim.vercel.app/)**
 
@@ -22,7 +22,7 @@ Three overlays map onto the three things the original withholds:
 
 ## Honesty boundary
 
-The real Cesim demand model (competitor-dependent) is hidden. SIMCESIM does **not** fake
+The real Cesim demand model (competitor-dependent) is hidden. SIMCesim does **not** fake
 it. It reproduces only the deterministic accounting (income statement, balance sheet,
 occupancy, ratios) and uses **Approach A** for demand: you enter an estimate, and
 everything downstream computes from it. Actual demand resolves only in the live system —

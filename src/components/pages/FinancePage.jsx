@@ -2,6 +2,7 @@ import { useDecisions } from '../../state/decisions'
 import { Section } from '../shared/Section'
 import { PageHeader } from '../shared/PageHeader'
 import { PageProgressDots } from '../shared/PageProgressDots'
+import { TimeframeLabel } from '../shared/TimeframeLabel'
 import { DecisionField } from '../shared/DecisionField'
 import { StatementTable } from '../shared/StatementTable'
 import { Axiom } from '../shared/Axiom'
@@ -12,7 +13,7 @@ import { usd, pct, dec2 } from '../../lib/format'
 // (ratios) on the right. This page is densest with acronym tooltips (spec §11).
 
 export function FinancePage() {
-  const { projection } = useDecisions()
+  const { projection, season } = useDecisions()
   const { income, balance, ratios } = projection
 
   const field = (id) => <DecisionField fieldId={id} />
@@ -65,6 +66,7 @@ export function FinancePage() {
         {/* Left: decisions + cash flow */}
         <div className="space-y-4">
           <Section title="Financing Decisions">
+            <TimeframeLabel className="mb-1.5">This {season}</TimeframeLabel>
             <div className="space-y-1">
               {field('ltLoanChange')}
               {field('dividends')}

@@ -9,7 +9,7 @@ export function InfoIcon({ help, onOpen, label }) {
       type="button"
       onClick={onOpen}
       aria-label={label ? `Explain: ${label}` : 'Explain'}
-      className="ml-1 inline-flex h-[15px] w-[15px] items-center justify-center rounded-full bg-cesim-muted/80 align-middle text-[10px] font-bold italic leading-none text-white transition-colors hover:bg-cesim-link"
+      className="ml-1 inline-flex h-[15px] w-[15px] -translate-y-[2px] items-center justify-center rounded-full bg-cesim-muted/80 align-middle text-[10px] font-bold italic leading-none text-white transition-colors hover:bg-cesim-link"
     >
       i
     </button>

@@ -1,5 +1,5 @@
 // principles.js
-// SIMCESIM "Principles" content (GREEN accent variant).
+// SIMCesim "Principles" content (GREEN accent variant).
 // Companion to "Axiom" (YELLOW), which distills the Cesim decision-making guide.
 // Principles are general business-administration / economics 101 concepts written
 // for someone with NO prior business background — plain language, a concrete

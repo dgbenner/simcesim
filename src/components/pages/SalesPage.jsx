@@ -1,13 +1,16 @@
 import { useDecisions } from '../../state/decisions'
+import { useUI } from '../../state/ui'
 import { advanceUnitPrice, PARAMS } from '../../data/formulas'
 import { Section } from '../shared/Section'
 import { PageHeader } from '../shared/PageHeader'
 import { PageProgressDots } from '../shared/PageProgressDots'
+import { TimeframeLabel } from '../shared/TimeframeLabel'
 import { DecisionField } from '../shared/DecisionField'
 import { Donut } from '../shared/Donut'
 import { StatementTable } from '../shared/StatementTable'
 import { Readout } from '../shared/Readout'
 import { Axiom } from '../shared/Axiom'
+import { cap, otherSeason } from '../../lib/season'
 import { usd, int, pct } from '../../lib/format'
 
 // SALES — decisions on the left (units on fields, ⓘ on every label, the sales-mix donut);
@@ -16,6 +19,7 @@ import { usd, int, pct } from '../../lib/format'
 
 export function SalesPage() {
   const { values, projection, season } = useDecisions()
+  const { setPastResultsOpen } = useUI()
   const { income } = projection
 
   const walkNights = Number(values.estNightsSold) || 0
@@ -23,8 +27,8 @@ export function SalesPage() {
   const advTwo = Number(values.advanceTwoSeasons) || 0
 
   const mix = [
-    { label: 'Walk-in (this season)', value: walkNights, color: '#2f6fb0' },
-    { label: 'Advance — next season', value: advNext, color: '#e8821e' },
+    { label: `Walk-in (this ${season})`, value: walkNights, color: '#2f6fb0' },
+    { label: `Advance — next ${otherSeason(season)}`, value: advNext, color: '#e8821e' },
     { label: 'Advance — two ahead', value: advTwo, color: '#f0b34d' },
   ]
 
@@ -55,9 +59,9 @@ export function SalesPage() {
   ]
 
   const cols = [
-    { key: 'now', label: 'This Season' },
+    { key: 'now', label: `This ${cap(season)}` },
     { key: 'd', label: 'Δ%', gloss: 'Δ%' },
-    { key: 'last', label: 'Last Season' },
+    { key: 'last', label: `Last ${cap(otherSeason(season))}` },
   ]
 
   return (
@@ -72,10 +76,23 @@ export function SalesPage() {
         {/* ── Left: decisions ── */}
         <div className="space-y-4">
           <Section title="Walk-In Sales">
+            <TimeframeLabel className="mb-1.5">This {season}</TimeframeLabel>
             <div className="space-y-1">
               {field('walkInRate')}
               {field('estNightsSold')}
             </div>
+
+            {/* Yellow hint: anchor your numbers to last round's actual results */}
+            <button
+              type="button"
+              onClick={() => setPastResultsOpen(true)}
+              className="mt-2 flex w-full items-center gap-1.5 rounded border-l-2 border-amber-400 bg-amber-50 px-2 py-1.5 text-left text-[11px] leading-snug text-amber-900 hover:bg-amber-100"
+            >
+              <span aria-hidden>💡</span>
+              <span>
+                Not sure what to enter? <span className="font-semibold underline">See what the hotel did last {otherSeason(season)} →</span>
+              </span>
+            </button>
 
             {/* Make the 9,000 tangible, right where you enter the estimate */}
             <div className="mt-2 rounded border border-gray-200 bg-gray-50 p-2.5">
@@ -104,6 +121,17 @@ export function SalesPage() {
             </Axiom>
 
             <div className="mt-2 space-y-1">{field('marketing')}</div>
+            <button
+              type="button"
+              onClick={() => setPastResultsOpen(true)}
+              className="mt-1 flex w-full items-center gap-1.5 rounded border-l-2 border-amber-400 bg-amber-50 px-2 py-1 text-left text-[11px] leading-snug text-amber-900 hover:bg-amber-100"
+            >
+              <span aria-hidden>💡</span>
+              <span>
+                The {usd(7000)} default ≈ last winter's spend.{' '}
+                <span className="font-semibold underline">See the recap →</span>
+              </span>
+            </button>
 
             <div className="mt-4 border-t border-gray-100 pt-3">
               <Donut data={mix} unit="nights" />
@@ -115,11 +143,11 @@ export function SalesPage() {
               Pre-sell future room-nights to agencies now, for a season ahead.
             </p>
             <div className="space-y-1">
-              <div className="text-[11px] font-bold uppercase tracking-wide text-cesim-muted">Next season (winter)</div>
+              <TimeframeLabel>Next winter</TimeframeLabel>
               {field('advanceNextSeason')}
               <Readout label="Price per night (derived)" value={`${usd(advanceUnitPrice(advNext, season))} / night`} help="Falls as you offer more nights — a volume discount. Derived, not entered." />
 
-              <div className="mt-3 text-[11px] font-bold uppercase tracking-wide text-cesim-muted">Two seasons ahead (summer)</div>
+              <TimeframeLabel className="mt-3">Two seasons ahead (summer)</TimeframeLabel>
               {field('advanceTwoSeasons')}
               <Readout label="Price per night (derived)" value={`${usd(advanceUnitPrice(advTwo, season))} / night`} help="Falls as you offer more nights — a volume discount. Derived, not entered." />
             </div>
@@ -132,7 +160,7 @@ export function SalesPage() {
 
         {/* ── Right: read-only statements ── */}
         <div className="space-y-4">
-          <Section title="Sales for This Season">
+          <Section title={`Sales for This ${cap(season)}`}>
             <StatementTable columns={cols} rows={salesRows} />
             <p className="mt-2 text-[11px] text-cesim-muted">
               Δ% and last-season columns populate once round-over-round results exist (v2). Figures are a forecast — open <span className="font-semibold">Projections</span> for the full statements.

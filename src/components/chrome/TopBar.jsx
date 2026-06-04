@@ -24,7 +24,7 @@ function Avatar({ initials, color, name }) {
   )
 }
 
-export function TopBar({ page, onNavigate }) {
+export function TopBar() {
   return (
     <header className="bg-header-grad text-white shadow">
       {/* Row 1: brand · meta strip · avatars */}
@@ -34,8 +34,8 @@ export function TopBar({ page, onNavigate }) {
             <span className="text-lg">▲▲</span>
           </div>
           <div className="leading-none">
-            <span className="text-[15px] font-light tracking-wide text-white/80">SIM</span>
-            <span className="text-[18px] font-bold tracking-wide">CESIM</span>
+            <span className="text-[18px] font-bold tracking-wide text-white/80">SIM</span>
+            <span className="text-[18px] font-bold tracking-wide">Cesim</span>
           </div>
         </div>
 
@@ -59,7 +59,7 @@ export function TopBar({ page, onNavigate }) {
       </div>
 
       {/* Row 2: main nav */}
-      <NavTabs page={page} onNavigate={onNavigate} />
+      <NavTabs />
     </header>
   )
 }

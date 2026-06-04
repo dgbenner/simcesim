@@ -9,7 +9,10 @@ export function Footer() {
     <footer className="mt-8 bg-surface-footer text-[12px] text-cesim-muted">
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-6 px-4 py-7 md:grid-cols-3">
         <div className="flex items-center gap-2 text-gray-400">
-          <span className="text-3xl font-light tracking-tight">◎ cesim</span>
+          <div className="leading-none">
+            <div className="text-3xl font-light tracking-tight">◎ Cesim</div>
+            <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.2em]">Business Simulations</div>
+          </div>
         </div>
 
         <div>
@@ -47,7 +50,7 @@ export function Footer() {
 
       <div className="border-t border-gray-300/60">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-2 px-4 py-2 text-[11px] text-gray-400">
-          <span>© 2000–2026 SIMCESIM — an MBA capstone re-build of Cesim Service.</span>
+          <span>© 2000–2026 SIMCesim — an MBA capstone re-build of Cesim Service, by Cesim Business Simulations.</span>
           <span>All monetary figures denominated in USD ($).</span>
         </div>
       </div>
