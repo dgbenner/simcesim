@@ -1,14 +1,15 @@
 // lastRoundResults.js
-// SEEDED FROM SCREENSHOTS — not computed. These are the actual Round-1 (Winter) figures
-// read from the `Results · Cesim Service` screenshots in _reference/screenshots/. They are
-// the historical ANCHOR the Results page + past-results hint display. When a real
+// SEEDED FROM SCREENSHOTS — not computed. Figures read from the `Results · Cesim Service`
+// screenshots in _reference/screenshots/ (the source screenshots were a winter round; the
+// numbers now stand in as the prior SUMMER anchor since the active season is winter). They
+// are the historical ANCHOR the Results page + past-results hint display. When a real
 // multi-round engine exists, replace this file with computed round-to-round state.
 //
 // Columns are the four teams; only Hotel Red is active (the rest render ghosted, per the
 // global competitor-ghosting rule). Numbers for competitors come from the Sorting/Ratios
 // screenshots where legible and are otherwise representative.
 
-export const LAST_ROUND = { n: 1, season: 'Winter', label: 'Round 1 · Winter' }
+export const LAST_ROUND = { n: 1, season: 'Summer', label: 'Round 1 · Summer' }
 
 export const RESULT_TEAMS = [
   { key: 'northline', name: 'The Northline', active: false },
@@ -71,9 +72,9 @@ export const BALANCE = [
 // ── Market report (THE ANCHOR) ────────────────────────────────────────────────────────
 export const MARKET = {
   roomRates: [
-    r('Booked this winter', [150, 130, 220, 150], { fmt: 'rate' }),
-    r('Booked last summer', [150, 150, 150, 150], { fmt: 'rate' }),
-    r('Booked two seasons ago (winter)', [90, 100, 100, 119], { fmt: 'rate' }),
+    r('Booked this summer', [150, 130, 220, 150], { fmt: 'rate' }),
+    r('Booked last winter', [150, 150, 150, 150], { fmt: 'rate' }),
+    r('Booked two seasons ago (summer)', [90, 100, 100, 119], { fmt: 'rate' }),
     r('Average room rate', [110.36, 109.84, 110.75, 118.55], { fmt: 'rate', bold: true }),
   ],
   salesAndNights: [

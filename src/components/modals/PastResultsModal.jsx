@@ -10,8 +10,8 @@ import { usd, int, pct } from '../../lib/format'
 //   • the tagged rows = RECAP (purely what the hotel DID last season — past tense)
 // Rounds alternate seasons, so we name the season ("last winter") not the vaguer "round".
 
-const lastSeason = LAST_ROUND.season.toLowerCase() // "winter"
-const thisSeason = otherSeason(lastSeason) // "summer"
+const lastSeason = LAST_ROUND.season.toLowerCase() // last completed round's season
+const thisSeason = otherSeason(lastSeason) // the current decision season
 
 function Row({ label, value, hint, note }) {
   return (

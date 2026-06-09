@@ -128,7 +128,7 @@ export function SalesPage() {
             >
               <span aria-hidden>💡</span>
               <span>
-                The {usd(7000)} default ≈ last winter's spend.{' '}
+                The {usd(7000)} default ≈ last {otherSeason(season)}'s spend.{' '}
                 <span className="font-semibold underline">See the recap →</span>
               </span>
             </button>
@@ -143,11 +143,11 @@ export function SalesPage() {
               Pre-sell future room-nights to agencies now, for a season ahead.
             </p>
             <div className="space-y-1">
-              <TimeframeLabel>Next winter</TimeframeLabel>
+              <TimeframeLabel>Next {otherSeason(season)}</TimeframeLabel>
               {field('advanceNextSeason')}
               <Readout label="Price per night (derived)" value={`${usd(advanceUnitPrice(advNext, season))} / night`} help="Falls as you offer more nights — a volume discount. Derived, not entered." />
 
-              <TimeframeLabel className="mt-3">Two seasons ahead (summer)</TimeframeLabel>
+              <TimeframeLabel className="mt-3">Two seasons ahead ({season})</TimeframeLabel>
               {field('advanceTwoSeasons')}
               <Readout label="Price per night (derived)" value={`${usd(advanceUnitPrice(advTwo, season))} / night`} help="Falls as you offer more nights — a volume discount. Derived, not entered." />
             </div>

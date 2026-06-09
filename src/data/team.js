@@ -46,12 +46,12 @@ export const ACTIVE_MEMBERS = HOTEL_RED.members
 // All 7 real rounds, numbered AND season-labeled. Winter/summer alternate; Round 2 is
 // Summer (CONFIRMED). Practice rounds dropped. Round 2 is current; past/future inactive.
 export const ROUNDS = [
-  { n: 1, season: 'Winter', state: 'past' },
-  { n: 2, season: 'Summer', state: 'current' },
-  { n: 3, season: 'Winter', state: 'future' },
-  { n: 4, season: 'Summer', state: 'future' },
-  { n: 5, season: 'Winter', state: 'future' },
-  { n: 6, season: 'Summer', state: 'future' },
-  { n: 7, season: 'Winter', state: 'future' },
+  { n: 1, season: 'Summer', state: 'past' },
+  { n: 2, season: 'Winter', state: 'current' },
+  { n: 3, season: 'Summer', state: 'future' },
+  { n: 4, season: 'Winter', state: 'future' },
+  { n: 5, season: 'Summer', state: 'future' },
+  { n: 6, season: 'Winter', state: 'future' },
+  { n: 7, season: 'Summer', state: 'future' },
 ]
 export const CURRENT_ROUND = ROUNDS.find((r) => r.state === 'current')
