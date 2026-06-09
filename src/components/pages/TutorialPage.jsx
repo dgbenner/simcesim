@@ -10,15 +10,16 @@ import { PageHeader } from '../shared/PageHeader'
 // set from coachingTips.js — a quiet one-word header over three pointing bullets. Steps 1
 // and 7 are self-evident and get no coaching block.
 
-// One coaching set, styled as the small accent block under a step. Header = the set's
-// one-word label; content comes entirely from the data file.
-function Coaching({ set }) {
-  if (!set) return null
+// One coaching set (three verb-first bullets), styled as the small accent block under a
+// step. No header — the step title frames it; a 💡 marks it as guidance. Content comes
+// entirely from the data file.
+function Coaching({ bullets }) {
+  if (!bullets || !bullets.length) return null
   return (
-    <div className="mt-2 rounded border-l-2 border-amber-400 bg-amber-50 p-2.5">
-      <div className="mb-1 text-[11px] font-bold uppercase tracking-wide text-amber-800">{set.label}</div>
-      <ul className="grid gap-x-5 gap-y-1 text-[11px] leading-snug text-amber-900 sm:grid-cols-2 lg:grid-cols-3">
-        {set.bullets.map((b, j) => (
+    <div className="mt-2 flex gap-2 rounded border-l-2 border-amber-400 bg-amber-50 p-2.5">
+      <span aria-hidden className="select-none leading-none">💡</span>
+      <ul className="grid flex-1 gap-x-5 gap-y-1 text-[11px] leading-snug text-amber-900 sm:grid-cols-2 lg:grid-cols-3">
+        {bullets.map((b, j) => (
           <li key={j} className="flex gap-1.5">
             <span aria-hidden className="text-amber-500">•</span>
             <span>{b}</span>
@@ -107,7 +108,7 @@ export function TutorialPage({ onNavigate }) {
               <div className="min-w-0 flex-1">
                 <div className="text-[14px] font-semibold text-cesim-ink">{s.title}</div>
                 <div className="text-[13px] leading-relaxed text-cesim-muted">{s.body}</div>
-                <Coaching set={coaching[i]} />
+                <Coaching bullets={coaching[i]} />
               </div>
             </li>
           ))}
