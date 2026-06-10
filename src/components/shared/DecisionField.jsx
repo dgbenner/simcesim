@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { cn } from '../../lib/cn'
 import { FIELDS } from '../../data/fields'
 import { fieldTips } from '../../data/fieldTips'
+import { horizonTagFor, investmentTagMeta } from '../../data/investmentTags'
 import { useDecisions } from '../../state/decisions'
 import { useUI } from '../../state/ui'
 import { InfoIcon } from './InfoIcon'
@@ -97,6 +98,7 @@ export function DecisionField({ fieldId, highlight }) {
   const { openField, explain } = useUI()
   const value = values[fieldId]
   const made = madeSet.has(fieldId)
+  const horizon = horizonTagFor(fieldId) // 'SHRT-INV' | 'LNG-INV' | null
 
   const tips = fieldTips[fieldId]
   const [focused, setFocused] = useState(false)
@@ -163,6 +165,14 @@ export function DecisionField({ fieldId, highlight }) {
             {field.kind === 'estimation' && (
               <span className="ml-1.5 inline-block -translate-y-[2px] align-middle" title="Forecast — feeds the budget only, does not change your actual results">
                 <Tag variant="estimation">forecast</Tag>
+              </span>
+            )}
+            {horizon && (
+              <span
+                className="ml-1.5 inline-block -translate-y-[2px] align-middle"
+                title={`${investmentTagMeta[horizon].name} — ${investmentTagMeta[horizon].timeframe}`}
+              >
+                <Tag variant={investmentTagMeta[horizon].variant}>{investmentTagMeta[horizon].label}</Tag>
               </span>
             )}
           </div>

@@ -1,5 +1,6 @@
 import { Tag } from '../shared/Tag'
 import { cn } from '../../lib/cn'
+import { investmentTagMeta, untaggedHorizonNote } from '../../data/investmentTags'
 import mouseArrow from '../../assets/mouse-arrow.png'
 
 // Persistent legend in the right column (always visible, never changes). Its only job is
@@ -100,19 +101,28 @@ export function HowToReadPanel() {
         <Cue
           title="Tags"
           sample={
-            <span className="grid h-2.5 w-5 grid-cols-2 gap-0.5">
+            <span className="grid h-4 w-4 grid-cols-2 gap-0.5">
               <span className="rounded-sm bg-cesim-link/60" />
               <span className="rounded-sm bg-amber-400" />
+              <span className="rounded-sm bg-violet-300" />
+              <span className="rounded-sm bg-violet-500" />
             </span>
           }
         >
           <span className="block space-y-1.5">
-            <span className="flex items-center gap-2">
+            <span className="flex items-start gap-2">
               <Tag variant="decision">decision</Tag> a lever you set
             </span>
-            <span className="flex items-center gap-2">
+            <span className="flex items-start gap-2">
               <Tag variant="estimation">forecast</Tag> feeds the budget, not your results
             </span>
+            {Object.values(investmentTagMeta).map((m) => (
+              <span key={m.label} className="flex items-start gap-2">
+                <Tag variant={m.variant} className="shrink-0">{m.label}</Tag>
+                <span>{m.timeframe}</span>
+              </span>
+            ))}
+            <span className="block pt-1 text-cesim-muted/90">{untaggedHorizonNote}</span>
           </span>
         </Cue>
       </ul>

@@ -1,13 +1,16 @@
 import { cn } from '../../lib/cn'
 
-// Unified tag/badge system. Only two status pills are used in the app, and the colors
-// mean the same thing everywhere:
-//   decision   — an editable lever you set            (blue)
-//   estimation — a forecast: feeds the budget only    (amber)
+// Unified tag/badge system. The colors mean the same thing everywhere:
+//   decision   — an editable lever you set                 (blue)
+//   estimation — a forecast: feeds the budget only         (amber)
+//   shrtInv    — short-term investment, pays back ~1–3 rds (violet, light)
+//   lngInv     — long-term investment, compounds ~4+ rds   (violet, deep)
 // Units are shown inline on fields ($, %, nights…) — they are not tagged.
 const VARIANTS = {
   decision: 'bg-cesim-link/10 text-cesim-link',
   estimation: 'bg-amber-100 text-amber-700',
+  shrtInv: 'bg-violet-100 text-violet-700',
+  lngInv: 'bg-violet-300 text-violet-900',
 }
 
 export function Tag({ variant = 'decision', children, className }) {
