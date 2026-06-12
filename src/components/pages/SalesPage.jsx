@@ -1,6 +1,6 @@
 import { useDecisions } from '../../state/decisions'
 import { useUI } from '../../state/ui'
-import { advanceUnitPrice, PARAMS } from '../../data/formulas'
+import { advanceUnitPrice, PARAMS, computeIncomeStatement } from '../../data/formulas'
 import { estimateWalkInNights, walkInOccupancy, marketingFactor, demandRefFor } from '../../data/demandModel'
 import { ANCHORS } from '../../data/roundResults'
 import { LAST_COMPLETED_ROUND } from '../../data/config'
@@ -24,10 +24,46 @@ import { usd, int, pct } from '../../lib/format'
 // Reference rates spanning the real walk-in observations, per season-type.
 const PRICE_POINTS = { summer: [100, 120, 135, 150, 170], winter: [110, 130, 150, 200, 250] }
 
-// The grounded, SEASON-AWARE price→volume readout: model-suggested walk-in nights at the
-// user's rate vs. their own estimate, plus the price→volume curve for THIS season and the
-// required honesty labels (spec addendum §2). Assistive only — Approach A drives the budget.
-function DemandModelReadout({ price, marketing, userEstimate, season }) {
+// Slider/stepper bounds — covers the real spread seen across rounds (~$95–$250).
+const RATE_MIN = 80
+const RATE_MAX = 260
+const RATE_STEP = 5
+
+// A stepper + slider on the walk-in rate (spec price-profit addendum, Part 1). Adjusts the
+// rate in $5 steps and feeds the demand-model projections live. Locked on past rounds.
+function RateControl() {
+  const { values, setValue, readOnly } = useDecisions()
+  const rate = Number(values.walkInRate) || 0
+  const pos = rate || 130 // slider rests at a sensible default until a rate is set
+  const set = (v) => setValue('walkInRate', Math.max(RATE_MIN, Math.min(RATE_MAX, Math.round(v / RATE_STEP) * RATE_STEP)))
+  const btn = 'grid h-6 w-6 shrink-0 place-items-center rounded border border-gray-300 text-[14px] leading-none text-cesim-ink hover:border-cesim-link disabled:opacity-40'
+
+  return (
+    <div className="mt-1.5 flex items-center gap-2 px-1">
+      <button type="button" disabled={readOnly} onClick={() => set(pos - RATE_STEP)} className={btn} aria-label="Lower rate $5">−</button>
+      <input
+        type="range"
+        min={RATE_MIN}
+        max={RATE_MAX}
+        step={RATE_STEP}
+        value={pos}
+        disabled={readOnly}
+        onChange={(e) => set(Number(e.target.value))}
+        className="h-1 flex-1 cursor-pointer accent-cesim-link disabled:cursor-not-allowed disabled:opacity-40"
+        aria-label="Walk-in room rate"
+      />
+      <button type="button" disabled={readOnly} onClick={() => set(pos + RATE_STEP)} className={btn} aria-label="Raise rate $5">+</button>
+      <span className="w-12 shrink-0 text-right text-[12px] font-semibold tabular-nums text-cesim-ink">{rate ? usd(rate) : '—'}</span>
+    </div>
+  )
+}
+
+// The grounded, SEASON-AWARE price→volume→PROFIT readout: model-suggested walk-in nights at
+// the user's rate vs. their own estimate, plus a per-price table of nights, occupancy AND
+// estimated net profit (spec addendum §2 + price-profit addendum). Profit per row is just
+// Projections' bottom line recomputed for that rate, all other decisions held — assistive
+// only; Approach A still drives the official budget.
+function DemandModelReadout({ price, marketing, userEstimate, season, decisions }) {
   const p = Number(price) || 0
   const mf = marketingFactor(marketing)
   const modelNights = estimateWalkInNights(p, season, { marketingFactor: mf })
@@ -36,31 +72,39 @@ function DemandModelReadout({ price, marketing, userEstimate, season }) {
   const nearest = p > 0 ? points.reduce((a, b) => (Math.abs(b - p) < Math.abs(a - p) ? b : a)) : null
   const ref = demandRefFor(season)
 
+  // Estimated net profit at a given rate + nights, holding every other decision fixed.
+  const profitAt = (rate, nights) =>
+    computeIncomeStatement({ ...decisions, walkInRate: rate, estNightsSold: nights }, season).netProfit
+  const profitNow = p > 0 ? profitAt(p, modelNights) : 0
+
   return (
     <div className="mt-2 rounded border border-slate-300 bg-slate-50 p-2.5 text-[12px] text-slate-700">
-      <div className="mb-1.5 flex items-center gap-1.5 font-semibold text-slate-800">
-        <span aria-hidden>📊</span> Demand model — price drives volume ({cap(season)})
+      <div className="flex items-center gap-1.5 font-semibold text-slate-800">
+        <span aria-hidden>📊</span> Demand model projections ({cap(season)})
       </div>
+      <div className="mb-1.5 text-[10px] text-slate-500">How your room rate moves volume — and profit.</div>
       {p > 0 ? (
         <p className="leading-snug">
-          At your <span className="font-bold text-cesim-ink">{usd(p)}</span> walk-in rate, the model expects{' '}
+          At <span className="font-bold text-cesim-ink">{usd(p)}</span>, the model expects{' '}
           <span className="font-bold text-cesim-ink">~{int(modelNights)}</span> walk-in nights{' '}
-          (<span className="font-semibold">{pct(occ)}</span> of capacity).
+          (<span className="font-semibold">{pct(occ)}</span> occ.) →{' '}
+          <span className="font-bold text-cesim-ink">{usd(profitNow)}</span> est. net profit.
           {userEstimate > 0 && (
-            <> Your estimate: <span className="font-semibold text-cesim-ink">{int(userEstimate)}</span>.</>
+            <> Your estimate: <span className="font-semibold text-cesim-ink">{int(userEstimate)}</span> nights.</>
           )}
         </p>
       ) : (
-        <p className="leading-snug text-slate-500">Enter a walk-in rate to see the price → volume trade-off.</p>
+        <p className="leading-snug text-slate-500">Set a walk-in rate to see the price → volume → profit trade-off.</p>
       )}
 
-      {/* The price→volume curve (price alone), so the trade-off the cohort couldn't see is visible */}
+      {/* Price → volume → profit, so the real trade-off is visible in one glance */}
       <table className="mt-2 w-full text-[11px] tabular-nums">
         <thead>
           <tr className="text-slate-500">
             <th className="py-0.5 text-left font-medium">Walk-in rate</th>
             <th className="py-0.5 text-right font-medium">Nights</th>
-            <th className="py-0.5 text-right font-medium">Occupancy</th>
+            <th className="py-0.5 text-right font-medium">Occ.</th>
+            <th className="py-0.5 text-right font-medium">Net profit (est.)</th>
           </tr>
         </thead>
         <tbody>
@@ -75,6 +119,7 @@ function DemandModelReadout({ price, marketing, userEstimate, season }) {
                 </td>
                 <td className="py-0.5 text-right">~{int(n)}</td>
                 <td className="py-0.5 text-right">{pct(walkInOccupancy(n))}</td>
+                <td className="py-0.5 text-right">{usd(profitAt(pp, n))}</td>
               </tr>
             )
           })}
@@ -83,8 +128,9 @@ function DemandModelReadout({ price, marketing, userEstimate, season }) {
 
       <p className="mt-2 text-[10px] leading-snug text-slate-500">
         A simplified {season} demand curve (elasticity ≈ {ref.elasticity}) fit to real results for this season —
-        directional, a teaching approximation, not the live engine. The slope shifts season to season, and real
-        demand also moves with competitors' prices. It does not change your budget; your estimate drives the statements.
+        directional, a teaching approximation, not the live engine. Profit is Projections' bottom line recomputed per
+        rate, other decisions held. Demand still moves with competitors' prices in the live sim; your estimate drives
+        the official budget. Open <span className="font-semibold">Projections</span> for the full statements.
       </p>
     </div>
   )
@@ -152,6 +198,7 @@ export function SalesPage() {
             <TimeframeLabel className="mb-1.5">This {season}</TimeframeLabel>
             <div className="space-y-1">
               {field('walkInRate')}
+              <RateControl />
               {field('estNightsSold')}
             </div>
 
@@ -160,6 +207,7 @@ export function SalesPage() {
               marketing={values.marketing}
               userEstimate={walkNights}
               season={season}
+              decisions={values}
             />
 
             {/* Yellow hint: anchor your numbers to last round's actual results */}
