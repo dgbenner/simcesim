@@ -7,10 +7,10 @@ import { UIProvider } from './state/ui.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <DecisionsProvider>
-      <UIProvider>
+    <UIProvider>
+      <DecisionsProvider>
         <App />
-      </UIProvider>
-    </DecisionsProvider>
+      </DecisionsProvider>
+    </UIProvider>
   </StrictMode>,
 )

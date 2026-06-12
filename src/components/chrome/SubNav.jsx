@@ -3,7 +3,8 @@ import { DOCS } from '../../data/docs'
 import { DECISION_PAGES } from '../../data/nav'
 
 // The Decisions sub-nav — the spine for the decision pages. Active item gets a blue
-// label + underline (matches the live tool). Projections opens the lightbox modal.
+// label + underline (matches the live tool). The right cluster carries the one-pager +
+// source docs and the Projections lightbox. (Round navigation lives on the strip above.)
 export function SubNav({ page, onNavigate, onOpenProjections }) {
   return (
     <div className="border-b border-gray-200 bg-white">
@@ -30,6 +31,14 @@ export function SubNav({ page, onNavigate, onOpenProjections }) {
           })}
         </ul>
         <div className="ml-auto flex items-center gap-3">
+          <a
+            href={DOCS.onePager.href}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden text-[12px] text-cesim-link hover:underline sm:inline"
+          >
+            {DOCS.onePager.title}
+          </a>
           <a
             href={DOCS.guide.href}
             target="_blank"

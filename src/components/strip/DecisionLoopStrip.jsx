@@ -2,7 +2,7 @@ import { useDecisions } from '../../state/decisions'
 import { useUI } from '../../state/ui'
 import { FIELDS, DECISION_ORDER } from '../../data/fields'
 import { Tooltip } from '../shared/Tooltip'
-import { otherSeason } from '../../lib/season'
+import { RoundSelector } from '../chrome/RoundSelector'
 import { cn } from '../../lib/cn'
 
 // THE DECISION-LOOP STRIP (spec §6) — the "sequence" overlay. Sits below the native top
@@ -36,9 +36,8 @@ const SHORT = {
 }
 
 export function DecisionLoopStrip({ page, onNavigate }) {
-  const { made: madeSet, progress, season } = useDecisions()
+  const { made: madeSet, progress, season, readOnly } = useDecisions()
   const { setProjectionsOpen } = useUI()
-  const nextSeason = otherSeason(season)
 
   // Per-step completion, computed from decisions the user has actually made.
   const steps = PHASES.map((ph, i) => {
@@ -150,25 +149,19 @@ export function DecisionLoopStrip({ page, onNavigate }) {
           </div>
         </div>
 
-        {/* Loop + inactive inter-round gesture */}
+        {/* Loop + round navigation (review past rounds / return to the live one) */}
         <div className="ml-auto flex items-center gap-1.5">
-          <button
-            type="button"
-            onClick={() => onNavigate('sales')}
-            className="whitespace-nowrap rounded px-1.5 py-1 text-[12px] text-white/85 hover:bg-white/10"
-            title={`Start this ${season}'s decisions over from the top`}
-          >
-            ↻ Start over
-          </button>
-          <Tooltip
-            width={230}
-            placement="bottom"
-            content="Inter-round progression is out of scope in v1 — every round is mechanically identical; only the season changes."
-          >
-            <span className="cursor-not-allowed whitespace-nowrap rounded border border-white/20 px-2 py-1 text-[12px] text-white/40">
-              Advance to {nextSeason} →
-            </span>
-          </Tooltip>
+          {!readOnly && (
+            <button
+              type="button"
+              onClick={() => onNavigate('sales')}
+              className="whitespace-nowrap rounded px-1.5 py-1 text-[12px] text-white/85 hover:bg-white/10"
+              title={`Start this ${season}'s decisions over from the top`}
+            >
+              ↻ Start over
+            </button>
+          )}
+          <RoundSelector tone="dark" />
         </div>
       </div>
     </div>

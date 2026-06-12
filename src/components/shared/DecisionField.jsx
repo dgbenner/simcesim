@@ -45,7 +45,7 @@ function toDisplay(value) {
   return Number.isFinite(n) ? n.toLocaleString('en-US', { maximumFractionDigits: 6 }) : ''
 }
 
-function UnitInput({ field, value, onType, onCommit, disabled, onFocusTip, onBlurTip }) {
+function UnitInput({ field, value, onType, onCommit, disabled, locked, onFocusTip, onBlurTip }) {
   const prefix = field.unit === '$' ? '$' : null
   const suffix = field.unit && field.unit !== '$' ? field.unit : null
   const [focused, setFocused] = useState(false)
@@ -63,8 +63,11 @@ function UnitInput({ field, value, onType, onCommit, disabled, onFocusTip, onBlu
       className={cn(
         'flex w-28 shrink-0 items-center gap-1 rounded border bg-surface-input px-1.5 py-0.5',
         disabled ? 'border-gray-200' : 'border-cesim-link/40 focus-within:ring-1 focus-within:ring-cesim-link',
+        locked && 'bg-gray-50',
       )}
+      title={locked ? 'Locked — this round is completed (review only)' : undefined}
     >
+      {locked && <span aria-hidden className="text-[10px] text-cesim-muted">🔒</span>}
       {prefix && <span className="text-[12px] text-cesim-muted">{prefix}</span>}
       <input
         type="text"
@@ -94,11 +97,12 @@ function UnitInput({ field, value, onType, onCommit, disabled, onFocusTip, onBlu
 
 export function DecisionField({ fieldId, highlight }) {
   const field = FIELDS[fieldId]
-  const { values, setValue, made: madeSet } = useDecisions()
+  const { values, setValue, made: madeSet, readOnly } = useDecisions()
   const { openField, explain } = useUI()
   const value = values[fieldId]
   const made = madeSet.has(fieldId)
   const horizon = horizonTagFor(fieldId) // 'SHRT-INV' | 'LNG-INV' | null
+  const locked = readOnly && !field.ghosted
 
   const tips = fieldTips[fieldId]
   const [focused, setFocused] = useState(false)
@@ -149,15 +153,15 @@ export function DecisionField({ fieldId, highlight }) {
             <span
               role="button"
               tabIndex={0}
-              onClick={() => openField(fieldId)}
+              onClick={() => (locked ? explain(fieldId) : openField(fieldId))}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
-                  openField(fieldId)
+                  locked ? explain(fieldId) : openField(fieldId)
                 }
               }}
               className="cursor-pointer text-cesim-ink hover:text-cesim-link hover:underline"
-              title="Open the decision detail"
+              title={locked ? 'Open the explanation (read-only)' : 'Open the decision detail'}
             >
               {field.label}
             </span>
@@ -182,7 +186,8 @@ export function DecisionField({ fieldId, highlight }) {
           value={value}
           onType={commitType}
           onCommit={commitClamp}
-          disabled={field.ghosted}
+          disabled={field.ghosted || locked}
+          locked={locked}
           onFocusTip={() => setFocused(true)}
           onBlurTip={() => setFocused(false)}
         />

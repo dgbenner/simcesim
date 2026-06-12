@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components -- provider + hook co-located by design */
 import { createContext, useContext, useState, useMemo, useCallback } from 'react'
-import { LAST_COMPLETED_ROUND } from '../data/config'
+import { LAST_COMPLETED_ROUND, CURRENT_ROUND } from '../data/config'
 
 // Lightweight UI + navigation state shared across the app: the active section/page, the
 // field teaching modal, the dock explain target, the overlay modals (Projections,
@@ -13,6 +13,7 @@ export function UIProvider({ children }) {
   const [page, setPage] = useState('sales') // decision sub-page
   const [resultsTab, setResultsTab] = useState('market') // results sub-tab
   const [viewRound, setViewRound] = useState(LAST_COMPLETED_ROUND) // round under review in Results
+  const [decisionRound, setDecisionRound] = useState(CURRENT_ROUND) // round shown in Decisions (past = locked)
 
   // Overlays / dock
   const [modalField, setModalField] = useState(null)
@@ -48,6 +49,8 @@ export function UIProvider({ children }) {
       setResultsTab,
       viewRound,
       setViewRound,
+      decisionRound,
+      setDecisionRound,
       goToResults,
       goToDecision,
       goToHome,
@@ -66,6 +69,7 @@ export function UIProvider({ children }) {
       page,
       resultsTab,
       viewRound,
+      decisionRound,
       goToResults,
       goToDecision,
       goToHome,

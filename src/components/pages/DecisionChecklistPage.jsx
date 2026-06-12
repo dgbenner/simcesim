@@ -3,7 +3,6 @@ import { useDecisions } from '../../state/decisions'
 import { PageHeader } from '../shared/PageHeader'
 import { FIELDS, DECISION_ORDER, PAGES } from '../../data/fields'
 import { HOTEL_RED, displayName } from '../../data/team'
-import { RoundSelector } from '../chrome/RoundSelector'
 import { cn } from '../../lib/cn'
 import { usd, int, pct, dec2 } from '../../lib/format'
 
@@ -64,11 +63,6 @@ export function DecisionChecklistPage() {
         title="Decision Checklist"
         subtitle="Every decision across the team in one grid. Your column drives the live figures."
       />
-      {/* Round selector is top-LEFT on the checklist (top-right is for Results — spec §5) */}
-      <div className="mb-3">
-        <RoundSelector />
-      </div>
-
       <div className="card overflow-x-auto">
         <table className="w-full border-collapse text-[12px]">
           <thead>
