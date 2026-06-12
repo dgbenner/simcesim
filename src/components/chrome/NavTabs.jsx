@@ -4,7 +4,7 @@ import { useUI } from '../../state/ui'
 // Main nav row. DECISIONS and RESULTS are live sections; the rest are present but inactive
 // (their pages are out of scope). Clicking switches the active section.
 const TABS = [
-  { id: 'home', label: 'HOME', enabled: false },
+  { id: 'home', label: 'HOME', enabled: true },
   { id: 'decisions', label: 'DECISIONS', enabled: true },
   { id: 'results', label: 'RESULTS', enabled: true },
   { id: 'schedule', label: 'SCHEDULE', enabled: false },
@@ -14,10 +14,11 @@ const TABS = [
 ]
 
 export function NavTabs() {
-  const { section, goToDecision, goToResults } = useUI()
+  const { section, goToHome, goToDecision, goToResults } = useUI()
 
   const onClick = (id) => {
-    if (id === 'decisions') goToDecision()
+    if (id === 'home') goToHome()
+    else if (id === 'decisions') goToDecision()
     else if (id === 'results') goToResults()
   }
 

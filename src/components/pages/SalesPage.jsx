@@ -1,7 +1,9 @@
 import { useDecisions } from '../../state/decisions'
 import { useUI } from '../../state/ui'
 import { advanceUnitPrice, PARAMS } from '../../data/formulas'
-import { estimateWalkInNights, walkInOccupancy, marketingFactor, DEMAND_REF } from '../../data/demandModel'
+import { estimateWalkInNights, walkInOccupancy, marketingFactor, demandRefFor } from '../../data/demandModel'
+import { ANCHORS } from '../../data/roundResults'
+import { LAST_COMPLETED_ROUND } from '../../data/config'
 import { Section } from '../shared/Section'
 import { PageHeader } from '../shared/PageHeader'
 import { PageProgressDots } from '../shared/PageProgressDots'
@@ -19,22 +21,25 @@ import { usd, int, pct } from '../../lib/format'
 // driven by the user's estimate (spec §1, §7). Alongside it, the demand-model readout shows
 // what the price IMPLIES (a curve fit to real Round 1 results) — assistive, not the budget.
 
-// Reference rates spanning the four real Round 1 walk-in observations ($125–$250).
-const PRICE_POINTS = [110, 125, 150, 200, 250]
+// Reference rates spanning the real walk-in observations, per season-type.
+const PRICE_POINTS = { summer: [100, 120, 135, 150, 170], winter: [110, 130, 150, 200, 250] }
 
-// The grounded price→volume readout: model-suggested walk-in nights at the user's rate vs.
-// their own estimate, plus the price→volume curve and the required honesty labels (spec §3).
-function DemandModelReadout({ price, marketing, userEstimate }) {
+// The grounded, SEASON-AWARE price→volume readout: model-suggested walk-in nights at the
+// user's rate vs. their own estimate, plus the price→volume curve for THIS season and the
+// required honesty labels (spec addendum §2). Assistive only — Approach A drives the budget.
+function DemandModelReadout({ price, marketing, userEstimate, season }) {
   const p = Number(price) || 0
   const mf = marketingFactor(marketing)
-  const modelNights = estimateWalkInNights(p, { marketingFactor: mf })
+  const modelNights = estimateWalkInNights(p, season, { marketingFactor: mf })
   const occ = walkInOccupancy(modelNights)
-  const nearest = p > 0 ? PRICE_POINTS.reduce((a, b) => (Math.abs(b - p) < Math.abs(a - p) ? b : a)) : null
+  const points = PRICE_POINTS[season] ?? PRICE_POINTS.winter
+  const nearest = p > 0 ? points.reduce((a, b) => (Math.abs(b - p) < Math.abs(a - p) ? b : a)) : null
+  const ref = demandRefFor(season)
 
   return (
     <div className="mt-2 rounded border border-slate-300 bg-slate-50 p-2.5 text-[12px] text-slate-700">
       <div className="mb-1.5 flex items-center gap-1.5 font-semibold text-slate-800">
-        <span aria-hidden>📊</span> Demand model — price drives volume
+        <span aria-hidden>📊</span> Demand model — price drives volume ({cap(season)})
       </div>
       {p > 0 ? (
         <p className="leading-snug">
@@ -59,8 +64,8 @@ function DemandModelReadout({ price, marketing, userEstimate }) {
           </tr>
         </thead>
         <tbody>
-          {PRICE_POINTS.map((pp) => {
-            const n = estimateWalkInNights(pp)
+          {points.map((pp) => {
+            const n = estimateWalkInNights(pp, season)
             const on = pp === nearest
             return (
               <tr key={pp} className={on ? 'font-bold text-cesim-ink' : ''}>
@@ -77,9 +82,9 @@ function DemandModelReadout({ price, marketing, userEstimate }) {
       </table>
 
       <p className="mt-2 text-[10px] leading-snug text-slate-500">
-        A simplified demand curve (elasticity ≈ {DEMAND_REF.elasticity}) fit to the four teams' real Round 1 walk-in
-        results — directional, not the live engine. Real demand also moves with competitors' prices, which resolve
-        only in the simulation. It does not change your budget; your estimate above still drives the statements.
+        A simplified {season} demand curve (elasticity ≈ {ref.elasticity}) fit to real results for this season —
+        directional, a teaching approximation, not the live engine. The slope shifts season to season, and real
+        demand also moves with competitors' prices. It does not change your budget; your estimate drives the statements.
       </p>
     </div>
   )
@@ -154,6 +159,7 @@ export function SalesPage() {
               price={values.walkInRate}
               marketing={values.marketing}
               userEstimate={walkNights}
+              season={season}
             />
 
             {/* Yellow hint: anchor your numbers to last round's actual results */}
@@ -202,7 +208,7 @@ export function SalesPage() {
             >
               <span aria-hidden>💡</span>
               <span>
-                The {usd(7000)} default ≈ last {otherSeason(season)}'s spend.{' '}
+                Last {otherSeason(season)} the hotel spent {usd(ANCHORS[LAST_COMPLETED_ROUND].marketing)} on marketing.{' '}
                 <span className="font-semibold underline">See the recap →</span>
               </span>
             </button>

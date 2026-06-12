@@ -1,16 +1,18 @@
 /* eslint-disable react-refresh/only-export-components -- provider + hook co-located by design */
 import { createContext, useContext, useState, useMemo, useCallback } from 'react'
+import { LAST_COMPLETED_ROUND } from '../data/config'
 
 // Lightweight UI + navigation state shared across the app: the active section/page, the
-// field teaching modal, the dock explain target, and the overlay modals (Projections,
-// past-results).
+// field teaching modal, the dock explain target, the overlay modals (Projections,
+// past-results), and which past round the Results section is reviewing.
 const UIContext = createContext(null)
 
 export function UIProvider({ children }) {
   // Navigation
-  const [section, setSection] = useState('decisions') // 'decisions' | 'results'
+  const [section, setSection] = useState('home') // 'home' | 'decisions' | 'results'
   const [page, setPage] = useState('sales') // decision sub-page
   const [resultsTab, setResultsTab] = useState('market') // results sub-tab
+  const [viewRound, setViewRound] = useState(LAST_COMPLETED_ROUND) // round under review in Results
 
   // Overlays / dock
   const [modalField, setModalField] = useState(null)
@@ -22,8 +24,9 @@ export function UIProvider({ children }) {
   const closeField = useCallback(() => setModalField(null), [])
   const explain = useCallback((id) => setExplainField(id), [])
 
-  const goToResults = useCallback((tab) => {
+  const goToResults = useCallback((tab, round) => {
     if (tab) setResultsTab(tab)
+    if (round) setViewRound(round)
     setPastResultsOpen(false)
     setSection('results')
   }, [])
@@ -33,6 +36,8 @@ export function UIProvider({ children }) {
     setSection('decisions')
   }, [])
 
+  const goToHome = useCallback(() => setSection('home'), [])
+
   const value = useMemo(
     () => ({
       section,
@@ -41,8 +46,11 @@ export function UIProvider({ children }) {
       setPage,
       resultsTab,
       setResultsTab,
+      viewRound,
+      setViewRound,
       goToResults,
       goToDecision,
+      goToHome,
       modalField,
       openField,
       closeField,
@@ -57,8 +65,10 @@ export function UIProvider({ children }) {
       section,
       page,
       resultsTab,
+      viewRound,
       goToResults,
       goToDecision,
+      goToHome,
       modalField,
       openField,
       closeField,

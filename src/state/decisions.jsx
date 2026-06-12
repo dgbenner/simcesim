@@ -2,6 +2,7 @@
 import { createContext, useContext, useMemo, useState, useCallback } from 'react'
 import { FIELDS, DECISION_ORDER } from '../data/fields'
 import { computeProjection } from '../data/formulas'
+import { CURRENT_SEASON } from '../data/config'
 
 // In-memory decision store (spec §2: React state only, no persistence in v1).
 // Seeds every field from its catalog default; recomputes the projection on change.
@@ -12,7 +13,7 @@ import { computeProjection } from '../data/formulas'
 // pre-filled default. `changed` records which fields the user has edited; `made` is the
 // subset of those that currently hold a value. A refresh starts clean.
 
-const SEASON = 'summer' // Current decision round is Round 2 · Summer (Round 1 · Winter is the completed anchor)
+const SEASON = CURRENT_SEASON // current editable round's season (Round 4 · Summer) — from config.js
 
 // Editable (non-ghosted) decisions, in dependency order — the set we count + sequence.
 export const EDITABLE_IDS = DECISION_ORDER.filter((id) => !FIELDS[id].ghosted)

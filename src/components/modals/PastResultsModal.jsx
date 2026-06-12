@@ -1,15 +1,18 @@
 import { Modal } from '../shared/Modal'
 import { TimeframeLabel } from '../shared/TimeframeLabel'
 import { useUI } from '../../state/ui'
-import { LAST_ROUND, ANCHOR } from '../../data/lastRoundResults'
+import { ANCHORS, ROUND_META } from '../../data/roundResults'
+import { LAST_COMPLETED_ROUND } from '../../data/config'
 import { otherSeason } from '../../lib/season'
 import { usd, int, pct } from '../../lib/format'
 
 // The "check past results" modal (spec addendum, Part 2). Two clearly separated voices:
 //   • the yellow box = INSTRUCTION (how to use this as a benchmark for the current decision)
 //   • the tagged rows = RECAP (purely what the hotel DID last season — past tense)
-// Rounds alternate seasons, so we name the season ("last winter") not the vaguer "round".
+// Anchored on the last completed round (Round 3 · Winter); names the specific season.
 
+const LAST_ROUND = ROUND_META[LAST_COMPLETED_ROUND]
+const ANCHOR = ANCHORS[LAST_COMPLETED_ROUND]
 const lastSeason = LAST_ROUND.season.toLowerCase() // last completed round's season
 const thisSeason = otherSeason(lastSeason) // the current decision season
 
@@ -42,7 +45,7 @@ export function PastResultsModal() {
         <div className="flex items-center justify-between">
           <button
             type="button"
-            onClick={() => goToResults('market')}
+            onClick={() => goToResults('market', LAST_COMPLETED_ROUND)}
             className="text-[12px] font-semibold text-cesim-link hover:underline"
           >
             See full results →
@@ -62,7 +65,7 @@ export function PastResultsModal() {
         <span aria-hidden className="select-none">💡</span>
         <p>
           <span className="font-bold">Use this as your benchmark.</span> Last {lastSeason} it charged{' '}
-          {usd(ANCHOR.bookedRate)} for walk-ins and filled about half its rooms. For this {thisSeason}, start
+          {usd(ANCHOR.walkInRate)} for walk-ins and filled {pct(ANCHOR.occupancy)} of its rooms. For this {thisSeason}, start
           near that and decide: go <span className="font-semibold">higher</span> to earn more per room (and
           likely fill fewer), or <span className="font-semibold">lower</span> to fill more.
         </p>
@@ -73,7 +76,7 @@ export function PastResultsModal() {
 
       <Row
         label="Walk-in room rate"
-        value={usd(ANCHOR.bookedRate)}
+        value={usd(ANCHOR.walkInRate)}
         hint="/ night"
         note="The rate it charged individual ('walk-in') guests."
       />

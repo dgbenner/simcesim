@@ -8,6 +8,7 @@ import { DecisionChecklistPage } from './components/pages/DecisionChecklistPage'
 import { MarketOutlookPage } from './components/pages/MarketOutlookPage'
 import { TutorialPage } from './components/pages/TutorialPage'
 import { ResultsPage } from './components/pages/ResultsPage'
+import { HomePage } from './components/pages/HomePage'
 import { HowToReadPanel } from './components/dock/HowToReadPanel'
 import { ExplainDrawer } from './components/dock/ExplainDrawer'
 import { Principle } from './components/shared/Principle'
@@ -30,12 +31,14 @@ const PRINCIPLE_CONTEXT = {
 export default function App() {
   const { section, page, setPage, setProjectionsOpen } = useUI()
   const inResults = section === 'results'
+  const inHome = section === 'home'
+  const inDecisions = section === 'decisions'
 
   return (
     <div className="flex min-h-full flex-col">
       <TopBar />
 
-      {!inResults && (
+      {inDecisions && (
         <>
           <DecisionLoopStrip page={page} onNavigate={setPage} />
           <SubNav page={page} onNavigate={setPage} onOpenProjections={() => setProjectionsOpen(true)} />
@@ -43,7 +46,9 @@ export default function App() {
       )}
 
       <main className="mx-auto w-full max-w-[1180px] flex-1 px-4 py-5">
-        {inResults ? (
+        {inHome ? (
+          <HomePage />
+        ) : inResults ? (
           <ResultsPage />
         ) : (
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_300px]">

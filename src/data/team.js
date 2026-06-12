@@ -6,9 +6,9 @@ export const COURSE = {
   name: 'Mini MBA June 2026',
   universe: 'Universe 1, Mini MBA June 2026',
   instructor: 'Dan McLaughlin',
-  roundLabel: 'Round 2',
-  roundDeadline: '2026-06-09 13:05',
-  countdown: '06d 10:46:09', // static chrome only
+  roundLabel: 'Round 4',
+  roundDeadline: '2026-06-16 13:05',
+  countdown: '04d 00:00:00', // static chrome only
 }
 
 export const HOTEL_RED = {
@@ -66,17 +66,16 @@ export function displayName(name) {
   return initialsOf(name)
 }
 
-// All 7 real rounds, numbered AND season-labeled. Seasons alternate with ODD = Winter,
-// EVEN = Summer (CONFIRMED: Round 1 = Winter from the real export; Round 4 = Summer, the
-// live round). The app teaches with the Round 1 · Winter data in hand: Round 1 is the
-// completed anchor, Round 2 · Summer is the current decision round. Practice rounds dropped.
-export const ROUNDS = [
-  { n: 1, season: 'Winter', state: 'past' },
-  { n: 2, season: 'Summer', state: 'current' },
-  { n: 3, season: 'Winter', state: 'future' },
-  { n: 4, season: 'Summer', state: 'future' },
-  { n: 5, season: 'Winter', state: 'future' },
-  { n: 6, season: 'Summer', state: 'future' },
-  { n: 7, season: 'Winter', state: 'future' },
-]
+// All 7 real rounds, numbered AND season-labeled. Seasons alternate ODD = Winter, EVEN =
+// Summer (confirmed from the real exports: R1 Winter … R4 Summer, the live round). Rounds
+// 1–3 are complete (real data seeded in roundResults.js); Round 4 · Summer is current/
+// editable; later rounds are locked. State is derived from config.CURRENT_ROUND so there's
+// one source of truth. Practice rounds dropped.
+import { CURRENT_ROUND as CURRENT_N, seasonOfRound } from './config'
+
+export const ROUNDS = [1, 2, 3, 4, 5, 6, 7].map((n) => ({
+  n,
+  season: seasonOfRound(n) === 'winter' ? 'Winter' : 'Summer',
+  state: n < CURRENT_N ? 'past' : n === CURRENT_N ? 'current' : 'future',
+}))
 export const CURRENT_ROUND = ROUNDS.find((r) => r.state === 'current')
