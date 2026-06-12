@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { useDecisions } from '../../state/decisions'
 import { PageHeader } from '../shared/PageHeader'
 import { FIELDS, DECISION_ORDER, PAGES } from '../../data/fields'
-import { HOTEL_RED } from '../../data/team'
+import { HOTEL_RED, displayName } from '../../data/team'
 import { RoundSelector } from '../chrome/RoundSelector'
 import { cn } from '../../lib/cn'
 import { usd, int, pct, dec2 } from '../../lib/format'
@@ -41,7 +41,7 @@ export function DecisionChecklistPage() {
     { key: 'team', name: 'Hotel Red', team: true },
     ...HOTEL_RED.members.map((m) => ({
       key: m.name,
-      name: m.name,
+      name: displayName(m.name), // Hotel Red → full name; the rule anonymizes everyone else
       you: m.name === 'Dan Benner',
     })),
   ]

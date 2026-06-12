@@ -1,6 +1,7 @@
 import { useDecisions } from '../../state/decisions'
 import { useUI } from '../../state/ui'
 import { advanceUnitPrice, PARAMS } from '../../data/formulas'
+import { estimateWalkInNights, walkInOccupancy, marketingFactor, DEMAND_REF } from '../../data/demandModel'
 import { Section } from '../shared/Section'
 import { PageHeader } from '../shared/PageHeader'
 import { PageProgressDots } from '../shared/PageProgressDots'
@@ -15,7 +16,74 @@ import { usd, int, pct } from '../../lib/format'
 
 // SALES — decisions on the left (units on fields, ⓘ on every label, the sales-mix donut);
 // live read-only statements on the right. Demand is Approach A: the income statement is
-// driven by the user's estimate (spec §1, §7).
+// driven by the user's estimate (spec §1, §7). Alongside it, the demand-model readout shows
+// what the price IMPLIES (a curve fit to real Round 1 results) — assistive, not the budget.
+
+// Reference rates spanning the four real Round 1 walk-in observations ($125–$250).
+const PRICE_POINTS = [110, 125, 150, 200, 250]
+
+// The grounded price→volume readout: model-suggested walk-in nights at the user's rate vs.
+// their own estimate, plus the price→volume curve and the required honesty labels (spec §3).
+function DemandModelReadout({ price, marketing, userEstimate }) {
+  const p = Number(price) || 0
+  const mf = marketingFactor(marketing)
+  const modelNights = estimateWalkInNights(p, { marketingFactor: mf })
+  const occ = walkInOccupancy(modelNights)
+  const nearest = p > 0 ? PRICE_POINTS.reduce((a, b) => (Math.abs(b - p) < Math.abs(a - p) ? b : a)) : null
+
+  return (
+    <div className="mt-2 rounded border border-slate-300 bg-slate-50 p-2.5 text-[12px] text-slate-700">
+      <div className="mb-1.5 flex items-center gap-1.5 font-semibold text-slate-800">
+        <span aria-hidden>📊</span> Demand model — price drives volume
+      </div>
+      {p > 0 ? (
+        <p className="leading-snug">
+          At your <span className="font-bold text-cesim-ink">{usd(p)}</span> walk-in rate, the model expects{' '}
+          <span className="font-bold text-cesim-ink">~{int(modelNights)}</span> walk-in nights{' '}
+          (<span className="font-semibold">{pct(occ)}</span> of capacity).
+          {userEstimate > 0 && (
+            <> Your estimate: <span className="font-semibold text-cesim-ink">{int(userEstimate)}</span>.</>
+          )}
+        </p>
+      ) : (
+        <p className="leading-snug text-slate-500">Enter a walk-in rate to see the price → volume trade-off.</p>
+      )}
+
+      {/* The price→volume curve (price alone), so the trade-off the cohort couldn't see is visible */}
+      <table className="mt-2 w-full text-[11px] tabular-nums">
+        <thead>
+          <tr className="text-slate-500">
+            <th className="py-0.5 text-left font-medium">Walk-in rate</th>
+            <th className="py-0.5 text-right font-medium">Nights</th>
+            <th className="py-0.5 text-right font-medium">Occupancy</th>
+          </tr>
+        </thead>
+        <tbody>
+          {PRICE_POINTS.map((pp) => {
+            const n = estimateWalkInNights(pp)
+            const on = pp === nearest
+            return (
+              <tr key={pp} className={on ? 'font-bold text-cesim-ink' : ''}>
+                <td className="py-0.5 text-left">
+                  {usd(pp)}
+                  {on && <span className="ml-1 text-[9px] font-normal text-cesim-link">← you</span>}
+                </td>
+                <td className="py-0.5 text-right">~{int(n)}</td>
+                <td className="py-0.5 text-right">{pct(walkInOccupancy(n))}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+
+      <p className="mt-2 text-[10px] leading-snug text-slate-500">
+        A simplified demand curve (elasticity ≈ {DEMAND_REF.elasticity}) fit to the four teams' real Round 1 walk-in
+        results — directional, not the live engine. Real demand also moves with competitors' prices, which resolve
+        only in the simulation. It does not change your budget; your estimate above still drives the statements.
+      </p>
+    </div>
+  )
+}
 
 export function SalesPage() {
   const { values, projection, season } = useDecisions()
@@ -81,6 +149,12 @@ export function SalesPage() {
               {field('walkInRate')}
               {field('estNightsSold')}
             </div>
+
+            <DemandModelReadout
+              price={values.walkInRate}
+              marketing={values.marketing}
+              userEstimate={walkNights}
+            />
 
             {/* Yellow hint: anchor your numbers to last round's actual results */}
             <button
