@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useUI } from '../../state/ui'
-import { SUMMARY, ROUND_META } from '../../data/roundResults'
-import { COMPLETED_ROUNDS } from '../../data/roundResults'
+import { SUMMARY, ROUND_META, RESULT_TEAMS, COMPLETED_ROUNDS } from '../../data/roundResults'
 import { ROUNDS, HOTEL_RED, COURSE } from '../../data/team'
 import { CURRENT_ROUND, CURRENT_DEADLINE } from '../../data/config'
 import { cn } from '../../lib/cn'
@@ -9,12 +8,13 @@ import { pct, usdShort } from '../../lib/format'
 
 // HOME — read-only dashboard mirroring the real Cesim home (spec addendum §3). A results
 // carousel (3 KPIs: cumulative TSR, cumulative earnings, EBITDA prev 6 months) charting
-// Hotel Red across rounds against the competition range, plus the standard side cards.
-// Hotel Red is the user's series; competitors inform the min/max envelope (identities
-// ghosted per the anonymization rule). Round 4 is in progress → shown as a pending slot.
+// ALL FOUR teams side by side across rounds — competition is the heart of the sim, so every
+// team's bar is shown by name and color. Hotel Red is outlined as "you". Round 4 is in
+// progress → shown as a pending slot.
 
-const RED = 1 // Hotel Red column index
-const COMP = [0, 2, 3] // competitor column indices
+const TEAM_ORDER = ['northline', 'red', 'blue', 'america'] // = data column order
+const TEAM_COLOR = { northline: '#2e8b57', red: '#c0392b', blue: '#2f6fb0', america: '#e8821e' }
+const teamName = (key) => RESULT_TEAMS.find((t) => t.key === key)?.name ?? key
 
 // Running sum of net profit per team → cumulative earnings by round.
 function cumulativeEarnings() {
@@ -28,52 +28,61 @@ function cumulativeEarnings() {
 }
 
 function KpiChart({ data, fmt }) {
-  const W = 380, H = 176, padT = 12, padB = 26, padL = 10, padR = 10
+  const W = 440, H = 198, padT = 14, padB = 26, padL = 46, padR = 10
   const plotH = H - padT - padB
   const slots = [1, 2, 3, 4]
 
-  const reds = COMPLETED_ROUNDS.map((n) => data[n][RED])
-  const comps = COMPLETED_ROUNDS.flatMap((n) => COMP.map((i) => data[n][i]))
-  const all = [...reds, ...comps, 0]
-  const lo = Math.min(...all), hi = Math.max(...all)
+  const allVals = COMPLETED_ROUNDS.flatMap((n) => data[n])
+  const lo = Math.min(0, ...allVals), hi = Math.max(0, ...allVals)
   const span = hi - lo || 1
   const y = (v) => padT + plotH * (1 - (v - lo) / span)
   const zeroY = y(0)
   const slotW = (W - padL - padR) / slots.length
+  const groupW = slotW * 0.74
+  const barW = groupW / 4
+  const gridVals = [...new Set([hi, (hi + lo) / 2, lo])]
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="KPI by round">
-      {/* zero baseline */}
-      <line x1={padL} y1={zeroY} x2={W - padR} y2={zeroY} stroke="#cbd5e1" strokeWidth="1" />
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="KPI by round, all teams">
+      {/* gridlines + y-axis value labels */}
+      {gridVals.map((gv, k) => (
+        <g key={k}>
+          <line x1={padL} y1={y(gv)} x2={W - padR} y2={y(gv)} stroke={gv === 0 ? '#cbd5e1' : '#eef2f6'} strokeWidth="1" />
+          <text x={padL - 4} y={y(gv) + 3} textAnchor="end" className="fill-slate-400" style={{ fontSize: 8 }}>{fmt(gv)}</text>
+        </g>
+      ))}
       {slots.map((n, k) => {
         const cx = padL + slotW * k + slotW / 2
+        const x0 = padL + slotW * k + (slotW - groupW) / 2
         const pending = !COMPLETED_ROUNDS.includes(n)
-        if (pending) {
-          return (
-            <g key={n}>
-              <rect x={cx - 16} y={padT} width="32" height={plotH} fill="none" stroke="#e2e8f0" strokeDasharray="3 3" rx="3" />
-              <text x={cx} y={zeroY - 6} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 8 }}>pending</text>
-              <text x={cx} y={H - 8} textAnchor="middle" className="fill-slate-500" style={{ fontSize: 10 }}>R{n}</text>
-            </g>
-          )
-        }
-        const redV = data[n][RED]
-        const cVals = COMP.map((i) => data[n][i])
-        const cMin = Math.min(...cVals), cMax = Math.max(...cVals)
-        const barX = cx - 15
-        const wx = cx + 13 // competition whisker x (just right of the bar)
         return (
           <g key={n}>
-            {/* competition min–max range */}
-            <line x1={wx} y1={y(cMax)} x2={wx} y2={y(cMin)} stroke="#94a3b8" strokeWidth="2" />
-            <line x1={wx - 3} y1={y(cMax)} x2={wx + 3} y2={y(cMax)} stroke="#94a3b8" strokeWidth="2" />
-            <line x1={wx - 3} y1={y(cMin)} x2={wx + 3} y2={y(cMin)} stroke="#94a3b8" strokeWidth="2" />
-            {/* Hotel Red bar */}
-            <rect x={barX} y={Math.min(zeroY, y(redV))} width="22" height={Math.abs(y(redV) - zeroY)} fill="#c0392b" rx="2" />
             <text x={cx} y={H - 8} textAnchor="middle" className="fill-slate-600" style={{ fontSize: 10 }}>R{n}</text>
-            <text x={barX + 11} y={(redV >= 0 ? y(redV) - 4 : y(redV) + 10)} textAnchor="middle" className="fill-cesim-ink" style={{ fontSize: 8.5, fontWeight: 700 }}>
-              {fmt(redV)}
-            </text>
+            {pending ? (
+              <>
+                <rect x={x0} y={padT} width={groupW} height={plotH} fill="none" stroke="#e2e8f0" strokeDasharray="3 3" rx="3" />
+                <text x={cx} y={zeroY - 5} textAnchor="middle" className="fill-slate-400" style={{ fontSize: 8 }}>pending</text>
+              </>
+            ) : (
+              TEAM_ORDER.map((key, ti) => {
+                const v = data[n][ti]
+                const bx = x0 + ti * barW
+                const isYou = key === 'red'
+                return (
+                  <rect
+                    key={key}
+                    x={bx + 0.5}
+                    y={Math.min(zeroY, y(v))}
+                    width={barW - 1}
+                    height={Math.max(0, Math.abs(y(v) - zeroY))}
+                    fill={TEAM_COLOR[key]}
+                    rx="1"
+                    stroke={isYou ? '#5e1812' : 'none'}
+                    strokeWidth={isYou ? 0.75 : 0}
+                  />
+                )
+              })
+            )}
           </g>
         )
       })}
@@ -108,12 +117,18 @@ function ResultsCarousel() {
 
       <KpiChart data={s.data} fmt={s.fmt} />
 
-      <div className="mt-1 flex items-center justify-between">
-        <div className="flex items-center gap-3 text-[10px] text-cesim-muted">
-          <span className="flex items-center gap-1"><span className="inline-block h-2 w-2.5 rounded-sm bg-brand-red" /> Hotel Red</span>
-          <span className="flex items-center gap-1"><span className="inline-block h-2.5 w-0.5 bg-slate-400" /> Competition range</span>
+      <div className="mt-1 flex items-end justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10px] text-cesim-muted">
+          {TEAM_ORDER.map((key) => (
+            <span key={key} className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2.5 rounded-sm" style={{ backgroundColor: TEAM_COLOR[key] }} />
+              <span className={key === 'red' ? 'font-semibold text-cesim-ink' : ''}>
+                {teamName(key)}{key === 'red' && ' (you)'}
+              </span>
+            </span>
+          ))}
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5">
           {slides.map((_, k) => (
             <button key={k} type="button" onClick={() => setI(k)} aria-label={`Slide ${k + 1}`}
               className={cn('h-1.5 w-1.5 rounded-full', k === i ? 'bg-cesim-link' : 'bg-gray-300')} />
