@@ -1,6 +1,7 @@
-// Team rosters + course meta. Hotel Red is the only active team; competitors are
-// ghosted wherever they appear. Sarah Wall is the instructor mistakenly listed on
-// Hotel Red — ghost her in the roster, but she stays as instructor in the footer.
+// Team rosters + course meta. Hotel Red is the user's team (highlighted as "you");
+// competitor teams are shown by name with full stats for comparison — only their PEOPLE
+// are anonymized to initials. Sarah Wall is the instructor mistakenly listed on Hotel Red
+// — omitted from the roster, but she stays as instructor in the footer.
 
 export const COURSE = {
   name: 'Mini MBA June 2026',
@@ -21,9 +22,9 @@ export const HOTEL_RED = {
   ],
 }
 
-// Competitor teams — present but ghosted everywhere a comparison appears. Member names are
-// stored as INITIALS ONLY (anonymization rule, spec addendum §1): only Hotel Red members
-// appear by full name; everyone else is reduced to first+last initials.
+// Competitor teams — shown by name with full stats for comparison (un-ghosted). Member
+// names are stored as INITIALS ONLY (anonymization rule, spec addendum §1): only Hotel Red
+// members appear by full name; everyone else is reduced to first+last initials.
 export const COMPETITORS = [
   {
     name: 'The Northline',

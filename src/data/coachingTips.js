@@ -59,7 +59,7 @@ export const coachingTips = {
   4: [
     [
       'Work in your own area (Dan Benner) — your column is what drives the figures you see.',
-      'Ignore the greyed competitor columns; you only control Hotel Red.',
+      "Study the competitors' columns in Results — you only control Hotel Red, but their numbers show what's winning.",
       "Draft your plan in your own area first — it's the safe place to think before anything becomes the team's official answer.",
     ],
   ],

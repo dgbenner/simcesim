@@ -8,8 +8,9 @@ import { CURRENT_ROUND } from '../../data/config'
 
 // RESULTS — read-only review of any COMPLETED round (spec addendum). The round selector
 // switches which round you're reviewing (data from roundResults.js, transcribed from the
-// real exports); a banner makes clear past rounds are locked. Seven sub-tabs, four team
-// columns with only Hotel Red active (competitors ghosted).
+// real exports); a banner makes clear past rounds are locked. Seven sub-tabs, all four
+// teams shown by name with full figures; Hotel Red is highlighted as "you" (competitor
+// data is now visible for comparison — only the people stay anonymized to initials).
 
 const RESULT_TABS = [
   { id: 'income', label: 'Income statement' },
@@ -46,8 +47,9 @@ function TeamTable({ rows }) {
         <tr className="bg-surface-tablehead">
           <th className="px-2 py-1.5 text-left" />
           {RESULT_TEAMS.map((t) => (
-            <th key={t.key} className={cn('px-2 py-1.5 text-right font-semibold', t.active ? 'text-cesim-ink' : 'text-cesim-muted opacity-40')}>
+            <th key={t.key} className={cn('px-2 py-1.5 text-right font-semibold text-cesim-ink', t.active && 'bg-cesim-link/5')}>
               {t.name}
+              {t.active && <span className="ml-1 text-[10px] font-normal text-cesim-link">(you)</span>}
             </th>
           ))}
         </tr>
@@ -66,7 +68,7 @@ function TeamTable({ rows }) {
                 {row.gloss ? <Gloss term={row.gloss}>{row.label}</Gloss> : row.label}
               </td>
               {RESULT_TEAMS.map((t, ci) => (
-                <td key={t.key} className={cn('px-2 py-[3px] text-right tabular-nums', t.active ? (row.bold ? 'font-bold text-cesim-ink' : 'text-cesim-ink') : 'text-cesim-muted opacity-40')}>
+                <td key={t.key} className={cn('px-2 py-[3px] text-right tabular-nums text-cesim-ink', row.bold && 'font-bold', t.active && 'bg-cesim-link/5 font-semibold')}>
                   {fmtVal(row.vals[ci], row.fmt)}
                 </td>
               ))}
@@ -81,7 +83,7 @@ function TeamTable({ rows }) {
 function ChartPlaceholder({ label }) {
   return (
     <div className="mt-3 grid h-24 place-items-center rounded border border-dashed border-gray-300 bg-gray-50 text-[11px] text-gray-400">
-      {label} — cross-team chart (competitors ghosted)
+      {label} — cross-team chart (all four teams)
     </div>
   )
 }
