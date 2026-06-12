@@ -1,9 +1,10 @@
 import { useDecisions } from '../../state/decisions'
 import { useUI } from '../../state/ui'
-import { advanceUnitPrice, PARAMS, computeIncomeStatement } from '../../data/formulas'
-import { estimateWalkInNights, walkInOccupancy, marketingFactor, demandRefFor } from '../../data/demandModel'
-import { ANCHORS } from '../../data/roundResults'
-import { LAST_COMPLETED_ROUND } from '../../data/config'
+import { advanceUnitPrice, PARAMS } from '../../data/formulas'
+import { demandRefFor } from '../../data/demandModel'
+import { ANCHORS, COMPLETED_ROUNDS } from '../../data/roundResults'
+import { seasonOfRound, LAST_COMPLETED_ROUND } from '../../data/config'
+import { FIELDS } from '../../data/fields'
 import { Section } from '../shared/Section'
 import { PageHeader } from '../shared/PageHeader'
 import { PageProgressDots } from '../shared/PageProgressDots'
@@ -13,6 +14,7 @@ import { Donut } from '../shared/Donut'
 import { StatementTable } from '../shared/StatementTable'
 import { Readout } from '../shared/Readout'
 import { Axiom } from '../shared/Axiom'
+import { cn } from '../../lib/cn'
 import { cap, otherSeason } from '../../lib/season'
 import { usd, int, pct } from '../../lib/format'
 
@@ -21,116 +23,89 @@ import { usd, int, pct } from '../../lib/format'
 // driven by the user's estimate (spec §1, §7). Alongside it, the demand-model readout shows
 // what the price IMPLIES (a curve fit to real Round 1 results) — assistive, not the budget.
 
-// Reference rates spanning the real walk-in observations, per season-type.
-const PRICE_POINTS = { summer: [100, 120, 135, 150, 170], winter: [110, 130, 150, 200, 250] }
-
-// Slider/stepper bounds — covers the real spread seen across rounds (~$95–$250).
-const RATE_MIN = 80
-const RATE_MAX = 260
+// Slider bounds. Rate spans the full real spread (don't cap early); nights run 0 → the
+// walk-in capacity ceiling (the estNightsSold field's own max).
+const RATE_MIN = 70
+const RATE_MAX = 280
 const RATE_STEP = 5
+const NIGHTS_MAX = typeof FIELDS.estNightsSold?.max === 'number' ? FIELDS.estNightsSold.max : 9000
+const NIGHTS_STEP = 50
 
-// A stepper + slider on the walk-in rate (spec price-profit addendum, Part 1). Adjusts the
-// rate in $5 steps and feeds the demand-model projections live. Locked on past rounds.
-function RateControl() {
+const snap = (v, step, min, max) => Math.max(min, Math.min(max, Math.round(v / step) * step))
+
+// Most recent COMPLETED round of a given season (for the same-season occupancy reference).
+function lastRoundOfSeason(season) {
+  const matches = COMPLETED_ROUNDS.filter((n) => seasonOfRound(n) === season)
+  return matches.length ? Math.max(...matches) : null
+}
+
+// A slider + −/+ stepper bound to a decision field (the field row above it carries the
+// label, ⓘ, tag and typed value). Steps in `step`, clamps to [min,max]. Locked on past rounds.
+function FieldSlider({ fieldId, min, max, step, defaultPos, ariaLabel }) {
   const { values, setValue, readOnly } = useDecisions()
-  const rate = Number(values.walkInRate) || 0
-  const pos = rate || 130 // slider rests at a sensible default until a rate is set
-  const set = (v) => setValue('walkInRate', Math.max(RATE_MIN, Math.min(RATE_MAX, Math.round(v / RATE_STEP) * RATE_STEP)))
+  const raw = values[fieldId]
+  const cur = raw === '' || raw === null || raw === undefined ? null : Number(raw)
+  const pos = cur ?? defaultPos
+  const set = (v) => setValue(fieldId, snap(v, step, min, max))
   const btn = 'grid h-6 w-6 shrink-0 place-items-center rounded border border-gray-300 text-[14px] leading-none text-cesim-ink hover:border-cesim-link disabled:opacity-40'
 
   return (
-    <div className="mt-1.5 flex items-center gap-2 px-1">
-      <button type="button" disabled={readOnly} onClick={() => set(pos - RATE_STEP)} className={btn} aria-label="Lower rate $5">−</button>
+    <div className="mt-1 flex items-center gap-1.5 px-1">
+      <button type="button" disabled={readOnly} onClick={() => set(pos - step)} className={btn} aria-label={`Lower ${ariaLabel}`}>−</button>
       <input
         type="range"
-        min={RATE_MIN}
-        max={RATE_MAX}
-        step={RATE_STEP}
+        min={min}
+        max={max}
+        step={step}
         value={pos}
         disabled={readOnly}
         onChange={(e) => set(Number(e.target.value))}
         className="h-1 flex-1 cursor-pointer accent-cesim-link disabled:cursor-not-allowed disabled:opacity-40"
-        aria-label="Walk-in room rate"
+        aria-label={ariaLabel}
       />
-      <button type="button" disabled={readOnly} onClick={() => set(pos + RATE_STEP)} className={btn} aria-label="Raise rate $5">+</button>
-      <span className="w-12 shrink-0 text-right text-[12px] font-semibold tabular-nums text-cesim-ink">{rate ? usd(rate) : '—'}</span>
+      <button type="button" disabled={readOnly} onClick={() => set(pos + step)} className={btn} aria-label={`Raise ${ariaLabel}`}>+</button>
     </div>
   )
 }
 
-// The grounded, SEASON-AWARE price→volume→PROFIT readout: model-suggested walk-in nights at
-// the user's rate vs. their own estimate, plus a per-price table of nights, occupancy AND
-// estimated net profit (spec addendum §2 + price-profit addendum). Profit per row is just
-// Projections' bottom line recomputed for that rate, all other decisions held — assistive
-// only; Approach A still drives the official budget.
-function DemandModelReadout({ price, marketing, userEstimate, season, decisions }) {
-  const p = Number(price) || 0
-  const mf = marketingFactor(marketing)
-  const modelNights = estimateWalkInNights(p, season, { marketingFactor: mf })
-  const occ = walkInOccupancy(modelNights)
-  const points = PRICE_POINTS[season] ?? PRICE_POINTS.winter
-  const nearest = p > 0 ? points.reduce((a, b) => (Math.abs(b - p) < Math.abs(a - p) ? b : a)) : null
-  const ref = demandRefFor(season)
-
-  // Estimated net profit at a given rate + nights, holding every other decision fixed.
-  const profitAt = (rate, nights) =>
-    computeIncomeStatement({ ...decisions, walkInRate: rate, estNightsSold: nights }, season).netProfit
-  const profitNow = p > 0 ? profitAt(p, modelNights) : 0
+// DEMAND MODEL PROJECTIONS — the live outputs of the two-input calculator (spec demand-
+// calculator addendum). The two sliders above (walk-in rate + est. nights) feed two outputs
+// here — net profit and occupancy — recomputed on every move from the same deterministic
+// formulas. Replaces the old single-variable price TABLE, which read all-negative because it
+// ignored the nights lever (revenue = rate × nights). Assistive only; Approach A drives the budget.
+function DemandOutputs() {
+  const { projection, season } = useDecisions()
+  const net = projection.income.netProfit
+  const totalNights = projection.income.totalNights
+  const occ = (totalNights / PARAMS.capacityNights) * 100
+  const refRound = lastRoundOfSeason(season)
+  const ref = refRound ? ANCHORS[refRound] : null
+  const elasticity = demandRefFor(season).elasticity
 
   return (
-    <div className="mt-2 rounded border border-slate-300 bg-slate-50 p-2.5 text-[12px] text-slate-700">
-      <div className="flex items-center gap-1.5 font-semibold text-slate-800">
-        <span aria-hidden>📊</span> Demand model projections ({cap(season)})
+    <div className="mt-2 rounded border border-slate-300 bg-slate-50 p-3 text-slate-700">
+      <div className="flex items-center gap-1.5 text-[12px] font-semibold text-slate-800">
+        <span aria-hidden>📊</span> Demand Model Projections ({cap(season)})
       </div>
-      <div className="mb-1.5 text-[10px] text-slate-500">How your room rate moves volume — and profit.</div>
-      {p > 0 ? (
-        <p className="leading-snug">
-          At <span className="font-bold text-cesim-ink">{usd(p)}</span>, the model expects{' '}
-          <span className="font-bold text-cesim-ink">~{int(modelNights)}</span> walk-in nights{' '}
-          (<span className="font-semibold">{pct(occ)}</span> occ.) →{' '}
-          <span className="font-bold text-cesim-ink">{usd(profitNow)}</span> est. net profit.
-          {userEstimate > 0 && (
-            <> Your estimate: <span className="font-semibold text-cesim-ink">{int(userEstimate)}</span> nights.</>
-          )}
-        </p>
-      ) : (
-        <p className="leading-snug text-slate-500">Set a walk-in rate to see the price → volume → profit trade-off.</p>
-      )}
+      <div className="mb-2 text-[10px] text-slate-500">Move either slider above — net profit and occupancy update live.</div>
 
-      {/* Price → volume → profit, so the real trade-off is visible in one glance */}
-      <table className="mt-2 w-full text-[11px] tabular-nums">
-        <thead>
-          <tr className="text-slate-500">
-            <th className="py-0.5 text-left font-medium">Walk-in rate</th>
-            <th className="py-0.5 text-right font-medium">Nights</th>
-            <th className="py-0.5 text-right font-medium">Occ.</th>
-            <th className="py-0.5 text-right font-medium">Net profit (est.)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {points.map((pp) => {
-            const n = estimateWalkInNights(pp, season)
-            const on = pp === nearest
-            return (
-              <tr key={pp} className={on ? 'font-bold text-cesim-ink' : ''}>
-                <td className="py-0.5 text-left">
-                  {usd(pp)}
-                  {on && <span className="ml-1 text-[9px] font-normal text-cesim-link">← you</span>}
-                </td>
-                <td className="py-0.5 text-right">~{int(n)}</td>
-                <td className="py-0.5 text-right">{pct(walkInOccupancy(n))}</td>
-                <td className="py-0.5 text-right">{usd(profitAt(pp, n))}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Net profit (est.)</div>
+          <div className={cn('text-[22px] font-bold leading-tight tabular-nums', net >= 0 ? 'text-emerald-600' : 'text-red-600')}>{usd(net)}</div>
+        </div>
+        <div className="border-l border-slate-200 pl-3">
+          <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Occupancy</div>
+          <div className="text-[22px] font-bold leading-tight tabular-nums text-cesim-ink">{pct(occ)}</div>
+          {ref && <div className="text-[10px] italic text-slate-500">(last {season}: {pct(ref.occupancy, 0)})</div>}
+          <div className="text-[10px] text-slate-500">{int(totalNights)} total nights sold</div>
+        </div>
+      </div>
 
-      <p className="mt-2 text-[10px] leading-snug text-slate-500">
-        A simplified {season} demand curve (elasticity ≈ {ref.elasticity}) fit to real results for this season —
-        directional, a teaching approximation, not the live engine. Profit is Projections' bottom line recomputed per
-        rate, other decisions held. Demand still moves with competitors' prices in the live sim; your estimate drives
-        the official budget. Open <span className="font-semibold">Projections</span> for the full statements.
+      <p className="mt-2.5 text-[10px] leading-snug text-slate-500">
+        Directional teaching estimate (this {season}'s elasticity ≈ {elasticity}) — net profit is Projections' bottom
+        line recomputed live, all other decisions held; revenue = rate × nights. Real demand also moves with
+        competitors' prices, and the slope differs by season. Your estimate still drives the official budget.
       </p>
     </div>
   )
@@ -138,7 +113,7 @@ function DemandModelReadout({ price, marketing, userEstimate, season, decisions 
 
 export function SalesPage() {
   const { values, projection, season } = useDecisions()
-  const { setPastResultsOpen } = useUI()
+  const { setPastResultsOpen, goToResults } = useUI()
   const { income } = projection
 
   const walkNights = Number(values.estNightsSold) || 0
@@ -198,48 +173,22 @@ export function SalesPage() {
             <TimeframeLabel className="mb-1.5">This {season}</TimeframeLabel>
             <div className="space-y-1">
               {field('walkInRate')}
-              <RateControl />
+              <FieldSlider fieldId="walkInRate" min={RATE_MIN} max={RATE_MAX} step={RATE_STEP} defaultPos={130} ariaLabel="walk-in room rate" />
               {field('estNightsSold')}
+              <FieldSlider fieldId="estNightsSold" min={0} max={NIGHTS_MAX} step={NIGHTS_STEP} defaultPos={2000} ariaLabel="estimated walk-in nights" />
             </div>
 
-            <DemandModelReadout
-              price={values.walkInRate}
-              marketing={values.marketing}
-              userEstimate={walkNights}
-              season={season}
-              decisions={values}
-            />
+            <DemandOutputs />
 
-            {/* Yellow hint: anchor your numbers to last round's actual results */}
-            <button
-              type="button"
-              onClick={() => setPastResultsOpen(true)}
-              className="mt-2 flex w-full items-center gap-1.5 rounded border-l-2 border-amber-400 bg-amber-50 px-2 py-1.5 text-left text-[11px] leading-snug text-amber-900 hover:bg-amber-100"
-            >
+            {/* Yellow hint: go deeper into EITHER season's real past results */}
+            <div className="mt-2 flex items-start gap-1.5 rounded border-l-2 border-amber-400 bg-amber-50 px-2 py-1.5 text-[11px] leading-snug text-amber-900">
               <span aria-hidden>💡</span>
               <span>
-                Not sure what to enter? <span className="font-semibold underline">See what the hotel did last {otherSeason(season)} →</span>
+                Not sure what to enter? See what the hotel did{' '}
+                <button type="button" onClick={() => goToResults('market', lastRoundOfSeason('summer'))} className="font-semibold underline hover:text-amber-950">last summer</button>{' '}
+                or{' '}
+                <button type="button" onClick={() => goToResults('market', lastRoundOfSeason('winter'))} className="font-semibold underline hover:text-amber-950">last winter</button>.
               </span>
-            </button>
-
-            {/* Make the 9,000 tangible, right where you enter the estimate */}
-            <div className="mt-2 rounded border border-gray-200 bg-gray-50 p-2.5">
-              <div className="flex flex-wrap items-baseline justify-center gap-x-1.5 gap-y-0.5 text-[13px] text-cesim-ink">
-                <span><span className="font-bold">{int(PARAMS.roomCount)}</span> rooms</span>
-                <span className="text-cesim-muted">×</span>
-                <span><span className="font-bold">{int(PARAMS.nightsPerSeason)}</span> nights</span>
-                <span className="text-cesim-muted">=</span>
-                <span><span className="font-bold">{int(PARAMS.capacityNights)}</span> room-nights to fill</span>
-              </div>
-              <div className="mt-1 text-center text-[11px] text-cesim-muted">
-                your forecast fills{' '}
-                <span className="font-semibold text-cesim-ink">{int(income.totalNights)}</span> of{' '}
-                {int(PARAMS.capacityNights)} ·{' '}
-                <span className="font-semibold text-cesim-ink">
-                  {pct((income.totalNights / PARAMS.capacityNights) * 100)}
-                </span>{' '}
-                occupancy
-              </div>
             </div>
 
             <Axiom lead="What's a room-night?">
