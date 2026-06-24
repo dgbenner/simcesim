@@ -11,7 +11,7 @@ export const FINAL_COLUMNS = [
   {
     key: 'high',
     header: 'High Level',
-    blurb: 'Overall game & strategy',
+    blurb: 'Overall game and strategy',
     cards: [
       {
         icon: '🎯',
@@ -38,7 +38,7 @@ export const FINAL_COLUMNS = [
   {
     key: 'decisions',
     header: 'Our Decisions',
-    blurb: 'Hotel Red’s choices & consequences',
+    blurb: 'Hotel Red’s choices and consequences',
     cards: [
       {
         icon: '🩹',

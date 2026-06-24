@@ -15,38 +15,23 @@ export function GameCompleteBar() {
 
   return (
     <div className="bg-purple-800 text-white">
-      <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-x-3 gap-y-1 px-4 py-1.5">
+      <div className="relative mx-auto flex max-w-[1180px] items-center px-4 py-1.5">
+        {/* Left: label + a small underlined Download-results link (opens the per-round menu) */}
         <span className="flex items-center gap-2 text-[12px]">
           <span aria-hidden>🏁</span>
           <span className="font-semibold">Mini MBA June 2026</span>
           <span className="text-white/70">·</span>
           <span className="text-white/90">7 Rounds Complete</span>
-          <span className="hidden text-white/50 sm:inline">·</span>
-          <span className="hidden text-white/60 sm:inline">Jun 2–23</span>
-        </span>
-
-        <div className="ml-auto flex items-center gap-2">
-          <button
-            type="button"
-            onClick={goToFinal}
-            className={cn(
-              'rounded px-2.5 py-1 text-[12px] font-semibold transition-colors',
-              active ? 'bg-white text-purple-800' : 'bg-white/15 text-white hover:bg-white/25',
-            )}
-          >
-            Final Results →
-          </button>
-
-          <div className="relative">
+          <span className="relative">
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className="flex items-center gap-1 rounded bg-white/15 px-2.5 py-1 text-[12px] font-semibold text-white hover:bg-white/25"
+              className="text-[11px] text-white/75 underline underline-offset-2 hover:text-white"
             >
-              ⤓ Download results <span className="text-white/70">▾</span>
+              Download results
             </button>
             {open && (
-              <ul className="absolute right-0 z-40 mt-1 w-52 rounded border border-gray-200 bg-white py-1 text-cesim-ink shadow-lg">
+              <ul className="absolute left-0 z-40 mt-1 w-52 rounded border border-gray-200 bg-white py-1 text-cesim-ink shadow-lg">
                 {FINAL_DOWNLOADS.map((d) => (
                   <li key={d.round}>
                     <a
@@ -62,8 +47,22 @@ export function GameCompleteBar() {
                 ))}
               </ul>
             )}
-          </div>
-        </div>
+          </span>
+          <span className="hidden text-white/50 md:inline">·</span>
+          <span className="hidden text-white/60 md:inline">Jun 2–23</span>
+        </span>
+
+        {/* Center: the Final Results link, given prominence */}
+        <button
+          type="button"
+          onClick={goToFinal}
+          className={cn(
+            'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded px-3.5 py-1 text-[12px] font-bold shadow-sm transition-colors',
+            active ? 'bg-white text-purple-800 ring-2 ring-white/60' : 'bg-white text-purple-800 hover:bg-white/90',
+          )}
+        >
+          Final Results →
+        </button>
       </div>
     </div>
   )

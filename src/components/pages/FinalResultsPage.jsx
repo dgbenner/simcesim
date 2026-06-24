@@ -14,7 +14,7 @@ const ROWS_USED = [
   ['Revenue', '“Sales revenues this period”'],
   ['Net profit', '“Net profit for the period”'],
   ['Levers', 'Marketing, Maintenance, Cost saving efforts, Wage / month, Training / person, permanent and temporary headcount'],
-  ['Quality & load', '“Quality level”, “Personnel stress level”'],
+  ['Quality and load', '“Quality level”, “Personnel stress level”'],
   ['Finance', '“Long-term loans”, “Int.exp. on long-term loans”, “Interest income”, “Dividends paid”, “Cash and cash equivalents at end of period”'],
   ['Scoreboard', '“Cumulative total shareholder return %”'],
 ]
@@ -102,7 +102,7 @@ export function FinalResultsPage() {
         <div className="flex items-center gap-3">
           <img src="/hotel-red-logo.svg" alt="Hotel Red" className="h-11 w-auto" />
           <div>
-            <h1 className="text-[22px] font-bold tracking-tight text-cesim-ink">Final Results &amp; Self-Analysis</h1>
+            <h1 className="text-[22px] font-bold tracking-tight text-cesim-ink">Final Results and Self-Analysis</h1>
             <p className="text-[12px] text-cesim-muted">Mini MBA June 2026 · 7 rounds complete · a retrospective</p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export function FinalResultsPage() {
           <button
             type="button"
             onClick={() => setHowOpen(true)}
-            className="mb-2 text-[12px] font-semibold text-cesim-link hover:underline"
+            className="mb-2 text-[12px] italic text-cesim-muted underline underline-offset-2 hover:text-cesim-ink"
           >
             How was this calculated?
           </button>
@@ -133,7 +133,7 @@ export function FinalResultsPage() {
             <div className="mb-3">
               <h2 className="text-[16px] font-bold tracking-tight text-cesim-ink">{col.header}</h2>
               <p className="text-[11px] uppercase tracking-wide text-cesim-muted">{col.blurb}</p>
-              <div className="mt-1 h-0.5 w-10 rounded bg-purple-500" />
+              <div className="mt-1 h-0.5 w-full rounded bg-purple-500" />
             </div>
             <div className="space-y-4">
               {col.cards.map((c, i) => (
