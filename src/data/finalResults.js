@@ -65,7 +65,7 @@ export const FINAL_COLUMNS = [
       {
         icon: '🏆',
         q: 'Who actually played the best full game?',
-        a: 'It converged late — by R7, TSR was tight (America 13.5, Northline 11.2, us 10.8, Blue 7.1). We led the early game by a wide margin but the lead eroded as others worked the levers we left idle. America climbed from worst to first.',
+        a: 'It converged late — by R7, TSR was tight (Hotel of America 13.5, The Northline 11.2, Hotel Red 10.8, Blue 7.1). We led the early game by a wide margin but the lead eroded as others worked the levers we left idle. America climbed from worst to first.',
       },
       {
         icon: '🎢',
