@@ -37,7 +37,7 @@ export const COMPETITORS = [
     members: ['TH', 'PP', 'KD', 'TS'],
   },
   {
-    name: 'Hotel of America',
+    name: 'Hotel America',
     accent: 'orange',
     members: ['AS', 'CJ', 'VB', 'KC'],
   },

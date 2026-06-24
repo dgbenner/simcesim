@@ -40,7 +40,7 @@ function HowCalculatedModal({ open, onClose }) {
         <div>
           <p>
             <span className="font-bold">How the files were read.</span> Each export is a single sheet of 363 rows and
-            four team columns (The Northline, Hotel Red, Blue, Hotel of America). The relevant rows were located by
+            four team columns (The Northline, Hotel Red, Blue, Hotel America). The relevant rows were located by
             their labels and pulled across all seven rounds. The specific rows used:
           </p>
           <ul className="mt-2 space-y-1">
