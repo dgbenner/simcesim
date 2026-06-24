@@ -38,6 +38,7 @@ export function UIProvider({ children }) {
   }, [])
 
   const goToHome = useCallback(() => setSection('home'), [])
+  const goToFinal = useCallback(() => setSection('final'), [])
 
   const value = useMemo(
     () => ({
@@ -54,6 +55,7 @@ export function UIProvider({ children }) {
       goToResults,
       goToDecision,
       goToHome,
+      goToFinal,
       modalField,
       openField,
       closeField,
@@ -73,6 +75,7 @@ export function UIProvider({ children }) {
       goToResults,
       goToDecision,
       goToHome,
+      goToFinal,
       modalField,
       openField,
       closeField,

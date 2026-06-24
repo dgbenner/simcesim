@@ -1,4 +1,5 @@
 import { TopBar } from './components/chrome/TopBar'
+import { GameCompleteBar } from './components/chrome/GameCompleteBar'
 import { SubNav } from './components/chrome/SubNav'
 import { Footer } from './components/chrome/Footer'
 import { SalesPage } from './components/pages/SalesPage'
@@ -9,6 +10,7 @@ import { MarketOutlookPage } from './components/pages/MarketOutlookPage'
 import { TutorialPage } from './components/pages/TutorialPage'
 import { ResultsPage } from './components/pages/ResultsPage'
 import { HomePage } from './components/pages/HomePage'
+import { FinalResultsPage } from './components/pages/FinalResultsPage'
 import { HowToReadPanel } from './components/dock/HowToReadPanel'
 import { ExplainDrawer } from './components/dock/ExplainDrawer'
 import { Principle } from './components/shared/Principle'
@@ -59,10 +61,12 @@ export default function App() {
   const { section, page, setPage, setProjectionsOpen } = useUI()
   const inResults = section === 'results'
   const inHome = section === 'home'
+  const inFinal = section === 'final'
   const inDecisions = section === 'decisions'
 
   return (
     <div className="flex min-h-full flex-col">
+      <GameCompleteBar />
       <TopBar />
 
       {inDecisions && (
@@ -75,6 +79,8 @@ export default function App() {
       <main className="mx-auto w-full max-w-[1180px] flex-1 px-4 py-5">
         {inHome ? (
           <HomePage />
+        ) : inFinal ? (
+          <FinalResultsPage />
         ) : inResults ? (
           <ResultsPage />
         ) : (
