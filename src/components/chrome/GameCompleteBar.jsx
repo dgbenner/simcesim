@@ -15,20 +15,20 @@ export function GameCompleteBar() {
 
   return (
     <div className="bg-purple-800 text-white">
-      <div className="relative mx-auto flex max-w-[1180px] items-center px-4 py-1.5">
-        {/* Left: label + a small underlined Download-results link (opens the per-round menu) */}
-        <span className="flex items-center gap-2 text-[12px]">
+      <div className="mx-auto flex max-w-[1180px] items-baseline px-4 py-1.5">
+        {/* Left: brand, then "7 Rounds Complete" itself is the underlined download link */}
+        <span className="flex items-baseline gap-2 text-[12px]">
           <span aria-hidden>🏁</span>
           <span className="font-semibold">Mini MBA June 2026</span>
-          <span className="text-white/70">·</span>
-          <span className="text-white/90">7 Rounds Complete</span>
+          <span className="text-[10px] text-white/40">·</span>
           <span className="relative">
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className="text-[11px] text-white/75 underline underline-offset-2 hover:text-white"
+              title="Download the round result spreadsheets"
+              className="text-[10px] text-white/85 underline underline-offset-2 hover:text-white"
             >
-              Download results
+              7 Rounds Complete
             </button>
             {open && (
               <ul className="absolute left-0 z-40 mt-1 w-52 rounded border border-gray-200 bg-white py-1 text-cesim-ink shadow-lg">
@@ -48,16 +48,16 @@ export function GameCompleteBar() {
               </ul>
             )}
           </span>
-          <span className="hidden text-white/50 md:inline">·</span>
-          <span className="hidden text-white/60 md:inline">Jun 2–23</span>
+          <span className="hidden text-[10px] text-white/30 md:inline">·</span>
+          <span className="hidden text-[10px] text-white/55 md:inline">Jun 2–23</span>
         </span>
 
-        {/* Center: the Final Results link, given prominence */}
+        {/* Right: the Final Results CTA — horizontal padding only, no extra height */}
         <button
           type="button"
           onClick={goToFinal}
           className={cn(
-            'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded px-3.5 py-1 text-[12px] font-bold shadow-sm transition-colors',
+            'ml-auto self-center rounded px-3.5 py-0.5 text-[12px] font-bold shadow-sm transition-colors',
             active ? 'bg-white text-purple-800 ring-2 ring-white/60' : 'bg-white text-purple-800 hover:bg-white/90',
           )}
         >
