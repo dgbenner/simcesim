@@ -12,9 +12,9 @@ const require = createRequire(import.meta.url)
 let xlsx
 try { xlsx = require('xlsx') } catch { xlsx = require('/tmp/node_modules/xlsx/xlsx.js') }
 
-const SRC_DIR = '/Users/macbookpro2025/Desktop'
+const SRC_DIR = new URL('../public/data/results', import.meta.url).pathname
 const OUT = new URL('../src/data/roundResults.js', import.meta.url).pathname
-const ROUNDS = [1, 2, 3]
+const ROUNDS = [1, 2, 3, 4, 5, 6, 7]
 const SEASON_OF = (n) => (n % 2 === 1 ? 'Winter' : 'Summer') // odd=Winter, even=Summer
 
 // Team columns in the sheet, in order: [Northline, Hotel Red, Blue, America] = cols 1..4

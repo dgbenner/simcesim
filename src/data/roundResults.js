@@ -24,6 +24,30 @@ export const ROUND_META = {
     "season": "Winter",
     "label": "Round 3 · Winter",
     "state": "past"
+  },
+  "4": {
+    "n": 4,
+    "season": "Summer",
+    "label": "Round 4 · Summer",
+    "state": "past"
+  },
+  "5": {
+    "n": 5,
+    "season": "Winter",
+    "label": "Round 5 · Winter",
+    "state": "past"
+  },
+  "6": {
+    "n": 6,
+    "season": "Summer",
+    "label": "Round 6 · Summer",
+    "state": "past"
+  },
+  "7": {
+    "n": 7,
+    "season": "Winter",
+    "label": "Round 7 · Winter",
+    "state": "past"
   }
 }
 
@@ -3185,6 +3209,4186 @@ export const ROUNDS_DATA = {
         "occDom": 34.58
       }
     ]
+  },
+  "4": {
+    "income": [
+      {
+        "heading": "Sales revenue"
+      },
+      {
+        "label": "Domestic",
+        "vals": [
+          700310,
+          691188,
+          770667,
+          642714
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "International",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "ghostRow": true
+      },
+      {
+        "label": "Total sales",
+        "vals": [
+          700310,
+          691188,
+          770667,
+          642714
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Personnel expenses and direct costs"
+      },
+      {
+        "label": "Permanent",
+        "vals": [
+          72000,
+          76392,
+          105000,
+          64050
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Temporary",
+        "vals": [
+          51646,
+          8608,
+          0,
+          17215
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct cost",
+        "vals": [
+          35906,
+          34608,
+          38981,
+          33275
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Gross profit",
+        "vals": [
+          540757,
+          571580,
+          626686,
+          528174
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Other operating expenses"
+      },
+      {
+        "label": "Administration",
+        "vals": [
+          46105,
+          44308,
+          46261,
+          48210
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Marketing",
+        "vals": [
+          40000,
+          11200,
+          1000,
+          20000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Rental payment",
+        "vals": [
+          62500,
+          62500,
+          62500,
+          62500
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Layoff and recruitment",
+        "vals": [
+          6667,
+          1944,
+          1118,
+          3592
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel training",
+        "vals": [
+          10500,
+          4500,
+          5000,
+          4500
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Cost saving efforts",
+        "vals": [
+          15000,
+          12800,
+          2000,
+          8000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Maintenance",
+        "vals": [
+          50000,
+          37500,
+          15000,
+          20000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          309985,
+          396829,
+          493808,
+          361372
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Depreciation",
+        "vals": [
+          -55000,
+          -50000,
+          -55000,
+          -50000
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Depreciation"
+      },
+      {
+        "label": "EBIT",
+        "vals": [
+          254985,
+          346829,
+          438808,
+          311372
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "gloss": "EBIT"
+      },
+      {
+        "heading": "Financing income and expenses"
+      },
+      {
+        "label": "Interest income",
+        "vals": [
+          8804,
+          30700,
+          3200,
+          26406
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (long-term)",
+        "vals": [
+          -125840,
+          -122956,
+          -120704,
+          -125463
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (short-term)",
+        "vals": [
+          0,
+          0,
+          -6498,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Income before taxes",
+        "vals": [
+          137949,
+          254573,
+          314805,
+          212315
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -41385,
+          -76372,
+          -57634,
+          -63695
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          96564,
+          178201,
+          257172,
+          148621
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "balance": [
+      {
+        "heading": "Assets"
+      },
+      {
+        "label": "Property, plant & equipment",
+        "vals": [
+          6565000,
+          5950000,
+          6565000,
+          5950000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade receivables",
+        "vals": [
+          56128,
+          60450,
+          69061,
+          57857
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade receivables"
+      },
+      {
+        "label": "Cash and cash equivalents",
+        "vals": [
+          360402,
+          1061110,
+          100000,
+          913060
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total assets",
+        "vals": [
+          6981530,
+          7071560,
+          6734061,
+          6920917
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Shareholders' equity"
+      },
+      {
+        "label": "Share capital",
+        "vals": [
+          2665350,
+          2665350,
+          2665350,
+          2665350
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Retained earnings",
+        "vals": [
+          825974,
+          861617,
+          555108,
+          742804
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          96564,
+          178201,
+          257172,
+          148621
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total equity",
+        "vals": [
+          3587889,
+          3705169,
+          3477630,
+          3556775
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Liabilities"
+      },
+      {
+        "label": "Long-term loans",
+        "vals": [
+          3365725,
+          3345725,
+          3235725,
+          3345725
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Short-term loans",
+        "vals": [
+          0,
+          0,
+          7289,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade payables",
+        "vals": [
+          27917,
+          20667,
+          13417,
+          18417
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade payables"
+      },
+      {
+        "label": "Total liabilities",
+        "vals": [
+          3393642,
+          3366392,
+          3256431,
+          3364142
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Total equity + liabilities",
+        "vals": [
+          6981530,
+          7071560,
+          6734061,
+          6920917
+        ],
+        "fmt": "usd",
+        "bold": true
+      }
+    ],
+    "market": {
+      "roomRates": [
+        {
+          "label": "Walk-in room rate",
+          "vals": [
+            145,
+            150,
+            160,
+            149.99
+          ],
+          "fmt": "rate",
+          "bold": true
+        },
+        {
+          "label": "Weighted average room rate",
+          "vals": [
+            127.16,
+            130.66,
+            134.57,
+            129.3
+          ],
+          "fmt": "rate"
+        }
+      ],
+      "salesAndNights": [
+        {
+          "label": "Walk-in nights sold",
+          "vals": [
+            2507,
+            2190,
+            2227,
+            1971
+          ],
+          "fmt": "nights",
+          "bold": true,
+          "gloss": "room-night"
+        },
+        {
+          "label": "Revenue per available room",
+          "vals": [
+            12733,
+            13824,
+            14012,
+            12854
+          ],
+          "fmt": "usd"
+        },
+        {
+          "label": "Sales revenue this period",
+          "vals": [
+            700310,
+            691188,
+            770667,
+            642714
+          ],
+          "fmt": "usd",
+          "bold": true
+        },
+        {
+          "label": "Nights sold (total)",
+          "vals": [
+            5507,
+            5290,
+            5727,
+            4971
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Occupancy",
+          "vals": [
+            55.63,
+            58.78,
+            57.85,
+            55.23
+          ],
+          "fmt": "pct",
+          "bold": true,
+          "gloss": "Occupancy"
+        }
+      ],
+      "advance": [
+        {
+          "label": "Advance price — next round",
+          "vals": [
+            111.88,
+            114.58,
+            125.48,
+            98.55
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — next round",
+          "vals": [
+            1400,
+            1450,
+            1140,
+            2272
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Advance price — two rounds ahead",
+          "vals": [
+            120.87,
+            115.44,
+            127.37,
+            100
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — two rounds ahead",
+          "vals": [
+            1500,
+            2057,
+            1570,
+            3132
+          ],
+          "fmt": "nights"
+        }
+      ],
+      "totalMarket": [
+        {
+          "label": "Total market demand (this summer)",
+          "vals": [
+            21495,
+            37,
+            15651,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        },
+        {
+          "label": "Total market supply",
+          "vals": [
+            37800,
+            5,
+            36000,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        }
+      ]
+    },
+    "operations": [
+      {
+        "heading": "Capacity"
+      },
+      {
+        "label": "Rooms",
+        "vals": [
+          55,
+          50,
+          55,
+          50
+        ],
+        "fmt": "int",
+        "indent": true
+      },
+      {
+        "label": "Nights available",
+        "vals": [
+          9900,
+          9000,
+          9900,
+          9000
+        ],
+        "fmt": "nights",
+        "indent": true,
+        "gloss": "room-night"
+      },
+      {
+        "heading": "Sales this period"
+      },
+      {
+        "label": "Nights sold",
+        "vals": [
+          5507,
+          5290,
+          5727,
+          4971
+        ],
+        "fmt": "nights",
+        "indent": true
+      },
+      {
+        "label": "Occupancy",
+        "vals": [
+          55.63,
+          58.78,
+          57.85,
+          55.23
+        ],
+        "fmt": "pct",
+        "indent": true,
+        "gloss": "Occupancy"
+      },
+      {
+        "heading": "Personnel (decisions + outcomes)"
+      },
+      {
+        "label": "Permanent employees",
+        "vals": [
+          4,
+          4,
+          5,
+          3.5
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Temporary employees",
+        "vals": [
+          3,
+          0.5,
+          0,
+          1
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Wage / month",
+        "vals": [
+          3000,
+          3183,
+          3500,
+          3050
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Training / person",
+        "vals": [
+          1500,
+          1000,
+          1000,
+          1000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel turnover",
+        "vals": [
+          4.76,
+          4.86,
+          2.24,
+          6.51
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Average competence (permanent)",
+        "vals": [
+          1,
+          1.01,
+          1.03,
+          1
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Personnel stress level",
+        "vals": [
+          2,
+          15,
+          10,
+          12
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Quality level",
+        "vals": [
+          1.01,
+          1,
+          1.11,
+          0.88
+        ],
+        "fmt": "num",
+        "indent": true,
+        "gloss": "Quality Level"
+      }
+    ],
+    "cashflow": [
+      {
+        "heading": "From operations"
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          309985,
+          396829,
+          493808,
+          361372
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Financing income and expenses",
+        "vals": [
+          -117036,
+          -92256,
+          -124002,
+          -99057
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -41385,
+          -76372,
+          -57634,
+          -63695
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Change in working capital",
+        "vals": [
+          4015,
+          -24760,
+          -51994,
+          -22894
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net operating cash flow",
+        "vals": [
+          155580,
+          203441,
+          260178,
+          175727
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net investment cash flow",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd"
+      },
+      {
+        "heading": "From financing"
+      },
+      {
+        "label": "Change in long-term loans",
+        "vals": [
+          20000,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Dividends paid",
+        "vals": [
+          5000,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net financing cash flow",
+        "vals": [
+          15000,
+          0,
+          -260178,
+          0
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net change in cash",
+        "vals": [
+          170580,
+          203441,
+          0,
+          175727
+        ],
+        "fmt": "usd",
+        "bold": true
+      },
+      {
+        "label": "Cash at end of period",
+        "vals": [
+          360402,
+          1061110,
+          100000,
+          913060
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "ratios": [
+      {
+        "label": "Cumulative total shareholder return % pa",
+        "vals": [
+          4.46,
+          6.87,
+          3.86,
+          1.87
+        ],
+        "fmt": "pct",
+        "bold": true,
+        "gloss": "TSR"
+      },
+      {
+        "label": "Return on capital employed (ROCE) % annual",
+        "vals": [
+          6.09,
+          6.45,
+          6.95,
+          6.05
+        ],
+        "fmt": "pct",
+        "gloss": "ROCE"
+      },
+      {
+        "label": "Gross profit ratio %",
+        "vals": [
+          77.22,
+          82.7,
+          81.32,
+          82.18
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Net profit ratio %",
+        "vals": [
+          13.79,
+          25.78,
+          33.37,
+          23.12
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Gearing %",
+        "vals": [
+          86.97,
+          65.99,
+          97.73,
+          72.38
+        ],
+        "fmt": "pct",
+        "gloss": "Gearing"
+      },
+      {
+        "label": "Asset turnover ratio",
+        "vals": [
+          0.17,
+          0.16,
+          0.18,
+          0.15
+        ],
+        "fmt": "num"
+      },
+      {
+        "label": "Company-specific prime rate % (annual)",
+        "vals": [
+          7.64,
+          7.49,
+          7.6,
+          7.64
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Earnings per share (EPS)",
+        "vals": [
+          0.97,
+          1.78,
+          2.57,
+          1.49
+        ],
+        "fmt": "rate",
+        "gloss": "EPS"
+      },
+      {
+        "label": "Market value of share",
+        "vals": [
+          35.67,
+          39.14,
+          33.75,
+          32.31
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Number of shares",
+        "vals": [
+          100000,
+          100000,
+          100000,
+          100000
+        ],
+        "fmt": "int"
+      },
+      {
+        "label": "Hotel occupancy ratio %",
+        "vals": [
+          55.63,
+          58.78,
+          57.85,
+          55.23
+        ],
+        "fmt": "pct",
+        "gloss": "Occupancy"
+      },
+      {
+        "label": "Weighted average room rate",
+        "vals": [
+          127.16,
+          130.66,
+          134.57,
+          129.3
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Gross profit per room",
+        "vals": [
+          9832,
+          11432,
+          11394,
+          10563
+        ],
+        "fmt": "usd"
+      },
+      {
+        "label": "Net profit per room",
+        "vals": [
+          1756,
+          3564,
+          4676,
+          2972
+        ],
+        "fmt": "usd"
+      }
+    ],
+    "sorting": [
+      {
+        "team": "northline",
+        "tsr": 4.46,
+        "ebitdaPrev": 309985,
+        "ebitdaRoll": 529792,
+        "shareDom": 25.62,
+        "occDom": 55.63
+      },
+      {
+        "team": "red",
+        "tsr": 6.87,
+        "ebitdaPrev": 396829,
+        "ebitdaRoll": 549249,
+        "shareDom": 24.61,
+        "occDom": 58.78
+      },
+      {
+        "team": "blue",
+        "tsr": 3.86,
+        "ebitdaPrev": 493808,
+        "ebitdaRoll": 577095,
+        "shareDom": 26.64,
+        "occDom": 57.85
+      },
+      {
+        "team": "america",
+        "tsr": 1.87,
+        "ebitdaPrev": 361372,
+        "ebitdaRoll": 512831,
+        "shareDom": 23.12,
+        "occDom": 55.23
+      }
+    ]
+  },
+  "5": {
+    "income": [
+      {
+        "heading": "Sales revenue"
+      },
+      {
+        "label": "Domestic",
+        "vals": [
+          559349,
+          554137,
+          601787,
+          588703
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "International",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "ghostRow": true
+      },
+      {
+        "label": "Total sales",
+        "vals": [
+          559349,
+          554137,
+          601787,
+          588703
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Personnel expenses and direct costs"
+      },
+      {
+        "label": "Permanent",
+        "vals": [
+          60000,
+          76392,
+          105000,
+          63000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Temporary",
+        "vals": [
+          26340,
+          0,
+          0,
+          7024
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct cost",
+        "vals": [
+          28413,
+          28591,
+          32659,
+          34641
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Gross profit",
+        "vals": [
+          444596,
+          449154,
+          464128,
+          484038
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Other operating expenses"
+      },
+      {
+        "label": "Administration",
+        "vals": [
+          48622,
+          44093,
+          49633,
+          48210
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Marketing",
+        "vals": [
+          7500,
+          11200,
+          20000,
+          30000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Rental payment",
+        "vals": [
+          62500,
+          62500,
+          62500,
+          62500
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Layoff and recruitment",
+        "vals": [
+          1071,
+          1604,
+          538,
+          1659
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel training",
+        "vals": [
+          8250,
+          4000,
+          7500,
+          3900
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Cost saving efforts",
+        "vals": [
+          12000,
+          12800,
+          3000,
+          8000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Maintenance",
+        "vals": [
+          30000,
+          37500,
+          10000,
+          35000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          274653,
+          275457,
+          310957,
+          294770
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Depreciation",
+        "vals": [
+          -55000,
+          -50000,
+          -55000,
+          -50000
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Depreciation"
+      },
+      {
+        "label": "EBIT",
+        "vals": [
+          219653,
+          225457,
+          255957,
+          244770
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "gloss": "EBIT"
+      },
+      {
+        "heading": "Financing income and expenses"
+      },
+      {
+        "label": "Interest income",
+        "vals": [
+          12362,
+          33116,
+          5365,
+          28813
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (long-term)",
+        "vals": [
+          -114487,
+          -111385,
+          -109125,
+          -113539
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (short-term)",
+        "vals": [
+          0,
+          0,
+          -159,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Income before taxes",
+        "vals": [
+          117528,
+          147189,
+          152038,
+          160044
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -35258,
+          -44157,
+          -45611,
+          -48013
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          82270,
+          103032,
+          106427,
+          112031
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "balance": [
+      {
+        "heading": "Assets"
+      },
+      {
+        "label": "Property, plant & equipment",
+        "vals": [
+          6510000,
+          5900000,
+          6510000,
+          5900000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade receivables",
+        "vals": [
+          52423,
+          51811,
+          55684,
+          63052
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade receivables"
+      },
+      {
+        "label": "Cash and cash equivalents",
+        "vals": [
+          492127,
+          1222781,
+          270015,
+          1074062
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total assets",
+        "vals": [
+          7054550,
+          7174592,
+          6835698,
+          7037114
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Shareholders' equity"
+      },
+      {
+        "label": "Share capital",
+        "vals": [
+          2665350,
+          2665350,
+          2665350,
+          2665350
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Retained earnings",
+        "vals": [
+          922538,
+          1039818,
+          812280,
+          891425
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          82270,
+          103032,
+          106427,
+          112031
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total equity",
+        "vals": [
+          3670158,
+          3808201,
+          3584057,
+          3668806
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Liabilities"
+      },
+      {
+        "label": "Long-term loans",
+        "vals": [
+          3365725,
+          3345725,
+          3235725,
+          3345725
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Short-term loans",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade payables",
+        "vals": [
+          18667,
+          20667,
+          15917,
+          22583
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade payables"
+      },
+      {
+        "label": "Total liabilities",
+        "vals": [
+          3384392,
+          3366392,
+          3251642,
+          3368308
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Total equity + liabilities",
+        "vals": [
+          7054550,
+          7174592,
+          6835698,
+          7037114
+        ],
+        "fmt": "usd",
+        "bold": true
+      }
+    ],
+    "market": {
+      "roomRates": [
+        {
+          "label": "Walk-in room rate",
+          "vals": [
+            165,
+            150,
+            150,
+            149.99
+          ],
+          "fmt": "rate",
+          "bold": true
+        },
+        {
+          "label": "Weighted average room rate",
+          "vals": [
+            127.6,
+            126.75,
+            128.74,
+            113.77
+          ],
+          "fmt": "rate"
+        }
+      ],
+      "salesAndNights": [
+        {
+          "label": "Walk-in nights sold",
+          "vals": [
+            1484,
+            1622,
+            1785,
+            1403
+          ],
+          "fmt": "nights",
+          "bold": true,
+          "gloss": "room-night"
+        },
+        {
+          "label": "Revenue per available room",
+          "vals": [
+            10170,
+            11083,
+            10942,
+            11774
+          ],
+          "fmt": "usd"
+        },
+        {
+          "label": "Sales revenue this period",
+          "vals": [
+            559349,
+            554137,
+            601787,
+            588703
+          ],
+          "fmt": "usd",
+          "bold": true
+        },
+        {
+          "label": "Nights sold (total)",
+          "vals": [
+            4384,
+            4372,
+            4675,
+            5175
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Occupancy",
+          "vals": [
+            44.28,
+            48.58,
+            47.22,
+            57.5
+          ],
+          "fmt": "pct",
+          "bold": true,
+          "gloss": "Occupancy"
+        }
+      ],
+      "advance": [
+        {
+          "label": "Advance price — next round",
+          "vals": [
+            113.48,
+            119.75,
+            126.35,
+            99.93
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — next round",
+          "vals": [
+            2500,
+            1980,
+            1700,
+            3512
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Advance price — two rounds ahead",
+          "vals": [
+            116.15,
+            115.46,
+            129.75,
+            101.42
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — two rounds ahead",
+          "vals": [
+            1500,
+            1500,
+            1000,
+            2176
+          ],
+          "fmt": "nights"
+        }
+      ],
+      "totalMarket": [
+        {
+          "label": "Total market demand (this winter)",
+          "vals": [
+            18605,
+            37,
+            13556,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        },
+        {
+          "label": "Total market supply",
+          "vals": [
+            37800,
+            0,
+            37800,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        }
+      ]
+    },
+    "operations": [
+      {
+        "heading": "Capacity"
+      },
+      {
+        "label": "Rooms",
+        "vals": [
+          55,
+          50,
+          55,
+          50
+        ],
+        "fmt": "int",
+        "indent": true
+      },
+      {
+        "label": "Nights available",
+        "vals": [
+          9900,
+          9000,
+          9900,
+          9000
+        ],
+        "fmt": "nights",
+        "indent": true,
+        "gloss": "room-night"
+      },
+      {
+        "heading": "Sales this period"
+      },
+      {
+        "label": "Nights sold",
+        "vals": [
+          4384,
+          4372,
+          4675,
+          5175
+        ],
+        "fmt": "nights",
+        "indent": true
+      },
+      {
+        "label": "Occupancy",
+        "vals": [
+          44.28,
+          48.58,
+          47.22,
+          57.5
+        ],
+        "fmt": "pct",
+        "indent": true,
+        "gloss": "Occupancy"
+      },
+      {
+        "heading": "Personnel (decisions + outcomes)"
+      },
+      {
+        "label": "Permanent employees",
+        "vals": [
+          4,
+          4,
+          5,
+          3.5
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Temporary employees",
+        "vals": [
+          1.5,
+          0,
+          0,
+          0.4
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Wage / month",
+        "vals": [
+          2500,
+          3183,
+          3500,
+          3000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Training / person",
+        "vals": [
+          1500,
+          1000,
+          1500,
+          1000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel turnover",
+        "vals": [
+          3.57,
+          5.35,
+          1.43,
+          6.32
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Average competence (permanent)",
+        "vals": [
+          1.03,
+          1,
+          1.04,
+          1
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Personnel stress level",
+        "vals": [
+          1,
+          9,
+          3,
+          35
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Quality level",
+        "vals": [
+          1.05,
+          1.03,
+          1.1,
+          0.84
+        ],
+        "fmt": "num",
+        "indent": true,
+        "gloss": "Quality Level"
+      }
+    ],
+    "cashflow": [
+      {
+        "heading": "From operations"
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          274653,
+          275457,
+          310957,
+          294770
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Financing income and expenses",
+        "vals": [
+          -102125,
+          -78268,
+          -103919,
+          -84726
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -35258,
+          -44157,
+          -45611,
+          -48013
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Change in working capital",
+        "vals": [
+          -5545,
+          8639,
+          15877,
+          -1028
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net operating cash flow",
+        "vals": [
+          131725,
+          161671,
+          177304,
+          161002
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net investment cash flow",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd"
+      },
+      {
+        "heading": "From financing"
+      },
+      {
+        "label": "Change in long-term loans",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Dividends paid",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net financing cash flow",
+        "vals": [
+          0,
+          0,
+          -7289,
+          0
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net change in cash",
+        "vals": [
+          131725,
+          161671,
+          170015,
+          161002
+        ],
+        "fmt": "usd",
+        "bold": true
+      },
+      {
+        "label": "Cash at end of period",
+        "vals": [
+          492127,
+          1222781,
+          270015,
+          1074062
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "ratios": [
+      {
+        "label": "Cumulative total shareholder return % pa",
+        "vals": [
+          5.94,
+          8.91,
+          9.75,
+          8.13
+        ],
+        "fmt": "pct",
+        "bold": true,
+        "gloss": "TSR"
+      },
+      {
+        "label": "Return on capital employed (ROCE) % annual",
+        "vals": [
+          6.79,
+          8.06,
+          10.26,
+          7.99
+        ],
+        "fmt": "pct",
+        "gloss": "ROCE"
+      },
+      {
+        "label": "Gross profit ratio %",
+        "vals": [
+          79.48,
+          81.05,
+          77.12,
+          82.22
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Net profit ratio %",
+        "vals": [
+          14.71,
+          18.59,
+          17.69,
+          19.03
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Gearing %",
+        "vals": [
+          81,
+          58.66,
+          86.51,
+          65.11
+        ],
+        "fmt": "pct",
+        "gloss": "Gearing"
+      },
+      {
+        "label": "Asset turnover ratio",
+        "vals": [
+          0.18,
+          0.17,
+          0.2,
+          0.18
+        ],
+        "fmt": "num"
+      },
+      {
+        "label": "Company-specific prime rate % (annual)",
+        "vals": [
+          6.92,
+          6.77,
+          6.86,
+          6.9
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Earnings per share (EPS)",
+        "vals": [
+          0.82,
+          1.03,
+          1.06,
+          1.12
+        ],
+        "fmt": "rate",
+        "gloss": "EPS"
+      },
+      {
+        "label": "Market value of share",
+        "vals": [
+          39.99,
+          45.97,
+          46.57,
+          44.34
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Number of shares",
+        "vals": [
+          100000,
+          100000,
+          100000,
+          100000
+        ],
+        "fmt": "int"
+      },
+      {
+        "label": "Hotel occupancy ratio %",
+        "vals": [
+          44.28,
+          48.58,
+          47.22,
+          57.5
+        ],
+        "fmt": "pct",
+        "gloss": "Occupancy"
+      },
+      {
+        "label": "Weighted average room rate",
+        "vals": [
+          127.6,
+          126.75,
+          128.74,
+          113.77
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Gross profit per room",
+        "vals": [
+          8084,
+          8983,
+          8439,
+          9681
+        ],
+        "fmt": "usd"
+      },
+      {
+        "label": "Net profit per room",
+        "vals": [
+          1496,
+          2061,
+          1935,
+          2241
+        ],
+        "fmt": "usd"
+      }
+    ],
+    "sorting": [
+      {
+        "team": "northline",
+        "tsr": 5.94,
+        "ebitdaPrev": 274653,
+        "ebitdaRoll": 584639,
+        "shareDom": 23.56,
+        "occDom": 44.28
+      },
+      {
+        "team": "red",
+        "tsr": 8.91,
+        "ebitdaPrev": 275457,
+        "ebitdaRoll": 672286,
+        "shareDom": 23.5,
+        "occDom": 48.58
+      },
+      {
+        "team": "blue",
+        "tsr": 9.75,
+        "ebitdaPrev": 310957,
+        "ebitdaRoll": 804764,
+        "shareDom": 25.13,
+        "occDom": 47.22
+      },
+      {
+        "team": "america",
+        "tsr": 8.13,
+        "ebitdaPrev": 294770,
+        "ebitdaRoll": 656142,
+        "shareDom": 27.81,
+        "occDom": 57.5
+      }
+    ]
+  },
+  "6": {
+    "income": [
+      {
+        "heading": "Sales revenue"
+      },
+      {
+        "label": "Domestic",
+        "vals": [
+          892944,
+          837494,
+          711203,
+          948294
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "International",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "ghostRow": true
+      },
+      {
+        "label": "Total sales",
+        "vals": [
+          892944,
+          837494,
+          711203,
+          948294
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Personnel expenses and direct costs"
+      },
+      {
+        "label": "Permanent",
+        "vals": [
+          81000,
+          78696,
+          72000,
+          64050
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Temporary",
+        "vals": [
+          62688,
+          26866,
+          17911,
+          62688
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct cost",
+        "vals": [
+          42753,
+          40743,
+          37850,
+          54687
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Gross profit",
+        "vals": [
+          706503,
+          691189,
+          583442,
+          766869
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Other operating expenses"
+      },
+      {
+        "label": "Administration",
+        "vals": [
+          41382,
+          43988,
+          56584,
+          48210
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Marketing",
+        "vals": [
+          60000,
+          22400,
+          1000,
+          15000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Rental payment",
+        "vals": [
+          62500,
+          62500,
+          62500,
+          62500
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Layoff and recruitment",
+        "vals": [
+          5888,
+          2409,
+          3767,
+          2521
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel training",
+        "vals": [
+          20000,
+          5500,
+          500,
+          7000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Cost saving efforts",
+        "vals": [
+          25000,
+          12800,
+          200,
+          8000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Maintenance",
+        "vals": [
+          40000,
+          37500,
+          1000,
+          20000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          451732,
+          504092,
+          457891,
+          603638
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Depreciation",
+        "vals": [
+          -55000,
+          -50000,
+          -55000,
+          -50000
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Depreciation"
+      },
+      {
+        "label": "EBIT",
+        "vals": [
+          396732,
+          454092,
+          402891,
+          553638
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "gloss": "EBIT"
+      },
+      {
+        "heading": "Financing income and expenses"
+      },
+      {
+        "label": "Interest income",
+        "vals": [
+          11017,
+          26164,
+          7718,
+          23721
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (long-term)",
+        "vals": [
+          -74991,
+          -74528,
+          -73455,
+          -75232
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (short-term)",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Income before taxes",
+        "vals": [
+          332758,
+          405729,
+          337154,
+          502127
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -99827,
+          -121719,
+          -101146,
+          -150638
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          232930,
+          284010,
+          236008,
+          351489
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "balance": [
+      {
+        "heading": "Assets"
+      },
+      {
+        "label": "Property, plant & equipment",
+        "vals": [
+          6455000,
+          5850000,
+          6455000,
+          5850000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade receivables",
+        "vals": [
+          77499,
+          79095,
+          69127,
+          110693
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade receivables"
+      },
+      {
+        "label": "Cash and cash equivalents",
+        "vals": [
+          667565,
+          1531374,
+          542446,
+          1422910
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total assets",
+        "vals": [
+          7200064,
+          7460469,
+          7066573,
+          7383603
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Shareholders' equity"
+      },
+      {
+        "label": "Share capital",
+        "vals": [
+          2665350,
+          2665350,
+          2665350,
+          2665350
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Retained earnings",
+        "vals": [
+          1004808,
+          1142850,
+          918706,
+          1003455
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          232930,
+          284010,
+          236008,
+          351489
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total equity",
+        "vals": [
+          3903089,
+          4092211,
+          3820064,
+          4020295
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Liabilities"
+      },
+      {
+        "label": "Long-term loans",
+        "vals": [
+          3265725,
+          3345725,
+          3235725,
+          3345725
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Short-term loans",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade payables",
+        "vals": [
+          31250,
+          22533,
+          10783,
+          17583
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade payables"
+      },
+      {
+        "label": "Total liabilities",
+        "vals": [
+          3296975,
+          3368258,
+          3246508,
+          3363308
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Total equity + liabilities",
+        "vals": [
+          7200064,
+          7460469,
+          7066573,
+          7383603
+        ],
+        "fmt": "usd",
+        "bold": true
+      }
+    ],
+    "market": {
+      "roomRates": [
+        {
+          "label": "Walk-in room rate",
+          "vals": [
+            145,
+            150,
+            144.99,
+            155.99
+          ],
+          "fmt": "rate",
+          "bold": true
+        },
+        {
+          "label": "Weighted average room rate",
+          "vals": [
+            128.46,
+            129.71,
+            133.82,
+            112.02
+          ],
+          "fmt": "rate"
+        }
+      ],
+      "salesAndNights": [
+        {
+          "label": "Walk-in nights sold",
+          "vals": [
+            2951,
+            2419,
+            2045,
+            1821
+          ],
+          "fmt": "nights",
+          "bold": true,
+          "gloss": "room-night"
+        },
+        {
+          "label": "Revenue per available room",
+          "vals": [
+            16235,
+            16750,
+            12931,
+            18966
+          ],
+          "fmt": "usd"
+        },
+        {
+          "label": "Sales revenue this period",
+          "vals": [
+            892944,
+            837494,
+            711203,
+            948294
+          ],
+          "fmt": "usd",
+          "bold": true
+        },
+        {
+          "label": "Nights sold (total)",
+          "vals": [
+            6951,
+            6456,
+            5315,
+            8465
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Occupancy",
+          "vals": [
+            70.22,
+            71.74,
+            53.68,
+            94.06
+          ],
+          "fmt": "pct",
+          "bold": true,
+          "gloss": "Occupancy"
+        }
+      ],
+      "advance": [
+        {
+          "label": "Advance price — next round",
+          "vals": [
+            119.55,
+            130.45,
+            126.13,
+            101.55
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — next round",
+          "vals": [
+            1800,
+            1150,
+            1200,
+            2300
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Advance price — two rounds ahead",
+          "vals": [
+            123.15,
+            132.36,
+            127.56,
+            103.06
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — two rounds ahead",
+          "vals": [
+            2300,
+            1560,
+            1650,
+            3116
+          ],
+          "fmt": "nights"
+        }
+      ],
+      "totalMarket": [
+        {
+          "label": "Total market demand (this summer)",
+          "vals": [
+            27188,
+            26,
+            21495,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        },
+        {
+          "label": "Total market supply",
+          "vals": [
+            37800,
+            0,
+            37800,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        }
+      ]
+    },
+    "operations": [
+      {
+        "heading": "Capacity"
+      },
+      {
+        "label": "Rooms",
+        "vals": [
+          55,
+          50,
+          55,
+          50
+        ],
+        "fmt": "int",
+        "indent": true
+      },
+      {
+        "label": "Nights available",
+        "vals": [
+          9900,
+          9000,
+          9900,
+          9000
+        ],
+        "fmt": "nights",
+        "indent": true,
+        "gloss": "room-night"
+      },
+      {
+        "heading": "Sales this period"
+      },
+      {
+        "label": "Nights sold",
+        "vals": [
+          6951,
+          6456,
+          5315,
+          8465
+        ],
+        "fmt": "nights",
+        "indent": true
+      },
+      {
+        "label": "Occupancy",
+        "vals": [
+          70.22,
+          71.74,
+          53.68,
+          94.06
+        ],
+        "fmt": "pct",
+        "indent": true,
+        "gloss": "Occupancy"
+      },
+      {
+        "heading": "Personnel (decisions + outcomes)"
+      },
+      {
+        "label": "Permanent employees",
+        "vals": [
+          4.5,
+          4,
+          4,
+          3.5
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Temporary employees",
+        "vals": [
+          3.5,
+          1.5,
+          1,
+          3.5
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Wage / month",
+        "vals": [
+          3000,
+          3279,
+          3000,
+          3050
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Training / person",
+        "vals": [
+          2500,
+          1000,
+          100,
+          1000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel turnover",
+        "vals": [
+          0.3,
+          5.24,
+          14.98,
+          6.26
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Average competence (permanent)",
+        "vals": [
+          1.06,
+          1,
+          0.96,
+          1
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Personnel stress level",
+        "vals": [
+          2,
+          18,
+          12,
+          26
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Quality level",
+        "vals": [
+          1.16,
+          1.07,
+          0.93,
+          0.85
+        ],
+        "fmt": "num",
+        "indent": true,
+        "gloss": "Quality Level"
+      }
+    ],
+    "cashflow": [
+      {
+        "heading": "From operations"
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          451732,
+          504092,
+          457891,
+          603638
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Financing income and expenses",
+        "vals": [
+          -63974,
+          -48363,
+          -65737,
+          -51511
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -99827,
+          -121719,
+          -101146,
+          -150638
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Change in working capital",
+        "vals": [
+          -12493,
+          -25417,
+          -18577,
+          -52641
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net operating cash flow",
+        "vals": [
+          275438,
+          308593,
+          272431,
+          348848
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net investment cash flow",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd"
+      },
+      {
+        "heading": "From financing"
+      },
+      {
+        "label": "Change in long-term loans",
+        "vals": [
+          -100000,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Dividends paid",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net financing cash flow",
+        "vals": [
+          -100000,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net change in cash",
+        "vals": [
+          175438,
+          308593,
+          272431,
+          348848
+        ],
+        "fmt": "usd",
+        "bold": true
+      },
+      {
+        "label": "Cash at end of period",
+        "vals": [
+          667565,
+          1531374,
+          542446,
+          1422910
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "ratios": [
+      {
+        "label": "Cumulative total shareholder return % pa",
+        "vals": [
+          11.81,
+          12.48,
+          10.58,
+          14.28
+        ],
+        "fmt": "pct",
+        "bold": true,
+        "gloss": "TSR"
+      },
+      {
+        "label": "Return on capital employed (ROCE) % annual",
+        "vals": [
+          8.68,
+          9.31,
+          9.5,
+          11.1
+        ],
+        "fmt": "pct",
+        "gloss": "ROCE"
+      },
+      {
+        "label": "Gross profit ratio %",
+        "vals": [
+          79.12,
+          82.53,
+          82.04,
+          80.87
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Net profit ratio %",
+        "vals": [
+          26.09,
+          33.91,
+          33.18,
+          37.07
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Gearing %",
+        "vals": [
+          72.25,
+          49.84,
+          76.43,
+          54.55
+        ],
+        "fmt": "pct",
+        "gloss": "Gearing"
+      },
+      {
+        "label": "Asset turnover ratio",
+        "vals": [
+          0.2,
+          0.19,
+          0.19,
+          0.21
+        ],
+        "fmt": "num"
+      },
+      {
+        "label": "Company-specific prime rate % (annual)",
+        "vals": [
+          4.57,
+          4.5,
+          4.59,
+          4.55
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Earnings per share (EPS)",
+        "vals": [
+          2.33,
+          2.84,
+          2.36,
+          3.51
+        ],
+        "fmt": "rate",
+        "gloss": "EPS"
+      },
+      {
+        "label": "Market value of share",
+        "vals": [
+          58.57,
+          60.76,
+          53.63,
+          66.82
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Number of shares",
+        "vals": [
+          100000,
+          100000,
+          100000,
+          100000
+        ],
+        "fmt": "int"
+      },
+      {
+        "label": "Hotel occupancy ratio %",
+        "vals": [
+          70.22,
+          71.74,
+          53.68,
+          94.06
+        ],
+        "fmt": "pct",
+        "gloss": "Occupancy"
+      },
+      {
+        "label": "Weighted average room rate",
+        "vals": [
+          128.46,
+          129.71,
+          133.82,
+          112.02
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Gross profit per room",
+        "vals": [
+          12846,
+          13824,
+          10608,
+          15337
+        ],
+        "fmt": "usd"
+      },
+      {
+        "label": "Net profit per room",
+        "vals": [
+          4235,
+          5680,
+          4291,
+          7030
+        ],
+        "fmt": "usd"
+      }
+    ],
+    "sorting": [
+      {
+        "team": "northline",
+        "tsr": 11.81,
+        "ebitdaPrev": 451732,
+        "ebitdaRoll": 726386,
+        "shareDom": 25.57,
+        "occDom": 70.22
+      },
+      {
+        "team": "red",
+        "tsr": 12.48,
+        "ebitdaPrev": 504092,
+        "ebitdaRoll": 779549,
+        "shareDom": 23.75,
+        "occDom": 71.74
+      },
+      {
+        "team": "blue",
+        "tsr": 10.58,
+        "ebitdaPrev": 457891,
+        "ebitdaRoll": 768848,
+        "shareDom": 19.55,
+        "occDom": 53.68
+      },
+      {
+        "team": "america",
+        "tsr": 14.28,
+        "ebitdaPrev": 603638,
+        "ebitdaRoll": 898407,
+        "shareDom": 31.14,
+        "occDom": 94.06
+      }
+    ]
+  },
+  "7": {
+    "income": [
+      {
+        "heading": "Sales revenue"
+      },
+      {
+        "label": "Domestic",
+        "vals": [
+          614047,
+          526587,
+          454681,
+          617459
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "International",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "ghostRow": true
+      },
+      {
+        "label": "Total sales",
+        "vals": [
+          614047,
+          526587,
+          454681,
+          617459
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Personnel expenses and direct costs"
+      },
+      {
+        "label": "Permanent",
+        "vals": [
+          90000,
+          78696,
+          90000,
+          63000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Temporary",
+        "vals": [
+          18269,
+          0,
+          0,
+          23750
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct cost",
+        "vals": [
+          30871,
+          25279,
+          27235,
+          35945
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Gross profit",
+        "vals": [
+          474907,
+          422613,
+          337445,
+          494764
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Other operating expenses"
+      },
+      {
+        "label": "Administration",
+        "vals": [
+          46183,
+          48301,
+          55962,
+          48210
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Marketing",
+        "vals": [
+          0,
+          1000,
+          1000,
+          5000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Rental payment",
+        "vals": [
+          62500,
+          62500,
+          62500,
+          62500
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Layoff and recruitment",
+        "vals": [
+          6096,
+          1869,
+          16512,
+          2035
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel training",
+        "vals": [
+          9000,
+          4000,
+          3750,
+          4800
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Cost saving efforts",
+        "vals": [
+          3000,
+          9200,
+          3000,
+          8000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Maintenance",
+        "vals": [
+          5000,
+          5000,
+          1000,
+          10000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          343128,
+          290743,
+          193721,
+          354219
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Depreciation",
+        "vals": [
+          -55000,
+          -50000,
+          -55000,
+          -50000
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Depreciation"
+      },
+      {
+        "label": "EBIT",
+        "vals": [
+          288128,
+          240743,
+          138721,
+          304219
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "gloss": "EBIT"
+      },
+      {
+        "heading": "Financing income and expenses"
+      },
+      {
+        "label": "Interest income",
+        "vals": [
+          14676,
+          31041,
+          11560,
+          29543
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (long-term)",
+        "vals": [
+          -71928,
+          -73090,
+          -72836,
+          -73361
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Interest expense (short-term)",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Income before taxes",
+        "vals": [
+          230876,
+          198695,
+          77445,
+          260401
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -69263,
+          -59608,
+          -23233,
+          -78120
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          161614,
+          139086,
+          54211,
+          182281
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "balance": [
+      {
+        "heading": "Assets"
+      },
+      {
+        "label": "Property, plant & equipment",
+        "vals": [
+          6400000,
+          5800000,
+          6400000,
+          5800000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade receivables",
+        "vals": [
+          64902,
+          53868,
+          46850,
+          75707
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade receivables"
+      },
+      {
+        "label": "Cash and cash equivalents",
+        "vals": [
+          877276,
+          1736104,
+          674401,
+          1686843
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total assets",
+        "vals": [
+          7342177,
+          7589972,
+          7121251,
+          7562550
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Shareholders' equity"
+      },
+      {
+        "label": "Share capital",
+        "vals": [
+          2665350,
+          2665350,
+          2665350,
+          2665350
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Retained earnings",
+        "vals": [
+          1237738,
+          1426860,
+          1154714,
+          1354944
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net profit for the period",
+        "vals": [
+          161614,
+          139086,
+          54211,
+          182281
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Total equity",
+        "vals": [
+          4064702,
+          4231297,
+          3874276,
+          4202575
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "heading": "Liabilities"
+      },
+      {
+        "label": "Long-term loans",
+        "vals": [
+          3265725,
+          3345725,
+          3235725,
+          3345725
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Short-term loans",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Trade payables",
+        "vals": [
+          11750,
+          12950,
+          11250,
+          14250
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "Trade payables"
+      },
+      {
+        "label": "Total liabilities",
+        "vals": [
+          3277475,
+          3358675,
+          3246975,
+          3359975
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Total equity + liabilities",
+        "vals": [
+          7342177,
+          7589972,
+          7121251,
+          7562550
+        ],
+        "fmt": "usd",
+        "bold": true
+      }
+    ],
+    "market": {
+      "roomRates": [
+        {
+          "label": "Walk-in room rate",
+          "vals": [
+            150,
+            149.98,
+            99.99,
+            149.99
+          ],
+          "fmt": "rate",
+          "bold": true
+        },
+        {
+          "label": "Weighted average room rate",
+          "vals": [
+            127.99,
+            131.45,
+            115.52,
+            110.97
+          ],
+          "fmt": "rate"
+        }
+      ],
+      "salesAndNights": [
+        {
+          "label": "Walk-in nights sold",
+          "vals": [
+            1498,
+            1356,
+            1736,
+            1088
+          ],
+          "fmt": "nights",
+          "bold": true,
+          "gloss": "room-night"
+        },
+        {
+          "label": "Revenue per available room",
+          "vals": [
+            11164,
+            10532,
+            8267,
+            12349
+          ],
+          "fmt": "usd"
+        },
+        {
+          "label": "Sales revenue this period",
+          "vals": [
+            614047,
+            526587,
+            454681,
+            617459
+          ],
+          "fmt": "usd",
+          "bold": true
+        },
+        {
+          "label": "Nights sold (total)",
+          "vals": [
+            4798,
+            4006,
+            3936,
+            5564
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Occupancy",
+          "vals": [
+            48.46,
+            44.51,
+            39.76,
+            61.82
+          ],
+          "fmt": "pct",
+          "bold": true,
+          "gloss": "Occupancy"
+        }
+      ],
+      "advance": [
+        {
+          "label": "Advance price — next round",
+          "vals": [
+            162.86,
+            114.87,
+            122.26,
+            102.56
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — next round",
+          "vals": [
+            500,
+            2560,
+            1600,
+            3204
+          ],
+          "fmt": "nights"
+        },
+        {
+          "label": "Advance price — two rounds ahead",
+          "vals": [
+            154.51,
+            120.23,
+            123.03,
+            104.09
+          ],
+          "fmt": "rate"
+        },
+        {
+          "label": "Advance nights — two rounds ahead",
+          "vals": [
+            500,
+            1500,
+            1100,
+            2123
+          ],
+          "fmt": "nights"
+        }
+      ],
+      "totalMarket": [
+        {
+          "label": "Total market demand (this winter)",
+          "vals": [
+            18304,
+            -2,
+            18605,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        },
+        {
+          "label": "Total market supply",
+          "vals": [
+            37800,
+            0,
+            37800,
+            0
+          ],
+          "fmt": "nights",
+          "single": true
+        }
+      ]
+    },
+    "operations": [
+      {
+        "heading": "Capacity"
+      },
+      {
+        "label": "Rooms",
+        "vals": [
+          55,
+          50,
+          55,
+          50
+        ],
+        "fmt": "int",
+        "indent": true
+      },
+      {
+        "label": "Nights available",
+        "vals": [
+          9900,
+          9000,
+          9900,
+          9000
+        ],
+        "fmt": "nights",
+        "indent": true,
+        "gloss": "room-night"
+      },
+      {
+        "heading": "Sales this period"
+      },
+      {
+        "label": "Nights sold",
+        "vals": [
+          4798,
+          4006,
+          3936,
+          5564
+        ],
+        "fmt": "nights",
+        "indent": true
+      },
+      {
+        "label": "Occupancy",
+        "vals": [
+          48.46,
+          44.51,
+          39.76,
+          61.82
+        ],
+        "fmt": "pct",
+        "indent": true,
+        "gloss": "Occupancy"
+      },
+      {
+        "heading": "Personnel (decisions + outcomes)"
+      },
+      {
+        "label": "Permanent employees",
+        "vals": [
+          5,
+          4,
+          5,
+          3.5
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Temporary employees",
+        "vals": [
+          1,
+          0,
+          0,
+          1.3
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Wage / month",
+        "vals": [
+          3000,
+          3279,
+          3000,
+          3000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Training / person",
+        "vals": [
+          1500,
+          1000,
+          750,
+          1000
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Personnel turnover",
+        "vals": [
+          0.67,
+          4.06,
+          10.9,
+          5.06
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Average competence (permanent)",
+        "vals": [
+          1.05,
+          1.01,
+          0.97,
+          1.01
+        ],
+        "fmt": "num",
+        "indent": true
+      },
+      {
+        "label": "Personnel stress level",
+        "vals": [
+          1,
+          5,
+          2,
+          16
+        ],
+        "fmt": "pct",
+        "indent": true
+      },
+      {
+        "label": "Quality level",
+        "vals": [
+          1.13,
+          1.09,
+          0.94,
+          0.85
+        ],
+        "fmt": "num",
+        "indent": true,
+        "gloss": "Quality Level"
+      }
+    ],
+    "cashflow": [
+      {
+        "heading": "From operations"
+      },
+      {
+        "label": "EBITDA",
+        "vals": [
+          343128,
+          290743,
+          193721,
+          354219
+        ],
+        "fmt": "usd",
+        "indent": true,
+        "gloss": "EBITDA"
+      },
+      {
+        "label": "Financing income and expenses",
+        "vals": [
+          -57252,
+          -42049,
+          -61276,
+          -43818
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Direct taxes",
+        "vals": [
+          -69263,
+          -59608,
+          -23233,
+          -78120
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Change in working capital",
+        "vals": [
+          -6902,
+          15644,
+          22744,
+          31653
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net operating cash flow",
+        "vals": [
+          209711,
+          204730,
+          131955,
+          263934
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net investment cash flow",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd"
+      },
+      {
+        "heading": "From financing"
+      },
+      {
+        "label": "Change in long-term loans",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Dividends paid",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "indent": true
+      },
+      {
+        "label": "Net financing cash flow",
+        "vals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      },
+      {
+        "label": "Net change in cash",
+        "vals": [
+          209711,
+          204730,
+          131955,
+          263934
+        ],
+        "fmt": "usd",
+        "bold": true
+      },
+      {
+        "label": "Cash at end of period",
+        "vals": [
+          877276,
+          1736104,
+          674401,
+          1686843
+        ],
+        "fmt": "usd",
+        "bold": true,
+        "rule": true
+      }
+    ],
+    "ratios": [
+      {
+        "label": "Cumulative total shareholder return % pa",
+        "vals": [
+          11.19,
+          10.82,
+          7.08,
+          13.52
+        ],
+        "fmt": "pct",
+        "bold": true,
+        "gloss": "TSR"
+      },
+      {
+        "label": "Return on capital employed (ROCE) % annual",
+        "vals": [
+          9.45,
+          9.26,
+          7.65,
+          11.5
+        ],
+        "fmt": "pct",
+        "gloss": "ROCE"
+      },
+      {
+        "label": "Gross profit ratio %",
+        "vals": [
+          77.34,
+          80.25,
+          74.22,
+          80.13
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Net profit ratio %",
+        "vals": [
+          26.32,
+          26.41,
+          11.92,
+          29.52
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Gearing %",
+        "vals": [
+          62.58,
+          41.14,
+          68.29,
+          43.56
+        ],
+        "fmt": "pct",
+        "gloss": "Gearing"
+      },
+      {
+        "label": "Asset turnover ratio",
+        "vals": [
+          0.21,
+          0.18,
+          0.16,
+          0.21
+        ],
+        "fmt": "num"
+      },
+      {
+        "label": "Company-specific prime rate % (annual)",
+        "vals": [
+          4.45,
+          4.42,
+          4.55,
+          4.43
+        ],
+        "fmt": "pct"
+      },
+      {
+        "label": "Earnings per share (EPS)",
+        "vals": [
+          1.62,
+          1.39,
+          0.54,
+          1.82
+        ],
+        "fmt": "rate",
+        "gloss": "EPS"
+      },
+      {
+        "label": "Market value of share",
+        "vals": [
+          62.96,
+          61.6,
+          47.2,
+          72.89
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Number of shares",
+        "vals": [
+          100000,
+          100000,
+          100000,
+          100000
+        ],
+        "fmt": "int"
+      },
+      {
+        "label": "Hotel occupancy ratio %",
+        "vals": [
+          48.46,
+          44.51,
+          39.76,
+          61.82
+        ],
+        "fmt": "pct",
+        "gloss": "Occupancy"
+      },
+      {
+        "label": "Weighted average room rate",
+        "vals": [
+          127.99,
+          131.45,
+          115.52,
+          110.97
+        ],
+        "fmt": "rate"
+      },
+      {
+        "label": "Gross profit per room",
+        "vals": [
+          8635,
+          8452,
+          6135,
+          9895
+        ],
+        "fmt": "usd"
+      },
+      {
+        "label": "Net profit per room",
+        "vals": [
+          2938,
+          2782,
+          986,
+          3646
+        ],
+        "fmt": "usd"
+      }
+    ],
+    "sorting": [
+      {
+        "team": "northline",
+        "tsr": 11.19,
+        "ebitdaPrev": 343128,
+        "ebitdaRoll": 794860,
+        "shareDom": 26.21,
+        "occDom": 48.46
+      },
+      {
+        "team": "red",
+        "tsr": 10.82,
+        "ebitdaPrev": 290743,
+        "ebitdaRoll": 794835,
+        "shareDom": 21.89,
+        "occDom": 44.51
+      },
+      {
+        "team": "blue",
+        "tsr": 7.08,
+        "ebitdaPrev": 193721,
+        "ebitdaRoll": 651612,
+        "shareDom": 21.5,
+        "occDom": 39.76
+      },
+      {
+        "team": "america",
+        "tsr": 13.52,
+        "ebitdaPrev": 354219,
+        "ebitdaRoll": 957857,
+        "shareDom": 30.4,
+        "occDom": 61.82
+      }
+    ]
   }
 }
 
@@ -3207,6 +7411,30 @@ export const SUMMARY = {
       152421,
       83287,
       151458
+    ],
+    "4": [
+      309985,
+      396829,
+      493808,
+      361372
+    ],
+    "5": [
+      274653,
+      275457,
+      310957,
+      294770
+    ],
+    "6": [
+      451732,
+      504092,
+      457891,
+      603638
+    ],
+    "7": [
+      343128,
+      290743,
+      193721,
+      354219
     ]
   },
   "netProfit": {
@@ -3227,6 +7455,30 @@ export const SUMMARY = {
       14298,
       -90063,
       9919
+    ],
+    "4": [
+      96564,
+      178201,
+      257172,
+      148621
+    ],
+    "5": [
+      82270,
+      103032,
+      106427,
+      112031
+    ],
+    "6": [
+      232930,
+      284010,
+      236008,
+      351489
+    ],
+    "7": [
+      161614,
+      139086,
+      54211,
+      182281
     ]
   },
   "tsr": {
@@ -3247,6 +7499,30 @@ export const SUMMARY = {
       -4.2,
       -23.46,
       -11.36
+    ],
+    "4": [
+      4.46,
+      6.87,
+      3.86,
+      1.87
+    ],
+    "5": [
+      5.94,
+      8.91,
+      9.75,
+      8.13
+    ],
+    "6": [
+      11.81,
+      12.48,
+      10.58,
+      14.28
+    ],
+    "7": [
+      11.19,
+      10.82,
+      7.08,
+      13.52
     ]
   },
   "eps": {
@@ -3267,6 +7543,30 @@ export const SUMMARY = {
       0.14,
       -0.9,
       0.1
+    ],
+    "4": [
+      0.97,
+      1.78,
+      2.57,
+      1.49
+    ],
+    "5": [
+      0.82,
+      1.03,
+      1.06,
+      1.12
+    ],
+    "6": [
+      2.33,
+      2.84,
+      2.36,
+      3.51
+    ],
+    "7": [
+      1.62,
+      1.39,
+      0.54,
+      1.82
     ]
   }
 }
@@ -3306,6 +7606,50 @@ export const ANCHORS = {
     "marketing": 11200,
     "netProfit": 14298,
     "ebitda": 152421
+  },
+  "4": {
+    "walkInRate": 150,
+    "walkInNights": 2190,
+    "avgRate": 130.66,
+    "occupancy": 58.78,
+    "nightsSold": 5290,
+    "capacity": 9000,
+    "marketing": 11200,
+    "netProfit": 178201,
+    "ebitda": 396829
+  },
+  "5": {
+    "walkInRate": 150,
+    "walkInNights": 1622,
+    "avgRate": 126.75,
+    "occupancy": 48.58,
+    "nightsSold": 4372,
+    "capacity": 9000,
+    "marketing": 11200,
+    "netProfit": 103032,
+    "ebitda": 275457
+  },
+  "6": {
+    "walkInRate": 150,
+    "walkInNights": 2419,
+    "avgRate": 129.71,
+    "occupancy": 71.74,
+    "nightsSold": 6456,
+    "capacity": 9000,
+    "marketing": 22400,
+    "netProfit": 284010,
+    "ebitda": 504092
+  },
+  "7": {
+    "walkInRate": 149.98,
+    "walkInNights": 1356,
+    "avgRate": 131.45,
+    "occupancy": 44.51,
+    "nightsSold": 4006,
+    "capacity": 9000,
+    "marketing": 1000,
+    "netProfit": 139086,
+    "ebitda": 290743
   }
 }
 
@@ -3347,11 +7691,63 @@ export const PAST_DECISIONS = {
     "wage": 3090,
     "training": 1000,
     "turnover": 5.16
+  },
+  "4": {
+    "walkInRate": 150,
+    "estNightsSold": 2190,
+    "marketing": 11200,
+    "advanceNextSeason": 1450,
+    "advanceTwoSeasons": 2057,
+    "maintenance": 37500,
+    "headcount": 4,
+    "wage": 3183,
+    "training": 1000,
+    "turnover": 4.86
+  },
+  "5": {
+    "walkInRate": 150,
+    "estNightsSold": 1622,
+    "marketing": 11200,
+    "advanceNextSeason": 1980,
+    "advanceTwoSeasons": 1500,
+    "maintenance": 37500,
+    "headcount": 4,
+    "wage": 3183,
+    "training": 1000,
+    "turnover": 5.35
+  },
+  "6": {
+    "walkInRate": 150,
+    "estNightsSold": 2419,
+    "marketing": 22400,
+    "advanceNextSeason": 1150,
+    "advanceTwoSeasons": 1560,
+    "maintenance": 37500,
+    "headcount": 4,
+    "wage": 3279,
+    "training": 1000,
+    "turnover": 5.24
+  },
+  "7": {
+    "walkInRate": 149.98,
+    "estNightsSold": 1356,
+    "marketing": 1000,
+    "advanceNextSeason": 2560,
+    "advanceTwoSeasons": 1500,
+    "maintenance": 5000,
+    "headcount": 4,
+    "wage": 3279,
+    "training": 1000,
+    "turnover": 4.06
   }
 }
 
 export const COMPLETED_ROUNDS = [
   1,
   2,
-  3
+  3,
+  4,
+  5,
+  6,
+  7
 ]

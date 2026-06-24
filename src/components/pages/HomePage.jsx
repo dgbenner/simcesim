@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useUI } from '../../state/ui'
 import { SUMMARY, ROUND_META, RESULT_TEAMS, COMPLETED_ROUNDS } from '../../data/roundResults'
 import { ROUNDS, HOTEL_RED, COURSE } from '../../data/team'
-import { CURRENT_ROUND, CURRENT_DEADLINE } from '../../data/config'
+import { CURRENT_ROUND } from '../../data/config'
 import { cn } from '../../lib/cn'
 import { pct, usdShort } from '../../lib/format'
 
@@ -28,9 +28,9 @@ function cumulativeEarnings() {
 }
 
 function KpiChart({ data, fmt }) {
-  const W = 440, H = 198, padT = 14, padB = 26, padL = 46, padR = 10
+  const W = 560, H = 198, padT = 14, padB = 26, padL = 46, padR = 10
   const plotH = H - padT - padB
-  const slots = [1, 2, 3, 4]
+  const slots = COMPLETED_ROUNDS // the full game — all completed rounds
 
   const allVals = COMPLETED_ROUNDS.flatMap((n) => data[n])
   const lo = Math.min(0, ...allVals), hi = Math.max(0, ...allVals)
@@ -201,7 +201,7 @@ function ScheduleCard() {
               >
                 <span>Round {r.n} · {r.season}</span>
                 <span className="text-[10px] text-cesim-muted">
-                  {current ? `due ${CURRENT_DEADLINE.slice(5, 10).replace('-', '/')}` : past ? 'completed' : 'upcoming'}
+                  {current ? 'sandbox' : past ? 'completed' : 'upcoming'}
                 </span>
               </button>
             </li>

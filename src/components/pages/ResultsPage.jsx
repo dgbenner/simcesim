@@ -116,12 +116,6 @@ function RoundPicker({ viewRound, setViewRound }) {
               </button>
             </li>
           ))}
-          <li>
-            <span className="flex items-center justify-between px-3 py-1.5 text-[12px] text-cesim-muted opacity-50">
-              <span>Round {CURRENT_ROUND} · Summer</span>
-              <span className="text-[10px]">in progress</span>
-            </span>
-          </li>
         </ul>
       )}
     </div>

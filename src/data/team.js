@@ -68,15 +68,14 @@ export function displayName(name) {
 }
 
 // All 7 real rounds, numbered AND season-labeled. Seasons alternate ODD = Winter, EVEN =
-// Summer (confirmed from the real exports: R1 Winter … R4 Summer, the live round). Rounds
-// 1–3 are complete (real data seeded in roundResults.js); Round 4 · Summer is current/
-// editable; later rounds are locked. State is derived from config.CURRENT_ROUND so there's
-// one source of truth. Practice rounds dropped.
+// Summer. The full 7-round game is COMPLETE — every round has real data seeded in
+// roundResults.js and is reviewable. Round 4 · Summer remains the editable "current"
+// sandbox (config.CURRENT_ROUND); every other round is review-only (locked, real decisions).
 import { CURRENT_ROUND as CURRENT_N, seasonOfRound } from './config'
 
 export const ROUNDS = [1, 2, 3, 4, 5, 6, 7].map((n) => ({
   n,
   season: seasonOfRound(n) === 'winter' ? 'Winter' : 'Summer',
-  state: n < CURRENT_N ? 'past' : n === CURRENT_N ? 'current' : 'future',
+  state: n === CURRENT_N ? 'current' : 'past', // all rounds complete; non-current = reviewable
 }))
 export const CURRENT_ROUND = ROUNDS.find((r) => r.state === 'current')
