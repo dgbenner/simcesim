@@ -83,14 +83,14 @@ export const FINAL_COLUMNS = [
         certainty: 'High',
         impact: 'High',
         q: 'Who actually played the best full game?',
-        a: 'It converged late — by R7, TSR was tight (Hotel America 13.5, The Northline 11.2, Hotel Red 10.8, Blue 7.1). We led the early game by a wide margin but the lead eroded as others worked the levers we left idle. America climbed from worst to first.',
+        a: 'It converged late — by R7, shareholder return was tight (Hotel America 13.5, The Northline 11.2, Hotel Red 10.8, Blue 7.1). We led the early game by a wide margin but the lead eroded as others worked the levers we left idle. America climbed from worst to first.',
       },
       {
         icon: '🎢',
         certainty: 'Medium',
         impact: 'Medium',
         q: 'What did Blue’s wild swings (+257k to −90k) teach?',
-        a: 'Blue chased quality hardest and priced aggressively — big wins in booms, craters in soft rounds. High variance got punished over a long game; they finished last on TSR. Extreme swings are risky across many rounds.',
+        a: 'Blue chased quality hardest and priced aggressively — big wins in booms, craters in soft rounds. High variance got punished over a long game; they finished last on shareholder return. Extreme swings are risky across many rounds.',
       },
       {
         icon: '🚀',
