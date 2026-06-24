@@ -76,12 +76,37 @@ function HowCalculatedModal({ open, onClose }) {
           barely changed while results moved for other reasons — a fair inference, not a demonstrated cause. The
           distinction matters when presenting this analysis formally.
         </p>
+
+        <div className="border-t border-gray-200 pt-4">
+          <p className="font-bold">Reading the Certainty and Impact labels</p>
+          <p className="mt-1">Each card carries two small labels in its lower corner.</p>
+
+          <p className="mt-3"><span className="font-semibold">Certainty</span> — how directly the claim comes from the data:</p>
+          <ul className="mt-1 space-y-1">
+            <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">High</span> — a direct figure or simple arithmetic read straight from the spreadsheets, with little interpretation (e.g. total interest paid, final shareholder return).</span></li>
+            <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">Medium</span> — a clear pattern or comparison across rounds, where the numbers are solid but their meaning is inferred (e.g. “left money on the table in the booms”).</span></li>
+            <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">Low</span> — mostly judgment about why something happened or about behavior the numbers only hint at. (No card here rates Low; most are High or Medium.)</span></li>
+          </ul>
+
+          <p className="mt-3"><span className="font-semibold">Impact</span> — how much the point affected Hotel Red’s final outcome:</p>
+          <ul className="mt-1 space-y-1">
+            <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">High</span> — moved significant money or directly shaped the final standing (e.g. pricing discipline; the untouched debt and idle cash).</span></li>
+            <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">Medium</span> — meaningful but not decisive over the full seven rounds.</span></li>
+            <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">Low</span> — real but minor in the context of the whole game.</span></li>
+          </ul>
+
+          <p className="mt-3">
+            Together the two labels separate <span className="italic">how sure</span> a claim is from{' '}
+            <span className="italic">how much it mattered</span> — a high-impact point can still be medium-certainty if
+            its explanation involves judgment.
+          </p>
+        </div>
       </div>
     </Modal>
   )
 }
 
-function QACard({ icon, q, a }) {
+function QACard({ icon, q, a, certainty, impact }) {
   return (
     <div className="card rounded-xl border-gray-100 p-4 shadow-[0_3px_12px_rgba(0,0,0,0.05)]">
       <div className="flex items-start gap-2.5">
@@ -89,6 +114,9 @@ function QACard({ icon, q, a }) {
         <h3 className="max-w-[80%] text-[15px] font-bold leading-snug tracking-tight text-cesim-ink">{q}</h3>
       </div>
       <p className="mt-2.5 text-[13px] leading-relaxed text-cesim-muted">{a}</p>
+      <p className="mt-3 text-right text-[10px] italic text-gray-400">
+        Certainty: {certainty} · Impact: {impact}
+      </p>
     </div>
   )
 }
