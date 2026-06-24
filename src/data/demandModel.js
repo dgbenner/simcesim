@@ -31,12 +31,12 @@ export const WALKIN_POINTS = {
   winter: [
     { round: 1, team: 'Hotel Red', price: 125, nights: 1905 },
     { round: 3, team: 'Hotel Red', price: 130, nights: 1710 },
-    { round: 1, team: 'Hotel America', price: 250, nights: 399 },
+    { round: 1, team: 'Hotel of America', price: 250, nights: 399 },
   ],
   summer: [
     { round: 2, team: 'Hotel Red', price: 135, nights: 2056 },
     { round: 2, team: 'Blue', price: 170, nights: 1647 },
-    { round: 2, team: 'Hotel America', price: 100, nights: 2687 },
+    { round: 2, team: 'Hotel of America', price: 100, nights: 2687 },
   ],
 }
 

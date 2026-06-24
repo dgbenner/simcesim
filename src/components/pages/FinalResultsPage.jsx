@@ -22,7 +22,7 @@ const ROWS_USED = [
 const COMBINED = [
   ['Total interest paid', 'the sum of “Int.exp. on long-term loans” across Rounds 1–7 (≈ $674,000 for Hotel Red).'],
   ['Cash growth', 'end-of-period cash in Round 1 ($702,010) versus Round 7 ($1,736,104).'],
-  ['Final standing', 'the Round 7 “Cumulative total shareholder return” for each team (America 13.5, Northline 11.2, Hotel Red 10.8, Blue 7.1).'],
+  ['Final standing', 'the Round 7 “Cumulative total shareholder return” for each team (Hotel of America 13.5, The Northline 11.2, Hotel Red 10.8, Blue 7.1).'],
   ['“Lever did little”', 'a lever whose value barely changed across rounds (e.g. training held at $1,000 every round; marketing near $11,200 for five rounds), so it could not account for changes in results.'],
   ['Best/worst rounds', 'comparing each team’s “Net profit for the period” round by round.'],
 ]
@@ -40,7 +40,7 @@ function HowCalculatedModal({ open, onClose }) {
         <div>
           <p>
             <span className="font-bold">How the files were read.</span> Each export is a single sheet of 363 rows and
-            four team columns (The Northline, Hotel Red, Blue, Hotel America). The relevant rows were located by
+            four team columns (The Northline, Hotel Red, Blue, Hotel of America). The relevant rows were located by
             their labels and pulled across all seven rounds. The specific rows used:
           </p>
           <ul className="mt-2 space-y-1">

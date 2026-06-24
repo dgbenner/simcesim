@@ -83,7 +83,7 @@ export const FINAL_COLUMNS = [
         certainty: 'High',
         impact: 'High',
         q: 'Who actually played the best full game?',
-        a: 'It converged late — by R7, shareholder return was tight (Hotel America 13.5, The Northline 11.2, Hotel Red 10.8, Blue 7.1). We led the early game by a wide margin but the lead eroded as others worked the levers we left idle. America climbed from worst to first.',
+        a: 'It converged late — by R7, shareholder return was tight (Hotel of America 13.5, The Northline 11.2, Hotel Red 10.8, Blue 7.1). We led the early game by a wide margin but the lead eroded as others worked the levers we left idle. Hotel of America climbed from worst to first.',
       },
       {
         icon: '🎢',
@@ -96,7 +96,7 @@ export const FINAL_COLUMNS = [
         icon: '🚀',
         certainty: 'Medium',
         impact: 'Medium',
-        q: 'How did America recover from a last-place start?',
+        q: 'How did Hotel of America recover from a last-place start?',
         a: 'They dropped the disastrous $250 price after R1, settled into the ~$150 mid-band we used, and rode the summer booms harder. Steadiness plus capturing peaks beat their early gamble — they learned our early lesson and added the volume-pressing we didn’t.',
       },
     ],

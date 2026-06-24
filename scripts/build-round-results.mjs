@@ -278,7 +278,7 @@ const body = [
     { key: 'northline', name: 'The Northline', active: false },
     { key: 'red', name: 'Hotel Red', active: true },
     { key: 'blue', name: 'Blue', active: false },
-    { key: 'america', name: 'Hotel America', active: false },
+    { key: 'america', name: 'Hotel of America', active: false },
   ])}`,
   `export const ROUNDS_DATA = ${J(DATA)}`,
   `export const SUMMARY = ${J(SUMMARY)}`,

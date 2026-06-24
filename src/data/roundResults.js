@@ -69,7 +69,7 @@ export const RESULT_TEAMS = [
   },
   {
     "key": "america",
-    "name": "Hotel America",
+    "name": "Hotel of America",
     "active": false
   }
 ]
