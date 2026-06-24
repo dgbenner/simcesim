@@ -83,10 +83,10 @@ function HowCalculatedModal({ open, onClose }) {
 
 function QACard({ icon, q, a }) {
   return (
-    <div className="card p-4">
+    <div className="card rounded-xl border-gray-100 p-4 shadow-[0_3px_12px_rgba(0,0,0,0.05)]">
       <div className="flex items-start gap-2.5">
         <span aria-hidden className="text-[22px] leading-none">{icon}</span>
-        <h3 className="text-[15px] font-bold leading-snug tracking-tight text-cesim-ink">{q}</h3>
+        <h3 className="max-w-[80%] text-[15px] font-bold leading-snug tracking-tight text-cesim-ink">{q}</h3>
       </div>
       <p className="mt-2.5 text-[13px] leading-relaxed text-cesim-muted">{a}</p>
     </div>
