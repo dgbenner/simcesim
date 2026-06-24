@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
 import { useUI } from '../../state/ui'
-import { SUMMARY, ROUND_META, RESULT_TEAMS, COMPLETED_ROUNDS } from '../../data/roundResults'
+import { SUMMARY, RESULT_TEAMS, COMPLETED_ROUNDS } from '../../data/roundResults'
 import { ROUNDS, HOTEL_RED, COURSE } from '../../data/team'
-import { CURRENT_ROUND } from '../../data/config'
+import { CURRENT_ROUND, roundLabel } from '../../data/config'
 import { cn } from '../../lib/cn'
 import { pct, usdShort } from '../../lib/format'
 
@@ -199,9 +199,9 @@ function ScheduleCard() {
                   !past && !current && 'cursor-default text-cesim-muted opacity-50',
                 )}
               >
-                <span>Round {r.n} · {r.season}</span>
+                <span className={r.sandbox ? 'font-semibold' : ''}>{roundLabel(r.n)}</span>
                 <span className="text-[10px] text-cesim-muted">
-                  {current ? 'sandbox' : past ? 'completed' : 'upcoming'}
+                  {current ? 'editable' : past ? 'completed' : 'upcoming'}
                 </span>
               </button>
             </li>
@@ -247,8 +247,8 @@ export function HomePage() {
         <div>
           <h1 className="text-[22px] font-bold tracking-tight text-cesim-ink">Home</h1>
           <p className="text-[12px] text-cesim-muted">
-            {COURSE.universe} · current round{' '}
-            <span className="font-semibold text-cesim-ink">{ROUND_META[CURRENT_ROUND]?.label ?? `Round ${CURRENT_ROUND} · Summer`}</span>
+            {COURSE.universe} · 7 rounds complete · editable{' '}
+            <span className="font-semibold text-cesim-ink">{roundLabel(CURRENT_ROUND)}</span>
           </p>
         </div>
         <div className="flex gap-2">

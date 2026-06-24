@@ -41,7 +41,7 @@ function DecisionReviewBanner() {
         See its results →
       </button>
       <button type="button" onClick={() => setDecisionRound(CURRENT_ROUND)} className="font-semibold underline hover:text-amber-950">
-        Back to the live round (Round {CURRENT_ROUND} · Summer)
+        Back to the Sandbox →
       </button>
     </div>
   )

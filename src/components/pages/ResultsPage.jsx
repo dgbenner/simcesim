@@ -4,7 +4,6 @@ import { Gloss } from '../shared/AcronymTooltip'
 import { cn } from '../../lib/cn'
 import { usd } from '../../lib/format'
 import { ROUNDS_DATA, ROUND_META, RESULT_TEAMS, COMPLETED_ROUNDS } from '../../data/roundResults'
-import { CURRENT_ROUND } from '../../data/config'
 
 // RESULTS — read-only review of any COMPLETED round (spec addendum). The round selector
 // switches which round you're reviewing (data from roundResults.js, transcribed from the
@@ -209,9 +208,9 @@ export function ResultsPage() {
       <div className="mx-auto mb-3 flex max-w-[1180px] items-center gap-2 rounded border-l-2 border-amber-400 bg-amber-50 px-3 py-2 text-[12px] text-amber-900">
         <span aria-hidden>🔒</span>
         <span>
-          <span className="font-semibold">{meta?.label} — completed.</span> Review only; decisions are locked. Each completed
-          round already determined everything after it. The live round is{' '}
-          <span className="font-semibold">Round {CURRENT_ROUND} · Summer</span>.
+          <span className="font-semibold">{meta?.label} — completed.</span> Review only; decisions are locked. Each round
+          already determined everything after it. To experiment, open the{' '}
+          <span className="font-semibold">Sandbox</span> round in Decisions.
         </span>
       </div>
 

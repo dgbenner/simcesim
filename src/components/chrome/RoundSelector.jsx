@@ -1,16 +1,14 @@
 import { useState } from 'react'
 import { ROUNDS } from '../../data/team'
-import { CURRENT_ROUND } from '../../data/config'
+import { CURRENT_ROUND, roundLabel } from '../../data/config'
 import { useUI } from '../../state/ui'
 import { cn } from '../../lib/cn'
 
-// Round selector — navigate the Decisions section across rounds. The current round
-// (config.CURRENT_ROUND) is editable; completed rounds open review-only (their actual
-// decisions, locked); future rounds are unavailable. Drives `decisionRound` in UI state.
+// Round selector — navigate the Decisions section. The Sandbox round is editable; the seven
+// real rounds open review-only (their actual decisions, locked). Drives `decisionRound`.
 export function RoundSelector({ tone = 'light' }) {
   const { decisionRound, setDecisionRound } = useUI()
   const [open, setOpen] = useState(false)
-  const current = ROUNDS.find((r) => r.n === decisionRound)
   const reviewing = decisionRound !== CURRENT_ROUND
   const dark = tone === 'dark'
 
@@ -28,7 +26,7 @@ export function RoundSelector({ tone = 'light' }) {
         title="Switch round — past rounds open review-only"
       >
         {reviewing && <span aria-hidden>🔒</span>}
-        Round {current.n} · {current.season}
+        {roundLabel(decisionRound)}
         <span className={dark ? 'text-white/70' : 'text-cesim-muted'}>▾</span>
       </button>
       {open && (
@@ -49,7 +47,7 @@ export function RoundSelector({ tone = 'light' }) {
                     !selectable && 'cursor-default text-cesim-muted opacity-50',
                   )}
                 >
-                  <span>Round {r.n} · {r.season}</span>
+                  <span className={r.sandbox ? 'font-semibold' : ''}>{roundLabel(r.n)}</span>
                   <span className="text-[10px] text-cesim-muted">
                     {r.state === 'current' ? 'editable' : r.state === 'past' ? 'review' : 'locked'}
                   </span>

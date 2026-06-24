@@ -7,9 +7,9 @@ export const COURSE = {
   name: 'Mini MBA June 2026',
   universe: 'Universe 1, Mini MBA June 2026',
   instructor: 'Dan McLaughlin',
-  roundLabel: 'Round 4',
-  roundDeadline: '2026-06-16 13:05',
-  countdown: '04d 00:00:00', // static chrome only
+  roundLabel: 'Sandbox',
+  roundDeadline: '—',
+  countdown: 'practice', // static chrome only
 }
 
 export const HOTEL_RED = {
@@ -67,15 +67,17 @@ export function displayName(name) {
   return initialsOf(name)
 }
 
-// All 7 real rounds, numbered AND season-labeled. Seasons alternate ODD = Winter, EVEN =
-// Summer. The full 7-round game is COMPLETE — every round has real data seeded in
-// roundResults.js and is reviewable. Round 4 · Summer remains the editable "current"
-// sandbox (config.CURRENT_ROUND); every other round is review-only (locked, real decisions).
-import { CURRENT_ROUND as CURRENT_N, seasonOfRound } from './config'
+// The 7 real rounds (all COMPLETE + review-only, real data in roundResults.js) plus a
+// separate editable SANDBOX round — a practice playground, not a real round. Seasons
+// alternate ODD = Winter, EVEN = Summer; the sandbox is a Summer round labeled "Sandbox".
+import { SANDBOX_ROUND, seasonOfRound } from './config'
 
-export const ROUNDS = [1, 2, 3, 4, 5, 6, 7].map((n) => ({
-  n,
-  season: seasonOfRound(n) === 'winter' ? 'Winter' : 'Summer',
-  state: n === CURRENT_N ? 'current' : 'past', // all rounds complete; non-current = reviewable
-}))
+export const ROUNDS = [
+  ...[1, 2, 3, 4, 5, 6, 7].map((n) => ({
+    n,
+    season: seasonOfRound(n) === 'winter' ? 'Winter' : 'Summer',
+    state: 'past', // every real round is complete + reviewable
+  })),
+  { n: SANDBOX_ROUND, season: 'Summer', state: 'current', sandbox: true },
+]
 export const CURRENT_ROUND = ROUNDS.find((r) => r.state === 'current')
