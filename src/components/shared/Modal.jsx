@@ -23,7 +23,7 @@ export function Modal({ open, onClose, title, subtitle, children, footer, width 
         className={cn('card max-h-[90vh] w-full overflow-auto', width)}
         onMouseDown={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-gray-200 px-5 py-3">
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-gray-200 bg-surface-card px-5 py-3">
           <div>
             <h2 className="text-[16px] font-semibold text-cesim-ink">{title}</h2>
             {subtitle && <p className="mt-0.5 text-[12px] text-cesim-muted">{subtitle}</p>}

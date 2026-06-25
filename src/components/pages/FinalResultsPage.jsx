@@ -29,19 +29,24 @@ const COMBINED = [
 
 function HowCalculatedModal({ open, onClose }) {
   return (
-    <Modal open={open} onClose={onClose} title="How these answers were derived" width="max-w-2xl">
-      <div className="space-y-4 text-[13px] leading-relaxed text-cesim-ink">
-        <p>
-          <span className="font-bold">Source data.</span> Every figure on the Final Results page comes directly from
-          the seven official Cesim round exports (<code className="text-[12px]">results-r01.xls</code> through{' '}
-          <code className="text-[12px]">results-r07.xls</code>) — the real course results for all four teams. Nothing
-          is estimated or remembered; each number is read straight from the spreadsheets.
-        </p>
-        <div>
+    <Modal open={open} onClose={onClose} title="How These Answers Were Derived" width="max-w-2xl">
+      <div className="space-y-5 text-[13px] leading-relaxed text-cesim-ink">
+        <section>
+          <h4 className="mb-1 text-[13px] font-bold text-cesim-ink">Source Data</h4>
           <p>
-            <span className="font-bold">How the files were read.</span> Each export is a single sheet of 363 rows and
-            four team columns (The Northline, Hotel Red, Blue, Hotel of America). The relevant rows were located by
-            their labels and pulled across all seven rounds. The specific rows used:
+            Every figure on the Final Results page comes directly from the seven official Cesim round exports
+            (<code className="text-[12px]">results-r01.xls</code> through <code className="text-[12px]">results-r07.xls</code>)
+            — the real course results for all four teams. Nothing is estimated or remembered; each number is read
+            straight from the spreadsheets.
+          </p>
+        </section>
+
+        <section>
+          <h4 className="mb-1 text-[13px] font-bold text-cesim-ink">How the Files Were Read</h4>
+          <p>
+            Each export is a single sheet of 363 rows and four team columns (The Northline, Hotel Red, Blue, Hotel of
+            America). The relevant rows were located by their labels and pulled across all seven rounds. The specific
+            rows used:
           </p>
           <ul className="mt-2 space-y-1">
             {ROWS_USED.map(([k, v]) => (
@@ -51,9 +56,11 @@ function HowCalculatedModal({ open, onClose }) {
               </li>
             ))}
           </ul>
-        </div>
-        <div>
-          <p><span className="font-bold">How the figures were combined.</span> The claims are simple arithmetic on those rows:</p>
+        </section>
+
+        <section>
+          <h4 className="mb-1 text-[13px] font-bold text-cesim-ink">How the Figures Were Combined</h4>
+          <p>The claims are simple arithmetic on those rows:</p>
           <ul className="mt-2 space-y-1">
             {COMBINED.map(([k, v]) => (
               <li key={k} className="flex gap-2">
@@ -62,33 +69,39 @@ function HowCalculatedModal({ open, onClose }) {
               </li>
             ))}
           </ul>
-        </div>
-        <p>
-          <span className="font-bold">Facts versus interpretation.</span> The numbers are facts, traceable to a
-          specific row and round in the spreadsheets. The surrounding narrative — for example, “played it safe during
-          the summer booms,” or “high variance was punished over a long game” — is interpretation: a reasoned reading
-          of the patterns, the kind an analyst would offer. The data supports the direction of each claim; the framing
-          is judgment, not proof.
-        </p>
-        <p>
-          <span className="font-bold">A note on certainty.</span> With four teams over seven rounds, these are observed
-          patterns and correlations, not controlled experiments. “Marketing did little for Hotel Red” means marketing
-          barely changed while results moved for other reasons — a fair inference, not a demonstrated cause. The
-          distinction matters when presenting this analysis formally.
-        </p>
+        </section>
 
-        <div className="border-t border-gray-200 pt-4">
-          <p className="font-bold">Reading the Certainty and Impact labels</p>
-          <p className="mt-1">Each card carries two small labels in its lower corner.</p>
+        <section>
+          <h4 className="mb-1 text-[13px] font-bold text-cesim-ink">Facts Versus Interpretation</h4>
+          <p>
+            The numbers are facts, traceable to a specific row and round in the spreadsheets. The surrounding narrative
+            — for example, “played it safe during the summer booms,” or “high variance was punished over a long game” —
+            is interpretation: a reasoned reading of the patterns, the kind an analyst would offer. The data supports
+            the direction of each claim; the framing is judgment, not proof.
+          </p>
+        </section>
 
-          <p className="mt-3"><span className="font-semibold">Certainty</span> — how directly the claim comes from the data:</p>
+        <section>
+          <h4 className="mb-1 text-[13px] font-bold text-cesim-ink">A Note on Certainty</h4>
+          <p>
+            With four teams over seven rounds, these are observed patterns and correlations, not controlled experiments.
+            “Marketing did little for Hotel Red” means marketing barely changed while results moved for other reasons —
+            a fair inference, not a demonstrated cause. The distinction matters when presenting this analysis formally.
+          </p>
+        </section>
+
+        <section className="border-t border-gray-200 pt-4">
+          <h4 className="mb-1 text-[13px] font-bold text-cesim-ink">Reading the Certainty and Impact Labels</h4>
+          <p>Each card carries two small labels in its lower corner.</p>
+
+          <p className="mt-3 font-semibold text-cesim-ink">Certainty — how directly the claim comes from the data:</p>
           <ul className="mt-1 space-y-1">
             <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">High</span> — a direct figure or simple arithmetic read straight from the spreadsheets, with little interpretation (e.g. total interest paid, final shareholder return).</span></li>
             <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">Medium</span> — a clear pattern or comparison across rounds, where the numbers are solid but their meaning is inferred (e.g. “left money on the table in the booms”).</span></li>
             <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">Low</span> — mostly judgment about why something happened or about behavior the numbers only hint at. (No card here rates Low; most are High or Medium.)</span></li>
           </ul>
 
-          <p className="mt-3"><span className="font-semibold">Impact</span> — how much the point affected Hotel Red’s final outcome:</p>
+          <p className="mt-3 font-semibold text-cesim-ink">Impact — how much the point affected Hotel Red’s final outcome:</p>
           <ul className="mt-1 space-y-1">
             <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">High</span> — moved significant money or directly shaped the final standing (e.g. pricing discipline; the untouched debt and idle cash).</span></li>
             <li className="flex gap-2"><span aria-hidden className="text-cesim-muted">•</span><span><span className="font-semibold">Medium</span> — meaningful but not decisive over the full seven rounds.</span></li>
@@ -100,7 +113,7 @@ function HowCalculatedModal({ open, onClose }) {
             <span className="italic">how much it mattered</span> — a high-impact point can still be medium-certainty if
             its explanation involves judgment.
           </p>
-        </div>
+        </section>
       </div>
     </Modal>
   )
