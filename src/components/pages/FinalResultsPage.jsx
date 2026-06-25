@@ -172,9 +172,29 @@ export function FinalResultsPage() {
         ))}
       </div>
 
-      <p className="mt-6 text-center text-[11px] text-cesim-muted">
-        A reflective summary of the completed game. Figures trace to the real round exports — download them from the bar above.
-      </p>
+      {/* About this analysis — attribution + an independent cross-check */}
+      <div className="mx-auto mt-8 max-w-3xl border-t border-gray-200 pt-4 text-center">
+        <p className="text-[11px] italic text-gray-400">
+          The analysis cards above were generated with <span className="font-semibold">Claude Opus 4.8</span>, working
+          from the seven official Cesim round result spreadsheets.
+        </p>
+        <a
+          href="/docs/HotelRed_Analysis_Sonnet_4_6.docx"
+          download
+          className="mt-3 inline-block text-[12px] font-semibold text-cesim-link hover:underline"
+        >
+          Read a second, independent analysis (Word document) →
+        </a>
+        <p className="mx-auto mt-2 max-w-2xl text-[11px] leading-relaxed text-cesim-muted">
+          As a cross-check, the same seven spreadsheets were analyzed independently by a different model,{' '}
+          <span className="font-semibold">Claude Sonnet 4.6</span>, in a separate session. Its full write-up is
+          available as a Word document. The two analyses agree on the major findings — pricing discipline, the strong
+          cash position, and low debt — and differ in emphasis: the second read focuses on advance-sales volume and
+          notes that Hotel Red earned the highest total profit of any team, yet finished third on shareholder return
+          because rivals concentrated their earnings nearer the final valuation window. Reading both together is the
+          point: where two independent analyses agree, the conclusion is solid; where they differ is worth a closer look.
+        </p>
+      </div>
     </div>
   )
 }
